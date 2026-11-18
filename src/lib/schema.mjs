@@ -42,6 +42,9 @@ export const AgencySchema = z.object({
     items: z.array(z.object({ label: z.string(), value: z.string(), source_id: z.string(), checked: z.string() })).optional(),
   }),
   disclosures: z.array(z.string()),
+  logo: z.string().regex(/^\/logos\/[a-z0-9-]+\.(svg|png|webp|jpg|ico)$/).optional(),
+  logo_source: z.object({ url: z.string(), retrieved: z.string(), basis: z.string() }).optional(),
+  logo_fit: z.enum(['full', 'padded']).optional(),
   publication_state: state,
 });
 

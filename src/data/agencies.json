@@ -14,7 +14,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/agente.png",
+    "logo_source": {
+      "url": "https://static.agentestudio.com/assets/apple-touch-icon-9ab6fdd598c349459a5fe6e8431dd761398559bc2dccc80b9becbc68d5b0b6bd.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "arounda",
@@ -31,7 +38,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/arounda.png",
+    "logo_source": {
+      "url": "https://cdn.prod.website-files.com/65647bbe0d57c8abad78e939/696f93795a8734a13de7ad88_favicon_gradient%20256px.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "aufait-ux",
@@ -48,7 +61,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/aufait-ux.png",
+    "logo_source": {
+      "url": "https://www.aufaitux.com/wp-content/uploads/2024/10/Vector.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "cieden",
@@ -65,7 +85,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/cieden.png",
+    "logo_source": {
+      "url": "https://cieden.com/cieden/images/site-content/Cieden-Logo.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "corlab-tech",
@@ -82,7 +109,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/corlab-tech.png",
+    "logo_source": {
+      "url": "https://corlab.tech/corlab-webclip-256x256.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "fantasy",
@@ -116,7 +149,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/fuselab-creative.png",
+    "logo_source": {
+      "url": "https://fuselabcreative.com/wp-content/themes/fuselab/assets/favicon/apple-touch-icon-152x152.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "fuzzy-math",
@@ -150,7 +190,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/goinvo.png",
+    "logo_source": {
+      "url": "https://www.goinvo.com/apple-icon.png?apple-icon.b10ab06d.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "guidea",
@@ -167,7 +214,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/guidea.png",
+    "logo_source": {
+      "url": "https://cdn.prod.website-files.com/63ea9f442bd00f226c77febb/63ee57e1580c1864cee5e13f_guidea-webclip.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "htec-momentum",
@@ -186,7 +239,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/htec-momentum.png",
+    "logo_source": {
+      "url": "https://cdn.prod.website-files.com/68f662e54f5ec59ad9836996/68f662e74f5ec59ad9836ae1_webclip.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "lazarev-agency",
@@ -203,7 +262,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/lazarev-agency.png",
+    "logo_source": {
+      "url": "https://cdn.prod.website-files.com/6a39a391d36279ee103bc51f/6a624c8d80c2ad37baa4be22_wclip.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "metalab",
@@ -220,7 +285,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/metalab.png",
+    "logo_source": {
+      "url": "https://cdn.sanity.io/images/nuxb3jim/production-july-2025/ad1171841321470918a98d9e2bececa26b1e8933-500x500.png?w=192&h=192&q=80&fm=webp",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "netguru",
@@ -237,7 +309,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/netguru.ico",
+    "logo_source": {
+      "url": "https://www.netguru.com/hubfs/images/logos/favicon.ico",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "neuron",
@@ -254,7 +333,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/neuron.png",
+    "logo_source": {
+      "url": "https://www.neuronux.com/favicon.ico",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "qubstudio",
@@ -271,7 +357,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/qubstudio.png",
+    "logo_source": {
+      "url": "https://qubstudio.com/wp-content/themes/QubStudioNew/images/favicon/apple-touch-icon-180x180.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "think-company",
@@ -288,7 +380,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/think-company.svg",
+    "logo_source": {
+      "url": "https://cdn.sanity.io/images/k64fz5do/production/e34744a49d1cdb58f8d641a20b3792ac0146346e-520x520.svg?w=32&h=32",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "ustwo",
@@ -305,7 +404,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/ustwo.png",
+    "logo_source": {
+      "url": "https://ustwo.com/icons/icon-512x512.png?v=af9a249dc268c8cc3560f61ea1482eca",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "uxda",
@@ -322,7 +427,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/uxda.png",
+    "logo_source": {
+      "url": "https://www.theuxda.com/themes/uxda/assets/favicons/apple-touch-icon-180x180.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "ux-studio",
@@ -339,7 +450,14 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/ux-studio.png",
+    "logo_source": {
+      "url": "https://cdn.prod.website-files.com/663c7a1fecb0d1ccf0f0aeef/66f2a392ce6744ad47b60534_Webclip%20(1).png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    },
+    "logo_fit": "padded"
   },
   {
     "id": "work-and-co",
@@ -356,6 +474,12 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/work-and-co.png",
+    "logo_source": {
+      "url": "https://work.co/apple-touch-icon.png",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency website; used at site owner direction to identify the agency."
+    }
   }
 ]

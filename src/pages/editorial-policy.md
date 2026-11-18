@@ -30,4 +30,4 @@ We want our lists to be accurate. If you spot an error, [contact us](/contact/) 
 
 ## Images and trademarks
 
-We don't hotlink case-study images or use agency logos without permission. Agency names and trademarks belong to their respective owners, and being listed doesn't imply that an agency endorses this site.
+We don't hotlink case-study images. Agency logos appear only to identify each agency, and are stored on our own site rather than loaded from theirs. Agency names, logos and trademarks belong to their respective owners, and being listed doesn't imply that an agency endorses this site. An agency that would prefer us not to show its logo can [contact us](/contact/) and we'll remove it.

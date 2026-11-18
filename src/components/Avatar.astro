@@ -1,8 +1,26 @@
 ---
+// Agency mark: the agency's official logo (stored locally in public/logos/) or a generated monogram fallback.
+// logo_fit "padded" (in agencies.json) adds breathing room for logos with transparent backgrounds.
 import { monogram } from '../lib/visuals';
+import { getAgencies } from '../lib/data';
 interface Props { name: string; size?: number }
 const { name, size = 44 } = Astro.props;
+const agency = getAgencies().find((a) => a.name === name);
+const logo = agency?.logo;
 const m = monogram(name);
+const radius = Math.round(size * 0.28);
+const img = agency?.logo_fit === 'padded' ? Math.round(size * 0.7) : size;
 ---
 
-<span class="avatar" style={`width:${size}px;height:${size}px;font-size:${Math.round(size * 0.36)}px;background:${m.gradient};border-radius:${Math.round(size * 0.28)}px`} aria-hidden="true">{m.initials}</span>
+{logo ? (
+  <span class="avatar logo" style={`width:${size}px;height:${size}px;border-radius:${radius}px`}>
+    <img src={logo} alt={`${name} logo`} width={img} height={img} style={`width:${img}px;height:${img}px`} loading="lazy" decoding="async" />
+  </span>
+) : (
+  <span class="avatar" style={`width:${size}px;height:${size}px;font-size:${Math.round(size * 0.36)}px;background:${m.gradient};border-radius:${radius}px`} aria-hidden="true">{m.initials}</span>
+)}
+
+<style>
+  .logo { display: inline-flex; align-items: center; justify-content: center; flex: none; background: #fff; border: 1px solid var(--c-border); overflow: hidden; box-shadow: var(--shadow-xs); }
+  .logo img { object-fit: contain; display: block; max-width: none; }
+</style>

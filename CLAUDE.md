@@ -57,7 +57,8 @@ Delete the placement and renumber positions. If the agency has no placements lef
 ### Visual design
 - Design tokens (colours, radius, shadows) are in `src/styles/global.css`. The font is Inter Variable (self-hosted via `@fontsource-variable/inter`).
 - Industry icon and colour: `src/lib/visuals.ts` (`industryTheme`) and `src/components/Icon.astro`. A new industry needs an entry in both, otherwise it falls back to a neutral style.
-- Agency avatars are generated monograms. Don't hotlink or invent agency logos.
+- Agency logos are stored locally in `public/logos/` and referenced by `logo` in `agencies.json`, with `logo_source` recording where each file came from. Set `logo_fit: "padded"` for logos with a transparent background. Agencies without a logo show a generated monogram.
+- To fetch a logo from an agency's official website, run `node scripts/fetch-logos.mjs <agency-id>`. To use a file supplied by the client, put it in `public/logos/<agency-id>.png` (or `.svg`) and set `logo`. Never hotlink logos.
 
 ### Change the contact email
 Edit `contactEmail` in `src/data/site.json`.

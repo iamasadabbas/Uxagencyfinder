@@ -26,3 +26,4 @@ export function monogram(name: string) {
   const [a, b] = palette[h % palette.length];
   return { initials: initials.toUpperCase(), gradient: `linear-gradient(135deg, ${a}, ${b})` };
 }
+
