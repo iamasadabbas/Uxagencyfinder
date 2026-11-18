@@ -1,0 +1,6 @@
+---
+interface Props { label?: string }
+const { label } = Astro.props;
+---
+
+{label && <span class="badge-qual">{label}</span>}

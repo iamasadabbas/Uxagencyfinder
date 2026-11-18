@@ -1,0 +1,20 @@
+{
+  "name": "uxagencyfinder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UX Agency Finder - static, frontend-only test website (no backend).",
+  "scripts": {
+    "dev": "astro dev",
+    "validate": "node scripts/validate-data.mjs",
+    "build": "node scripts/validate-data.mjs && astro build",
+    "preview": "astro preview",
+    "import:handoff": "node scripts/import-handoff.mjs",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
+    "astro": "^7.4.1",
+    "zod": "^4.6.7"
+  }
+}

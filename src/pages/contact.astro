@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site, getAgencies } from '../lib/data';
+const agencies = getAgencies();
+const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
+---
+
+<BaseLayout title="Contact" description="Send a correction, suggest an agency or get in touch with UX Agency Finder.">
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'Contact', href: '/contact/' }]} />
+      <h1>Contact</h1>
+      <p class="lead">Corrections, agency suggestions and general questions. Everything is reviewed by hand, and nothing is published automatically.</p>
+    </div>
+  </header>
+
+  <div class="container section two-col">
+    <div>
+      <h2>Email us directly</h2>
+      <p><a class="email" href={mail('Hello from UX Agency Finder')}>{site.contactEmail}</a></p>
+      <ul class="options">
+        <li><a href={mail('Correction')}>Report a correction</a>: include the page, the claim and a source if you have one.</li>
+        <li><a href={mail('Agency suggestion')}>Suggest an agency</a>: include a named project in the industry and a link to the agency's own case study.</li>
+        <li><a href={mail('Agency: updated case study')}>Agencies: send a fuller case study</a>, especially for entries labelled portfolio-level or service-level.</li>
+      </ul>
+
+      <h2 class="mt">Or compose a message</h2>
+      <p class="small muted">This opens your own email app with the message filled in. Nothing is sent or stored by this website.</p>
+      <form id="compose" class="card form" action={`mailto:${site.contactEmail}`} method="get" enctype="text/plain">
+        <div>
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option>Correction</option>
+            <option>Agency suggestion</option>
+            <option>Agency: updated case study</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div>
+          <label for="agency">Agency (optional)</label>
+          <select id="agency" name="agency">
+            <option value="">-</option>
+            {agencies.map((a) => <option>{a.name}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="msg">Message</label>
+          <textarea id="msg" name="body" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Open in my email app</button>
+        <p id="compose-status" class="small muted" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <aside class="card">
+      <h2 class="h3">Before you write</h2>
+      <ul class="small">
+        <li>We can't introduce you to agencies or pass on your details. Contact agencies through their official websites.</li>
+        <li>We don't accept payment for list positions.</li>
+        <li>Read <a href="/methodology/">how we select</a> and our <a href="/editorial-policy/">editorial policy</a>.</li>
+      </ul>
+    </aside>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ email: site.contactEmail }}>
+  const form = document.getElementById('compose');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const topic = form.topic.value;
+    const agency = form.agency.value;
+    const body = form.body.value.trim();
+    if (!body) { form.body.focus(); return; }
+    const subject = agency ? `${topic}: ${agency}` : topic;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.getElementById('compose-status').textContent = 'Your email app should open now. If nothing happens, email ' + email + ' directly.';
+  });
+</script>
+
+<style>
+  .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+  .email { font-size: 1.3rem; font-weight: 700; }
+  .options { padding-left: 1.2rem; }
+  .options li { margin-bottom: 0.5rem; }
+  .mt { margin-top: 2rem; }
+  .form { display: grid; gap: 1rem; max-width: 560px; }
+  .form .btn { justify-self: start; }
+  .h3 { font-family: var(--font-sans); font-size: 1.1rem; }
+  aside ul { padding-left: 1.1rem; }
+  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } }
+</style>

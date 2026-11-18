@@ -1,0 +1,816 @@
+{
+  "schema_version": 1,
+  "source_brief_version": "1.6",
+  "source_revision": 6,
+  "position_meaning": "owner-selected editorial presentation order",
+  "excluded_agencies": [
+    "Clay",
+    "Eleken"
+  ],
+  "industries": [
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "route": "/agencies/healthcare-ux/",
+      "selection_emphasis": "Relevant clinical, care, administrative and health-data work; clear contribution; research/process visibility; fit for complex digital healthcare. Wellness is qualified separately.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "healthcare",
+          "agency_id": "fuselab-creative",
+          "position": 1,
+          "agency_name": "Fuselab Creative",
+          "evidence_summary": "ClyHealth; DHCS; E07/E06",
+          "source_ids": [
+            "E07",
+            "E06"
+          ],
+          "fit_and_scope": "Editorial lead for complex provider-facing and public-health data interfaces; separate those two contexts.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "goinvo",
+          "position": 2,
+          "agency_name": "GoInvo",
+          "evidence_summary": "Maya EHR; E09",
+          "source_ids": [
+            "E09"
+          ],
+          "fit_and_scope": "Concrete home-health clinical and administrative workflows with source-reported working software.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "guidea",
+          "position": 3,
+          "agency_name": "Guidea",
+          "evidence_summary": "Amalgam Rx; Humana portfolio; E33",
+          "source_ids": [
+            "E33"
+          ],
+          "fit_and_scope": "Healthcare-specialist portfolio; public detail varies, so avoid unsupported process or clearance claims.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "think-company",
+          "position": 4,
+          "agency_name": "Think Company",
+          "evidence_summary": "Nemours; E19",
+          "source_ids": [
+            "E19"
+          ],
+          "fit_and_scope": "Documented research and family-provider product evolution.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "ustwo",
+          "position": 5,
+          "agency_name": "ustwo",
+          "evidence_summary": "Fresenius; E41",
+          "source_ids": [
+            "E41"
+          ],
+          "fit_and_scope": "Clinician and patient app experience informed by user research.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "cieden",
+          "position": 6,
+          "agency_name": "Cieden",
+          "evidence_summary": "Clinicmaster; E31",
+          "source_ids": [
+            "E31"
+          ],
+          "fit_and_scope": "Detailed EMR modernization and design-system direction, with continued rollout qualification.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "qubstudio",
+          "position": 7,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "Ademrius; E17",
+          "source_ids": [
+            "E17"
+          ],
+          "fit_and_scope": "Clinic/patient roles, appointments and records workflows; preserve prototype/deliverable scope.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "fuzzy-math",
+          "position": 8,
+          "agency_name": "Fuzzy Math",
+          "evidence_summary": "GE Healthcare; E08",
+          "source_ids": [
+            "E08"
+          ],
+          "fit_and_scope": "Enterprise healthcare R&D and data patterns; not every concept is a deployed product.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "neuron",
+          "position": 9,
+          "agency_name": "Neuron",
+          "evidence_summary": "iQuartic; E15",
+          "source_ids": [
+            "E15"
+          ],
+          "fit_and_scope": "Strong administrative medical-coding context; narrower than treatment-interface expertise.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "netguru",
+          "position": 10,
+          "agency_name": "Netguru",
+          "evidence_summary": "Aspit; E54",
+          "source_ids": [
+            "E54"
+          ],
+          "fit_and_scope": "Healthcare product design and development context; the public process account is less detailed than the leading specialist cases.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "healthcare",
+          "agency_id": "lazarev-agency",
+          "position": 11,
+          "agency_name": "Lazarev.agency",
+          "evidence_summary": "WellSet; E51",
+          "source_ids": [
+            "E51"
+          ],
+          "fit_and_scope": "Qualified wellness placement: content discovery, live classes and personalization, not clinical/EHR evidence.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "fintech",
+      "name": "Fintech",
+      "route": "/agencies/fintech-ux/",
+      "selection_emphasis": "Financial-task relevance and industry focus, with retail banking/payments distinguished from trading, internal bank AI and financial research.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "fintech",
+          "agency_id": "uxda",
+          "position": 1,
+          "agency_name": "UXDA",
+          "evidence_summary": "United Arab Bank; E48",
+          "source_ids": [
+            "E48"
+          ],
+          "fit_and_scope": "Focused financial UX with detailed banking-task redesign.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "qubstudio",
+          "position": 2,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "Gulf Bank; ila Bank; E40",
+          "source_ids": [
+            "E40"
+          ],
+          "fit_and_scope": "Banking UX/UI contribution; portfolio entries should be supplemented before deeper claims.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "ustwo",
+          "position": 3,
+          "agency_name": "ustwo",
+          "evidence_summary": "European Payments Initiative; E46",
+          "source_ids": [
+            "E46"
+          ],
+          "fit_and_scope": "Multi-market payment research and tested vision/prototype foundations.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "htec-momentum",
+          "position": 4,
+          "agency_name": "HTEC Momentum",
+          "evidence_summary": "Bitstamp; E35",
+          "source_ids": [
+            "E35"
+          ],
+          "fit_and_scope": "Product strategy and trading-app experience; crypto context is explicit.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "lazarev-agency",
+          "position": 5,
+          "agency_name": "Lazarev.agency",
+          "evidence_summary": "Accern Rhea; E12",
+          "source_ids": [
+            "E12"
+          ],
+          "fit_and_scope": "Detailed AI-assisted financial-research workflow; not a general payments claim.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "fantasy",
+          "position": 6,
+          "agency_name": "Fantasy",
+          "evidence_summary": "BNY Eliza; E32",
+          "source_ids": [
+            "E32"
+          ],
+          "fit_and_scope": "Internal bank AI vision and coded design system; distinguish from retail banking.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "fintech",
+          "agency_id": "arounda",
+          "position": 7,
+          "agency_name": "Arounda",
+          "evidence_summary": "PIIFUND; E27",
+          "source_ids": [
+            "E27"
+          ],
+          "fit_and_scope": "Banking/microloan design account; current deployment and compliance are not independently checked.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "name": "Ecommerce",
+      "route": "/agencies/ecommerce-ux/",
+      "selection_emphasis": "Actual shopping or procurement journeys, product discovery, transaction flow and documented UX responsibility. Consumer retail and industrial B2B commerce remain distinct.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "ecommerce",
+          "agency_id": "work-and-co",
+          "position": 1,
+          "agency_name": "Work & Co",
+          "evidence_summary": "IKEA; E49",
+          "source_ids": [
+            "E49"
+          ],
+          "fit_and_scope": "Detailed multi-channel shopping, app, website and design-system contribution.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ecommerce",
+          "agency_id": "ustwo",
+          "position": 2,
+          "agency_name": "ustwo",
+          "evidence_summary": "Lush; E47",
+          "source_ids": [
+            "E47"
+          ],
+          "fit_and_scope": "Consumer mobile-commerce discovery and delivery; historical engagement.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ecommerce",
+          "agency_id": "qubstudio",
+          "position": 3,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "BluePallet; E39",
+          "source_ids": [
+            "E39"
+          ],
+          "fit_and_scope": "Detailed industrial-commerce research, architecture, negotiation and transaction design.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ecommerce",
+          "agency_id": "agente",
+          "position": 4,
+          "agency_name": "Agente",
+          "evidence_summary": "Atterley; E26",
+          "source_ids": [
+            "E26"
+          ],
+          "fit_and_scope": "Catalog, product-page and checkout redesign; historical fashion-commerce case.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ecommerce",
+          "agency_id": "lazarev-agency",
+          "position": 5,
+          "agency_name": "Lazarev.agency",
+          "evidence_summary": "Matta; E52",
+          "source_ids": [
+            "E52"
+          ],
+          "fit_and_scope": "Chemical B2B sourcing, purchasing and supplier workflows; not generic consumer retail.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "logistics",
+      "name": "Logistics",
+      "route": "/agencies/logistics-ux/",
+      "selection_emphasis": "Operational relevance to transport, distribution, warehouse or fleet users, with task scope and source detail visible.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "logistics",
+          "agency_id": "qubstudio",
+          "position": 1,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "MyTower; E40",
+          "source_ids": [
+            "E40"
+          ],
+          "fit_and_scope": "Transportation-management IA/UX provides direct shipper/supply-chain relevance; public depth is limited.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "logistics",
+          "agency_id": "htec-momentum",
+          "position": 2,
+          "agency_name": "HTEC Momentum",
+          "evidence_summary": "Sifted; E34",
+          "source_ids": [
+            "E34"
+          ],
+          "fit_and_scope": "Supply-chain intelligence, shippers' decisions and accessible ML recommendations.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "logistics",
+          "agency_id": "fuselab-creative",
+          "position": 3,
+          "agency_name": "Fuselab Creative",
+          "evidence_summary": "Robodog AGV; E22",
+          "source_ids": [
+            "E22"
+          ],
+          "fit_and_scope": "Warehouse fleet and mission controls; preserve the warehouse-robotics boundary.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "logistics",
+          "agency_id": "aufait-ux",
+          "position": 4,
+          "agency_name": "Aufait UX",
+          "evidence_summary": "iD Fresh; E29",
+          "source_ids": [
+            "E29"
+          ],
+          "fit_and_scope": "Field research and distribution/loadout/route/reconciliation workflow design.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "logistics",
+          "agency_id": "corlab-tech",
+          "position": 5,
+          "agency_name": "CorLab Tech",
+          "evidence_summary": "Service pages, not a named client case; E55/E56",
+          "source_ids": [
+            "E55",
+            "E56"
+          ],
+          "fit_and_scope": "Owner-selected at #5. Dashboard/map capability and stated logistics services; confirm a comparable project and actual UX contribution.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "service-page",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "logistics",
+          "agency_id": "ustwo",
+          "position": 6,
+          "agency_name": "ustwo",
+          "evidence_summary": "Alphabet; E44",
+          "source_ids": [
+            "E44"
+          ],
+          "fit_and_scope": "Fleet-driver lifecycle and self-service; not freight-dispatch or warehouse operations.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "real-estate",
+      "name": "Real Estate",
+      "route": "/agencies/real-estate-ux/",
+      "selection_emphasis": "Documented property-marketplace, broker, home-buying or ownership journeys, with full product work distinguished from acquisition websites and brief portfolio claims.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "real-estate",
+          "agency_id": "netguru",
+          "position": 1,
+          "agency_name": "Netguru",
+          "evidence_summary": "Otodom; E36",
+          "source_ids": [
+            "E36"
+          ],
+          "fit_and_scope": "Detailed embedded design, research and testing for a property marketplace.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "real-estate",
+          "agency_id": "aufait-ux",
+          "position": 2,
+          "agency_name": "Aufait UX",
+          "evidence_summary": "DAMAC Agents; E28",
+          "source_ids": [
+            "E28"
+          ],
+          "fit_and_scope": "Concrete broker-facing property search, details and booking workflow.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "real-estate",
+          "agency_id": "lazarev-agency",
+          "position": 3,
+          "agency_name": "Lazarev.agency",
+          "evidence_summary": "CoHome; E53",
+          "source_ids": [
+            "E53"
+          ],
+          "fit_and_scope": "Property exploration and co-ownership acquisition UX; preserve website/funnel scope.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "real-estate",
+          "agency_id": "work-and-co",
+          "position": 4,
+          "agency_name": "Work & Co",
+          "evidence_summary": "Lennar; E50",
+          "source_ids": [
+            "E50"
+          ],
+          "fit_and_scope": "Qualified portfolio-level home-buying example; seek deeper approved detail.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "route": "/agencies/education-ux/",
+      "selection_emphasis": "Learning/assessment and education-user relevance, actual design contribution, and clear distinctions among LMS, academic tools, institutional websites and educational hardware.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "education",
+          "agency_id": "qubstudio",
+          "position": 1,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "LinkIt!; E38",
+          "source_ids": [
+            "E38"
+          ],
+          "fit_and_scope": "K-12 assessment, student/parent and staff platform experiences.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "education",
+          "agency_id": "ustwo",
+          "position": 2,
+          "agency_name": "ustwo",
+          "evidence_summary": "Brilliant.org; E42",
+          "source_ids": [
+            "E42"
+          ],
+          "fit_and_scope": "User-tested learning-engagement vision and interaction work; contribution to an existing product.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "education",
+          "agency_id": "agente",
+          "position": 3,
+          "agency_name": "Agente",
+          "evidence_summary": "WorkFusion Automation Academy; E25",
+          "source_ids": [
+            "E25"
+          ],
+          "fit_and_scope": "Documented learning-platform UX/UI redesign; public portfolio depth is limited.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "education",
+          "agency_id": "netguru",
+          "position": 4,
+          "agency_name": "Netguru",
+          "evidence_summary": "UCLA Chorus; E37",
+          "source_ids": [
+            "E37"
+          ],
+          "fit_and_scope": "App-creation UX/UI for academics, within that specific education-tool context.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "education",
+          "agency_id": "ux-studio",
+          "position": 5,
+          "agency_name": "UX Studio",
+          "evidence_summary": "Revolution Robotics; E24",
+          "source_ids": [
+            "E24"
+          ],
+          "fit_and_scope": "Research and configuration/coding/control for an educational robotics app.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "education",
+          "agency_id": "aufait-ux",
+          "position": 6,
+          "agency_name": "Aufait UX",
+          "evidence_summary": "Parul University; E30",
+          "source_ids": [
+            "E30"
+          ],
+          "fit_and_scope": "Institutional information architecture and website usability; not an LMS case.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "robotics",
+      "name": "Robotics",
+      "route": "/agencies/robotics-ux/",
+      "selection_emphasis": "Actual robot or robotics-tool interaction, operator/user tasks, research visibility and clear separation of industrial, consumer, educational and simulation contexts.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "robotics",
+          "agency_id": "fuselab-creative",
+          "position": 1,
+          "agency_name": "Fuselab Creative",
+          "evidence_summary": "Robodog AGV; Hyperfab; E22/E23",
+          "source_ids": [
+            "E22",
+            "E23"
+          ],
+          "fit_and_scope": "Most directly aligned here with warehouse/industrial fleet and control interfaces.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "robotics",
+          "agency_id": "ustwo",
+          "position": 2,
+          "agency_name": "ustwo",
+          "evidence_summary": "SharkClean; E45",
+          "source_ids": [
+            "E45"
+          ],
+          "fit_and_scope": "Consumer robot-vacuum controls, map editing and app research.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "robotics",
+          "agency_id": "ux-studio",
+          "position": 3,
+          "agency_name": "UX Studio",
+          "evidence_summary": "Revolution Robotics; E24",
+          "source_ids": [
+            "E24"
+          ],
+          "fit_and_scope": "Educational robot configuration, coding and control with child-user research.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "robotics",
+          "agency_id": "metalab",
+          "position": 4,
+          "agency_name": "Metalab",
+          "evidence_summary": "Robotics testing portfolio item; E13",
+          "source_ids": [
+            "E13"
+          ],
+          "fit_and_scope": "Qualified developer simulation/testing placement; limited public depth and no physical control claim.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    },
+    {
+      "id": "ai-and-ml",
+      "name": "AI & ML",
+      "route": "/agencies/ai-ux/",
+      "selection_emphasis": "AI-centric product UX, documented interaction/research/delivery contribution and project stage. Product interfaces rank on the reviewed fit, not generic AI service claims.",
+      "publication_state": "draft",
+      "placements": [
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "fuselab-creative",
+          "position": 1,
+          "agency_name": "Fuselab Creative",
+          "evidence_summary": "Stardog Voicebox; E05",
+          "source_ids": [
+            "E05"
+          ],
+          "fit_and_scope": "Owner-selected lead for conversational enterprise-data UX; Stardog Voicebox supplies workspace and source-verification context.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "metalab",
+          "position": 2,
+          "agency_name": "Metalab",
+          "evidence_summary": "Midjourney; Suno; E13",
+          "source_ids": [
+            "E13"
+          ],
+          "fit_and_scope": "Multiple core AI-product examples; selected portfolio items need separate scope labels.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "ustwo",
+          "position": 3,
+          "agency_name": "ustwo",
+          "evidence_summary": "Inflection Pi; E43",
+          "source_ids": [
+            "E43"
+          ],
+          "fit_and_scope": "Detailed AI interaction, continuous research, mobile launch and product delivery account.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "goinvo",
+          "position": 4,
+          "agency_name": "GoInvo",
+          "evidence_summary": "Ipsos Facto; E10",
+          "source_ids": [
+            "E10"
+          ],
+          "fit_and_scope": "Guided AI research with citations and workflow support; distinguish shipped work and prototypes.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "lazarev-agency",
+          "position": 5,
+          "agency_name": "Lazarev.agency",
+          "evidence_summary": "Accern Rhea; E12",
+          "source_ids": [
+            "E12"
+          ],
+          "fit_and_scope": "Prompt/widget/report workflows for financial analysts.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "fantasy",
+          "position": 6,
+          "agency_name": "Fantasy",
+          "evidence_summary": "BNY Eliza; E32",
+          "source_ids": [
+            "E32"
+          ],
+          "fit_and_scope": "Enterprise AI vision/interface and coded system contribution; not the whole bank platform.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "htec-momentum",
+          "position": 7,
+          "agency_name": "HTEC Momentum",
+          "evidence_summary": "Sifted; E34",
+          "source_ids": [
+            "E34"
+          ],
+          "fit_and_scope": "AI/ML recommendation discovery and action in a logistics product.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "qubstudio",
+          "position": 8,
+          "agency_name": "Qubstudio",
+          "evidence_summary": "Wade & Wendy; named AI portfolio work; E16/E40",
+          "source_ids": [
+            "E16",
+            "E40"
+          ],
+          "fit_and_scope": "Historical conversational recruitment and portfolio-level AI work; keep those limits.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        },
+        {
+          "industry_id": "ai-and-ml",
+          "agency_id": "ux-studio",
+          "position": 9,
+          "agency_name": "UX Studio",
+          "evidence_summary": "OverseeAI; E21",
+          "source_ids": [
+            "E21"
+          ],
+          "fit_and_scope": "Model-monitoring product UX with explicit POC/MVP stage.",
+          "selection_basis": "owner-directed",
+          "evidence_depth": "see-source-qualifications",
+          "publication_state": "draft"
+        }
+      ]
+    }
+  ]
+}

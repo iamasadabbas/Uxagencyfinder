@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AuthorReviewLine from '../../components/AuthorReviewLine.astro';
+import { getIndustries, getAgency, absolute } from '../../lib/data';
+
+const industries = getIndustries();
+const jsonLd = [{
+  '@type': 'CollectionPage', name: 'UX design agencies by industry', url: absolute('/agencies/'),
+  mainEntity: { '@type': 'ItemList', itemListElement: industries.map((i, n) => ({ '@type': 'ListItem', position: n + 1, name: i.h1, url: absolute(i.route) })) },
+}];
+---
+
+<BaseLayout title="UX Design Agencies by Industry" description="Browse curated UX design agency lists by industry: healthcare, fintech, ecommerce, logistics, real estate, education, robotics and AI & ML." jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'Browse niches', href: '/agencies/' }]} />
+      <h1>UX design agencies by industry</h1>
+      <p class="lead">Pick the market you're building for. Each list only includes agencies with public, named work in that niche, in an editorial order that explains its reasoning.</p>
+      <AuthorReviewLine />
+    </div>
+  </header>
+
+  <div class="container section">
+    <div class="list">
+      {industries.map((i) => (
+        <article class="card row">
+          <div>
+            <h2><a href={i.route}>{i.h1}</a></h2>
+            <p class="muted">{i.intro}</p>
+            <ul class="tag-list">{i.contexts.map((c) => <li class="tag">{c}</li>)}</ul>
+          </div>
+          <div class="side">
+            <p class="eyebrow">First three listed</p>
+            <ol>{i.placements.slice(0, 3).map((p) => <li>{getAgency(p.agency_id)!.name}</li>)}</ol>
+            <a class="btn btn-primary btn-small" href={i.route}>View all {i.placements.length}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .list { display: grid; gap: 1rem; }
+  .row { display: grid; grid-template-columns: 1fr 240px; gap: 1.5rem; }
+  h2 { font-size: 1.45rem; margin-bottom: 0.4rem; }
+  h2 a { color: var(--c-text); text-decoration: none; }
+  h2 a:hover { color: var(--c-accent); }
+  .side { border-left: 1px solid var(--c-border); padding-left: 1.5rem; }
+  .side ol { margin: 0 0 1rem; padding-left: 1.2rem; }
+  @media (max-width: 760px) { .row { grid-template-columns: 1fr; } .side { border-left: 0; padding-left: 0; border-top: 1px solid var(--c-border); padding-top: 1rem; } }
+</style>

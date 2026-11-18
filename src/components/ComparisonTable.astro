@@ -1,0 +1,47 @@
+---
+import type { Industry } from '../lib/data';
+import { getAgency, agencyUrl } from '../lib/data';
+import QualificationBadge from './QualificationBadge.astro';
+
+interface Props { industry: Industry }
+const { industry } = Astro.props;
+---
+
+<div class="table-wrap">
+  <table>
+    <caption>{industry.name}: editorial comparison, in the owner's selected order (not a rating)</caption>
+    <thead>
+      <tr>
+        <th scope="col">Position</th>
+        <th scope="col">Agency</th>
+        <th scope="col">Relevant subfield</th>
+        <th scope="col">Named project</th>
+        <th scope="col">Agency contribution</th>
+        <th scope="col">Profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      {industry.placements.map((p) => {
+        const a = getAgency(p.agency_id)!;
+        return (
+          <tr>
+            <td><span class="pos">{p.position}</span></td>
+            <th scope="row"><a href={`#${a.slug}`}>{a.name}</a></th>
+            <td>{p.subfield}</td>
+            <td>{p.project}{p.qualification_label && <div class="q"><QualificationBadge label={p.qualification_label} /></div>}</td>
+            <td class="contrib">{p.contribution}</td>
+            <td><a href={agencyUrl(a)} aria-label={`${a.name} profile`}>Profile</a></td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  th[scope='row'] { font-weight: 700; white-space: nowrap; }
+  th[scope='row'] a { color: var(--c-text); }
+  .contrib { min-width: 260px; color: var(--c-muted); }
+  .q { margin-top: 0.4rem; }
+  td:first-child { width: 1%; }
+</style>

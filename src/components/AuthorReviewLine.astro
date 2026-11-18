@@ -1,0 +1,13 @@
+---
+import { site, formatDate } from '../lib/data';
+interface Props { reviewed?: string }
+const reviewed = Astro.props.reviewed ?? site.lastReviewed;
+---
+
+<div class="meta-line">
+  <span>By <a href={site.editor ? `/authors/${site.editor.slug}/` : '/about/'}>{site.editor ? site.editor.name : `${site.publisher.name} editorial`}</a></span>
+  <span>Sources accessed {formatDate(site.researchDate)}</span>
+  <span>Last reviewed <time datetime={reviewed}>{formatDate(reviewed)}</time></span>
+  <span><a href="/methodology/">How we select</a></span>
+  <span><a href="/editorial-policy/">Disclosure</a></span>
+</div>

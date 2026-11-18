@@ -1,0 +1,361 @@
+[
+  {
+    "id": "agente",
+    "slug": "agente",
+    "name": "Agente",
+    "aliases": [],
+    "official_website": "https://agentestudio.com/",
+    "summary": "Adds concrete learning-platform and commerce experience. The portfolio identifies UX/UI work for Automation Academy, while Atterley's case describes information architecture, catalog/product pages and checkout redesign.",
+    "limits_and_questions": "Some work is historical. Confirm recent delivery staff and the exact scope proposed. Do not assign Real Estate from a PropTech service-page claim alone.",
+    "project_evidence": "WorkFusion Automation Academy; Atterley.  \n**Source records:** E25, E26",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "arounda",
+    "slug": "arounda",
+    "name": "Arounda",
+    "aliases": [],
+    "official_website": "https://arounda.agency/",
+    "summary": "A useful fintech-focused addition. Its PIIFUND case describes banking, microloan and insurance flows, including onboarding and use on weak connections. The account identifies UX, wireframes and UI work rather than a logo-only relationship.",
+    "limits_and_questions": "Deployment and compliance are agency-reported. Request current comparable financial-product work; do not extend this case into unrelated niches.",
+    "project_evidence": "PIIFUND.  \n**Source records:** E27",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "aufait-ux",
+    "slug": "aufait-ux",
+    "name": "Aufait UX",
+    "aliases": [],
+    "official_website": "https://www.aufaitux.com/",
+    "summary": "Helps cover three otherwise thinner areas. DAMAC documents broker-facing property search and booking; iD Fresh documents field research and distribution workflows; Parul documents information architecture for a large university website.",
+    "limits_and_questions": "Label Parul as an institutional website, not an LMS. DAMAC supports an agent workflow, not every tenant or property-transaction use case.",
+    "project_evidence": "DAMAC Agents; iD Fresh; Parul University.  \n**Source records:** E28, E29, E30",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "cieden",
+    "slug": "cieden",
+    "name": "Cieden",
+    "aliases": [],
+    "official_website": "https://cieden.com/",
+    "summary": "Relevant for complex clinical and practice-management software. The Clinicmaster account describes modernization across patient records, billing and charting, with workflow and design-system considerations.",
+    "limits_and_questions": "The source describes a validated direction ready for continued rollout. Do not call it an independently audited platform-wide deployment or compliance certification. Sitenna alone is not Logistics/Real Estate proof.",
+    "project_evidence": "Clinicmaster.  \n**Source records:** E31",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "corlab-tech",
+    "slug": "corlab-tech",
+    "name": "CorLab Tech",
+    "aliases": [],
+    "official_website": "https://corlab.tech/",
+    "summary": "Adds a development-oriented candidate for operational dashboards and maps. Its Logistics page describes transport, warehouse and delivery software services. The owner selected position #5; that position is not a measured comparison of client outcomes.",
+    "limits_and_questions": "Confirm the proposed UX research/design team, a comparable named logistics engagement and shipped contribution. Public service descriptions do not establish project delivery, usability testing or achieved results. Keep the service-level label on the profile and Logistics list. Do not add Healthcare or AI & ML memberships from service claims alone.",
+    "project_evidence": "",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "fantasy",
+    "slug": "fantasy",
+    "name": "Fantasy",
+    "aliases": [],
+    "official_website": "https://fantasy.co/",
+    "summary": "Brings enterprise AI and bank-employee workflow evidence. Fantasy describes vision/interface work and a coded design-system contribution for BNY Eliza. This supports internal financial-services AI rather than just an AI-company website.",
+    "limits_and_questions": "Credit the vision and design-system scope. Do not attribute the entire platform, model, bank adoption or reported operational results to Fantasy.",
+    "project_evidence": "BNY Eliza.  \n**Source records:** E32",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "fuselab-creative",
+    "slug": "fuselab-creative",
+    "name": "Fuselab Creative",
+    "aliases": [],
+    "official_website": "https://fuselabcreative.com/",
+    "summary": "Useful for data-rich clinical/administrative products, conversational data tools and robotics interfaces. Several sources support distinct contexts, including warehouse fleet/mission controls; that warehouse context can also support a narrowly described Logistics placement.",
+    "limits_and_questions": "Separate provider-facing work from public-health reporting, industrial robotics from warehouse operations, and design from hardware engineering. Deployment, safety and clinical outcomes are not independently verified. Disclose any material publisher relationship.",
+    "project_evidence": "ClyHealth; DHCS; Stardog Voicebox; Robodog AGV; Hyperfab.  \n**Source records:** E05, E06, E07, E22, E23",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "fuzzy-math",
+    "slug": "fuzzy-math",
+    "name": "Fuzzy Math",
+    "aliases": [],
+    "official_website": "https://fuzzymath.com/",
+    "summary": "Adds enterprise healthcare research and reusable interaction-pattern experience. The source describes work across clinical, imaging and administrative products, including data interpretation and legacy-system consistency.",
+    "limits_and_questions": "The account covers R&D and product exploration. It does not establish that every illustrated concept shipped, and should not be marketed as generic medical-device certification.",
+    "project_evidence": "GE Healthcare.  \n**Source records:** E08",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "goinvo",
+    "slug": "goinvo",
+    "name": "GoInvo",
+    "aliases": [],
+    "official_website": "https://www.goinvo.com/",
+    "summary": "Strong candidate for healthcare systems and research-centered AI. Maya provides concrete home-health workflow evidence; Facto describes guided AI research, contextual tools and source transparency.",
+    "limits_and_questions": "Maya's working-product status is agency-reported. Facto mixes shipped improvements with prototypes for future work; preserve that distinction and omit unaudited usage claims.",
+    "project_evidence": "Maya EHR; Ipsos Facto.  \n**Source records:** E09, E10",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "guidea",
+    "slug": "guidea",
+    "name": "Guidea",
+    "aliases": [],
+    "official_website": "https://guidea.com/",
+    "summary": "An industry-focused healthcare inclusion. Its public portfolio names platform-design and population-health contexts, giving the list a specialist beyond general product studios.",
+    "limits_and_questions": "This source is a portfolio overview with uneven project detail. Add a stronger project walkthrough or reference before using high-confidence process/outcome claims. Do not turn partner product clearances into agency-wide certification.",
+    "project_evidence": "Amalgam Rx; Humana population-health platform; Express Scripts.  \n**Source records:** E33",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "htec-momentum",
+    "slug": "htec-momentum",
+    "name": "HTEC Momentum",
+    "aliases": [
+      "Momentum Design Lab"
+    ],
+    "official_website": "https://www.momentumdesignlab.com/",
+    "summary": "Sifted supplies specific supply-chain and ML-recommendation experience, including reorganizing how shippers find actionable insight. Bitstamp supplies product-strategy and mobile trading-app design evidence.",
+    "limits_and_questions": "Use the current HTEC Momentum display name and retain Momentum Design Lab as an alias. Do not treat HTEC's company-wide services or headcount as the actual proposed design team, or publish unaudited results.",
+    "project_evidence": "Sifted; Bitstamp.  \n**Source records:** E34, E35",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "lazarev-agency",
+    "slug": "lazarev-agency",
+    "name": "Lazarev.agency",
+    "aliases": [],
+    "official_website": "https://www.lazarev.agency/",
+    "summary": "Rhea supports AI-assisted financial research. Additional named cases establish B2B chemical purchasing in Matta, property/co-ownership acquisition UX in CoHome, and wellness discovery, scheduling and personalization in WellSet.",
+    "limits_and_questions": "WellSet does not establish clinical/EHR expertise. Matta is industrial commerce. CoHome supports its documented property-exploration and website/funnel scope. Funding, acquisition, clinical outcomes and regulatory validation are not inferred.",
+    "project_evidence": "Accern Rhea; Matta; CoHome; WellSet.  \n**Source records:** E12, E51, E52, E53",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "metalab",
+    "slug": "metalab",
+    "name": "Metalab",
+    "aliases": [],
+    "official_website": "https://www.metalab.com/",
+    "summary": "Adds actual AI product examples, with selected portfolio items identifying product design and implementation contributions. A robotics-testing infrastructure entry also supports a limited simulation/developer-tools placement.",
+    "limits_and_questions": "The Robotics placement is qualified and portfolio-level, not physical robot-control evidence. The source mixes product, branding and website work; qualify each item separately and seek deeper detail before a high robotics rank.",
+    "project_evidence": "Midjourney; Suno; robotics virtual-testing portfolio item.  \n**Source records:** E13",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "netguru",
+    "slug": "netguru",
+    "name": "Netguru",
+    "aliases": [],
+    "official_website": "https://www.netguru.com/",
+    "summary": "Otodom describes embedded property-marketplace research/design/testing; Chorus supplies academic app-creation UX; Aspit identifies healthcare product design and engineering work for medical-professional software.",
+    "limits_and_questions": "Credit the actual design contribution within its combined design/engineering model. Academic tooling is not generic LMS proof. Aspit's public process description is less detailed than the leading specialist healthcare cases.",
+    "project_evidence": "Otodom; UCLA Chorus; Aspit.  \n**Source records:** E36, E37, E54",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "neuron",
+    "slug": "neuron",
+    "name": "Neuron",
+    "aliases": [],
+    "official_website": "https://www.neuronux.com/",
+    "summary": "Relevant for health-insurance administration and medical-coding tools. The case identifies workflow research with subject-matter experts, interface modernization and a React frontend contribution.",
+    "limits_and_questions": "Insurance risk adjustment and coding are distinct from treatment decisions or bedside clinical software. Keep the recommendation within that operational context.",
+    "project_evidence": "iQuartic.  \n**Source records:** E15",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "qubstudio",
+    "slug": "qubstudio",
+    "name": "Qubstudio",
+    "aliases": [],
+    "official_website": "https://qubstudio.com/",
+    "summary": "A useful coverage anchor with different named evidence for different niches. LinkIt! supports student/parent/staff product work; BluePallet supports industrial commerce; MyTower supports transportation-management IA/UX. The client portfolio also identifies banking work.",
+    "limits_and_questions": "Use the relevant project per list. MyTower/banking entries have less public depth than full cases; historical recruitment AI is not generic modern-agent expertise. Do not import infrastructure branding work as PropTech product evidence.",
+    "project_evidence": "Ademrius; Gulf Bank/ila Bank; BluePallet; MyTower; LinkIt!; Wade & Wendy.  \n**Source records:** E16, E17, E38, E39, E40",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "think-company",
+    "slug": "think-company",
+    "name": "Think Company",
+    "aliases": [],
+    "official_website": "https://www.thinkcompany.com/",
+    "summary": "Adds healthcare research and family-provider experience. The source describes interviews, a telemedicine pilot and later product evolution with the care organization.",
+    "limits_and_questions": "Its workforce analytics work is not another primary niche in this eight-category plan. Attribute healthcare outcomes and separate agency contribution from the whole health-system product.",
+    "project_evidence": "Nemours Children's Health.  \n**Source records:** E19",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "ustwo",
+    "slug": "ustwo",
+    "name": "ustwo",
+    "aliases": [],
+    "official_website": "https://ustwo.com/",
+    "summary": "The broadest documented coverage in this research set, with separate cases rather than one generic claim. Fresenius covers clinician/patient experiences; Brilliant covers learning engagement; Pi covers AI interaction; SharkClean covers consumer robot controls. Other cases support payments, fleet-driver tools and mobile commerce.",
+    "limits_and_questions": "Breadth is not a quality score. EPI includes vision/prototype foundations; Brilliant includes a tested North Star concept; Lush is historical. Alphabet is BMW Group's mobility business, not Google's parent; its driver app is not freight dispatch. Consumer robotics is distinct from industrial fleet control.",
+    "project_evidence": "Fresenius; Brilliant.org; Inflection Pi; Alphabet; SharkClean; EPI; Lush.  \n**Source records:** E41, E42, E43, E44, E45, E46, E47",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "uxda",
+    "slug": "uxda",
+    "name": "UXDA",
+    "aliases": [],
+    "official_website": "https://www.theuxda.com/",
+    "summary": "An explicit financial-UX specialist. The UAB case describes redesigning customer banking tasks and mobile flows rather than a general corporate brand website.",
+    "limits_and_questions": "Do not distribute it across unrelated sectors from reputation alone. Confirm the current team and relevant retail/corporate banking scope; published metrics remain agency-reported.",
+    "project_evidence": "United Arab Bank.  \n**Source records:** E48",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "ux-studio",
+    "slug": "ux-studio",
+    "name": "UX Studio",
+    "aliases": [],
+    "official_website": "https://www.uxstudioteam.com/",
+    "summary": "Adds a research-led AI-monitoring example and a distinct educational robotics example. Revolution describes configuration, coding and control, with research and testing involving children.",
+    "limits_and_questions": "OverseeAI is POC/MVP evidence. Revolution's Education and Robotics placements share one case and do not establish industrial control expertise or broad LMS experience.",
+    "project_evidence": "OverseeAI; Revolution Robotics.  \n**Source records:** E21, E24",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  },
+  {
+    "id": "work-and-co",
+    "slug": "work-and-co",
+    "name": "Work & Co",
+    "aliases": [],
+    "official_website": "https://work.co/",
+    "summary": "A strong commerce addition because IKEA's case identifies the shopping app, website ecosystem and reusable design work. Lennar's current client-portfolio entry establishes a home-buying experience contribution.",
+    "limits_and_questions": "The Real Estate placement is qualified: the current Lennar portfolio entry is much thinner than the IKEA case. Obtain a fuller approved account before detailed claims or a high niche position; do not use a development-preview news draft as proof.",
+    "project_evidence": "IKEA; Lennar.  \n**Source records:** E49, E50",
+    "capability_tags": [],
+    "commercial_facts": {
+      "status": "not-researched",
+      "note": "Budgets, rates, offices and availability have not been researched."
+    },
+    "disclosures": [],
+    "publication_state": "draft"
+  }
+]

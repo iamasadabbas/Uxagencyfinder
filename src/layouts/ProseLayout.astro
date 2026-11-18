@@ -1,0 +1,90 @@
+---
+// Layout for Markdown pages (guides and policy pages in src/pages/**/*.md).
+// Frontmatter: title, description, breadcrumb ("Hiring guides" | omit), worksheet (boolean), type ("guide" | "page")
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AuthorReviewLine from '../components/AuthorReviewLine.astro';
+import { site, absolute, guides } from '../lib/data';
+
+const { frontmatter } = Astro.props;
+const path = Astro.url.pathname;
+const isGuide = frontmatter.type === 'guide';
+const crumbs = isGuide
+  ? [{ name: 'Hiring guides', href: '/guides/' }, { name: frontmatter.title, href: path }]
+  : [{ name: frontmatter.title, href: path }];
+
+const jsonLd = isGuide
+  ? [{
+      '@type': 'Article',
+      headline: frontmatter.title,
+      description: frontmatter.description,
+      url: absolute(path),
+      dateModified: site.lastReviewed,
+      author: site.editor ? { '@type': 'Person', name: site.editor.name } : { '@type': 'Organization', name: site.publisher.name },
+      publisher: { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl },
+    }]
+  : [{ '@type': 'WebPage', name: frontmatter.title, url: absolute(path) }];
+const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description} jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      {isGuide && <p class="eyebrow">Hiring guide</p>}
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.description && <p class="lead">{frontmatter.description}</p>}
+      {isGuide && <AuthorReviewLine />}
+      {isGuide && frontmatter.worksheet && (
+        <p class="no-print tools"><button type="button" class="btn btn-secondary btn-small" onclick="window.print()">Print this worksheet</button></p>
+      )}
+    </div>
+  </header>
+  <div class="container section layout">
+    <article class="prose">
+      <slot />
+    </article>
+    {isGuide && (
+      <aside class="no-print side">
+        <p class="eyebrow">More guides</p>
+        <ul>{otherGuides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>)}</ul>
+        <p class="eyebrow">Next step</p>
+        <p class="small"><a href="/agencies/">Browse agencies by industry →</a></p>
+      </aside>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  // Add "Copy" buttons to worksheet code blocks (progressive enhancement).
+  document.querySelectorAll<HTMLPreElement>('.prose pre').forEach((pre) => {
+    if (!navigator.clipboard) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'worksheet';
+    pre.parentNode!.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-secondary btn-small copy-btn no-print';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.innerText);
+        btn.textContent = 'Copied';
+      } catch {
+        btn.textContent = 'Copy failed. Select the text manually.';
+      }
+      setTimeout(() => (btn.textContent = 'Copy'), 2000);
+    });
+    wrap.appendChild(btn);
+  });
+</script>
+
+<style>
+  .tools { margin-top: 1rem; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 3rem; }
+  .side ul { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+  .side li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .side { position: sticky; top: 5.5rem; align-self: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .side { position: static; } }
+</style>

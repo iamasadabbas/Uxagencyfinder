@@ -1,0 +1,23 @@
+---
+// Author pages are generated only when site.json has a real `editor`. With `editor: null`, no pages are built.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { site, absolute } from '../../lib/data';
+
+export function getStaticPaths() {
+  return site.editor ? [{ params: { slug: site.editor.slug } }] : [];
+}
+const editor = site.editor!;
+const jsonLd = [{ '@type': 'ProfilePage', url: absolute(`/authors/${editor.slug}/`), mainEntity: { '@type': 'Person', name: editor.name, jobTitle: editor.role } }];
+---
+
+<BaseLayout title={`${editor.name}, ${editor.role}`} description={`${editor.name} is ${editor.role} at ${site.name}.`} jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'About', href: '/about/' }, { name: editor.name, href: `/authors/${editor.slug}/` }]} />
+      <h1>{editor.name}</h1>
+      <p class="lead">{editor.role}</p>
+    </div>
+  </header>
+  <div class="container section prose"><p>{editor.bio}</p></div>
+</BaseLayout>

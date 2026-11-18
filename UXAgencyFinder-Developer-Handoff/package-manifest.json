@@ -1,0 +1,86 @@
+{
+  "project": "UX Agency Finder",
+  "domain": "uxagencyfinder.com",
+  "prepared_date": "2026-11-18",
+  "master_brief_version": "1.6",
+  "source_revision": 6,
+  "consistency_checks": {
+    "master_matches_current_source": true,
+    "industry_orders_match_master": true,
+    "industry_count": 8,
+    "agency_count": 21,
+    "placement_count": 52,
+    "agency_source_count": 52,
+    "fixed_route_count": 22,
+    "route_template_count": 2,
+    "excluded_agencies_absent_from_records": true,
+    "reference_integrity": true
+  },
+  "files": [
+    {
+      "path": "01-brief/UXAgencyFinder-Developer-Brief.md",
+      "bytes": 89502,
+      "sha256": "bc3dbc7bdc7673da2f31f341d31a3fbdf5085b085c27f4b8c2c0e93ab1afe468"
+    },
+    {
+      "path": "02-research/UXAgencyFinder-Agency-Research.md",
+      "bytes": 46630,
+      "sha256": "d841c58ee3f2348eaebf36d4205db83260b93c417508c99b5a7c2549c1750a40"
+    },
+    {
+      "path": "03-data/agencies.json",
+      "bytes": 24466,
+      "sha256": "40ac234a48c877bc1a50b63f13a21cbe9828306701686dd969ed3d27b7f4df36"
+    },
+    {
+      "path": "03-data/agency-position-matrix.csv",
+      "bytes": 929,
+      "sha256": "b37927deb14870e39989576b81a2bffd2b44db5621fb93c030b13fe9d26c0aca"
+    },
+    {
+      "path": "03-data/industry-rankings.csv",
+      "bytes": 11621,
+      "sha256": "7cf7d42f4a5297267bf1ccc04ffb97693f6a32cacfcda2c87ae6739af5f64180"
+    },
+    {
+      "path": "03-data/industry-rankings.json",
+      "bytes": 30527,
+      "sha256": "08d34549940e9ef88470f42f16f54bb9b970835c414b5074e5b7bb2c0947aa39"
+    },
+    {
+      "path": "03-data/routes.csv",
+      "bytes": 3131,
+      "sha256": "158d53942a3f5324c33ed99239bb6be28cd5a32f18ec9c4a6fc92b21820a9765"
+    },
+    {
+      "path": "03-data/source-register.csv",
+      "bytes": 13865,
+      "sha256": "9fa1ac583c4aad91559a78255b358298f72493cfd9137628dfd2510961caf3f8"
+    },
+    {
+      "path": "04-handoff/Data-Notes.md",
+      "bytes": 1978,
+      "sha256": "5fd1e462c3595b8969fcb150a197df630dbbdc9c5062b67889c50cff01e3300f"
+    },
+    {
+      "path": "04-handoff/Developer-Checklist.md",
+      "bytes": 3232,
+      "sha256": "bd14778abc4fb8ae73935fc1c9fa7d9e7b2c73903854f240e8a7d4aeffd36c13"
+    },
+    {
+      "path": "04-handoff/Owner-Inputs-and-Publication.md",
+      "bytes": 2070,
+      "sha256": "9e9aa2871ee48ed63878d7d318bd8f17536e3a781c6da5c69c74c329e3c7702a"
+    },
+    {
+      "path": "04-handoff/SEO-and-Implementation.md",
+      "bytes": 6988,
+      "sha256": "beaa80eea7a96e53b8151a834cc48c6ddbabd2c3a19b3b0c2ed73fb868a582d0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3758,
+      "sha256": "023f72bcc3c6cd1272d86837e27a81106f7a24269d5a58e39f052ed740d8d906"
+    }
+  ]
+}

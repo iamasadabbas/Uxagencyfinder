@@ -1,0 +1,98 @@
+---
+import { getIndustries } from '../lib/data';
+const industries = getIndustries();
+const path = Astro.url.pathname;
+const isActive = (p: string) => path === p || path.startsWith(p);
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label="UX Agency Finder - home">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1b1d21"/><circle cx="14" cy="14" r="6.5" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M19 19l5.5 5.5" stroke="#8fa2ff" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <span>UX Agency Finder</span>
+    </a>
+
+    <details class="mobile-toggle">
+      <summary aria-label="Menu"><span aria-hidden="true">☰</span> Menu</summary>
+      <nav aria-label="Mobile" class="mobile-nav">
+        <p class="mobile-label">Browse niches</p>
+        <ul>
+          {industries.map((i) => <li><a href={i.route}>{i.name}</a></li>)}
+        </ul>
+        <ul class="mobile-main">
+          <li><a href="/agencies/">All niches</a></li>
+          <li><a href="/directory/">Agency directory</a></li>
+          <li><a href="/guides/">Hiring guides</a></li>
+          <li><a href="/methodology/">How we select</a></li>
+        </ul>
+      </nav>
+    </details>
+
+    <nav aria-label="Main" class="main-nav">
+      <ul>
+        <li class="has-menu">
+          <details class="niche-menu">
+            <summary class:list={[{ active: isActive('/agencies/') }]}>Browse niches</summary>
+            <div class="menu-panel">
+              <ul>
+                {industries.map((i) => (
+                  <li><a href={i.route}><strong>{i.name}</strong><span>{i.placements.length} agencies</span></a></li>
+                ))}
+              </ul>
+              <a class="menu-all" href="/agencies/">View all niches →</a>
+            </div>
+          </details>
+        </li>
+        <li><a href="/directory/" class:list={[{ active: isActive('/directory/') }]}>Agency directory</a></li>
+        <li><a href="/guides/" class:list={[{ active: isActive('/guides/') }]}>Hiring guides</a></li>
+        <li><a href="/methodology/" class:list={[{ active: isActive('/methodology/') }]}>How we select</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement: close the <details> menus on Escape / outside click.
+  const menus = document.querySelectorAll<HTMLDetailsElement>('.niche-menu, .mobile-toggle');
+  document.addEventListener('click', (e) => {
+    menus.forEach((m) => { if (m.open && !m.contains(e.target as Node)) m.open = false; });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    menus.forEach((m) => {
+      if (m.open) { m.open = false; m.querySelector('summary')?.focus(); }
+    });
+  });
+</script>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgb(251 250 247 / 0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-border); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4rem; }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--c-text); text-decoration: none; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .main-nav > ul { display: flex; align-items: center; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+  .main-nav a, .main-nav summary { display: block; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); color: var(--c-text); text-decoration: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; }
+  .main-nav a:hover, .main-nav summary:hover { background: var(--c-surface-2); }
+  .main-nav .active { color: var(--c-accent); }
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  .niche-menu { position: relative; }
+  .niche-menu summary::after { content: ''; display: inline-block; margin-left: 0.4rem; border: 4px solid transparent; border-top-color: currentColor; transform: translateY(2px); }
+  .menu-panel { position: absolute; right: 0; top: calc(100% + 0.5rem); width: 340px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: 0 12px 40px rgb(20 20 30 / 0.12); padding: 0.5rem; }
+  .menu-panel ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
+  .menu-panel li a { display: flex; flex-direction: column; padding: 0.55rem 0.7rem; }
+  .menu-panel li a span { font-size: 0.8rem; color: var(--c-muted); font-weight: 400; }
+  .menu-panel .menu-all { border-top: 1px solid var(--c-border); margin-top: 0.4rem; color: var(--c-accent); font-weight: 600; }
+
+  .mobile-toggle { display: none; }
+  @media (max-width: 860px) {
+    .main-nav { display: none; }
+    .mobile-toggle { display: block; position: static; }
+    .mobile-toggle summary { padding: 0.5rem 0.8rem; border: 1px solid var(--c-border-strong); border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.95rem; }
+    .mobile-nav { position: absolute; left: 0; right: 0; top: 100%; background: var(--c-surface); border-bottom: 1px solid var(--c-border); padding: 1rem 1.25rem 1.5rem; box-shadow: 0 12px 30px rgb(20 20 30 / 0.1); }
+    .mobile-nav ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem; }
+    .mobile-nav a { display: block; padding: 0.5rem 0; color: var(--c-text); text-decoration: none; }
+    .mobile-main { border-top: 1px solid var(--c-border); margin-top: 0.75rem !important; padding-top: 0.75rem !important; grid-template-columns: 1fr !important; }
+    .mobile-main a { font-weight: 600; }
+    .mobile-label { margin: 0 0 0.25rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted); font-weight: 700; }
+  }
+</style>

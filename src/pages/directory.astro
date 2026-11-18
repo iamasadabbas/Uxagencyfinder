@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QualificationBadge from '../components/QualificationBadge.astro';
+import { getAgencies, getIndustries, getPlacementsForAgency, agencyUrl, absolute } from '../lib/data';
+
+const agencies = getAgencies(); // already alphabetical
+const industries = getIndustries();
+const rows = agencies.map((a) => ({ a, placements: getPlacementsForAgency(a.id) }));
+
+const jsonLd = [{
+  '@type': 'CollectionPage', name: 'UX agency directory', url: absolute('/directory/'),
+  mainEntity: { '@type': 'ItemList', itemListOrder: 'https://schema.org/ItemListOrderAscending', numberOfItems: agencies.length,
+    itemListElement: agencies.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.name, url: absolute(agencyUrl(a)) })) },
+}];
+---
+
+<BaseLayout title="UX Agency Directory (A–Z)" description={`Alphabetical directory of all ${agencies.length} UX design agencies in our industry selections. Filter by industry and search by name.`} jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'Agency directory', href: '/directory/' }]} />
+      <h1>Agency directory</h1>
+      <p class="lead">Every agency in our industry selections, listed alphabetically. Industry tags come from reviewed placements only. The numbers show the agency's editorial position in each niche.</p>
+    </div>
+  </header>
+
+  <div class="container section">
+    <form class="filters card" id="dir-filters" hidden role="search" aria-label="Filter agencies" onsubmit="return false">
+      <div class="f-search">
+        <label for="q">Search by name</label>
+        <input id="q" type="search" placeholder="e.g. ustwo, Momentum" autocomplete="off" />
+      </div>
+      <div>
+        <label for="ind">Industry</label>
+        <select id="ind">
+          <option value="">All industries</option>
+          {industries.map((i) => <option value={i.id}>{i.name}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option value="az">Name A–Z</option>
+          <option value="za">Name Z–A</option>
+        </select>
+      </div>
+      <div class="f-actions">
+        <button type="button" class="btn btn-secondary" id="clear">Clear all</button>
+      </div>
+    </form>
+
+    <noscript>
+      <p class="notice">Browse by industry: {industries.map((i, n) => <>{n > 0 && ' · '}<a href={i.route}>{i.name}</a></>)}</p>
+    </noscript>
+
+    <p class="count" id="count" aria-live="polite" role="status">{agencies.length} agencies</p>
+
+    <ul class="dir" id="dir-list">
+      {rows.map(({ a, placements }) => (
+        <li class="card dir-item" data-name={a.name.toLowerCase()} data-search={[a.name, ...a.aliases].join(' ').toLowerCase()} data-industries={placements.map((p) => p.industry.id).join(' ')}>
+          <div class="dir-main">
+            <h2><a href={agencyUrl(a)}>{a.name}</a></h2>
+            {a.aliases.length > 0 && <p class="small muted alias">Also known as {a.aliases.join(', ')}</p>}
+            <p class="small muted">{a.project_evidence}</p>
+            {placements.filter(({ placement }) => placement.evidence_depth === 'service-page').map(({ industry, placement }) => (
+              <p class="qual"><QualificationBadge label={`${industry.name}: ${placement.qualification_label}`} /></p>
+            ))}
+          </div>
+          <ul class="tag-list ind-tags" aria-label="Industry placements">
+            {placements.map(({ industry, placement }) => (
+              <li><a class="tag" href={`${industry.route}#${a.slug}`}>{industry.name} <b>#{placement.position}</b></a></li>
+            ))}
+          </ul>
+          <div class="dir-links small">
+            <a href={agencyUrl(a)}>Profile</a>
+            <a href={a.official_website} rel="noopener" target="_blank">Website ↗</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p id="empty" class="notice" hidden>No agencies match these filters. <button type="button" class="linklike" id="clear2">Clear all filters</button></p>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initDirectory } from '../scripts/directory';
+  initDirectory();
+</script>
+
+<style>
+  .filters { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 1rem; align-items: end; margin-bottom: 1.25rem; }
+  .f-actions .btn { width: 100%; }
+  .count { font-weight: 600; color: var(--c-muted); }
+  .dir { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+  .dir-item { display: grid; grid-template-columns: 1.4fr 1.6fr auto; gap: 1rem 1.5rem; align-items: center; }
+  .dir-item h2 { font-family: var(--font-sans); font-size: 1.15rem; margin: 0 0 0.2rem; }
+  .dir-item h2 a { color: var(--c-text); text-decoration: none; }
+  .dir-item h2 a:hover { color: var(--c-accent); text-decoration: underline; }
+  .dir-item p { margin: 0; }
+  .alias { font-style: italic; }
+  .qual { margin-top: 0.4rem !important; }
+  a.tag { text-decoration: none; color: var(--c-text); }
+  a.tag:hover { border-color: var(--c-accent); color: var(--c-accent); }
+  a.tag b { color: var(--c-muted); font-weight: 600; }
+  .dir-links { display: flex; flex-direction: column; gap: 0.25rem; text-align: right; white-space: nowrap; }
+  .linklike { background: none; border: 0; padding: 0; color: var(--c-accent); text-decoration: underline; cursor: pointer; font: inherit; }
+  @media (max-width: 860px) {
+    .filters { grid-template-columns: 1fr 1fr; }
+    .f-search { grid-column: 1 / -1; }
+    .dir-item { grid-template-columns: 1fr; }
+    .dir-links { flex-direction: row; gap: 1rem; text-align: left; }
+  }
+</style>

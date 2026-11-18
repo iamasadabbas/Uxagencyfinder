@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AuthorReviewLine from '../../components/AuthorReviewLine.astro';
+import QualificationBadge from '../../components/QualificationBadge.astro';
+import { site, getAgencies, getAgency, getPlacementsForAgency, getSourcesForAgency, getSource, agencyUrl, absolute } from '../../lib/data';
+import type { Agency } from '../../lib/data';
+
+export function getStaticPaths() {
+  return getAgencies().map((a) => ({ params: { slug: a.slug }, props: { id: a.id } }));
+}
+
+const agency = getAgency(Astro.props.id) as Agency;
+const placements = getPlacementsForAgency(agency.id);
+const placementSourceIds = new Set(placements.flatMap(({ placement }) => placement.source_ids));
+const allSources = getSourcesForAgency(agency.id).sort((a, b) => a.id.localeCompare(b.id));
+const evidenceSources = allSources.filter((s) => placementSourceIds.has(s.id));
+const supplementary = allSources.filter((s) => !placementSourceIds.has(s.id));
+const industryNames = placements.map(({ industry }) => industry.name);
+const projectName = (label: string) => label.split(':').slice(1).join(':').trim() || label;
+
+const description = `${agency.name}: documented UX work in ${industryNames.join(', ')}. Named projects, agency contribution, scope limits and questions to ask before hiring.`;
+
+const jsonLd = [{
+  '@type': 'WebPage',
+  name: `${agency.name}: UX agency profile`,
+  url: absolute(agencyUrl(agency)),
+  dateModified: site.lastReviewed,
+  publisher: { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl },
+  mainEntity: {
+    '@type': 'Organization',
+    name: agency.name,
+    url: agency.official_website,
+    ...(agency.aliases.length ? { alternateName: agency.aliases } : {}),
+  },
+}];
+---
+
+<BaseLayout title={`${agency.name}: UX Agency Profile`} description={description} jsonLd={jsonLd}>
+  <header class="page-header">
+    <div class="container">
+      <Breadcrumbs items={[{ name: 'Agency directory', href: '/directory/' }, { name: agency.name, href: agencyUrl(agency) }]} />
+      <p class="eyebrow">UX agency profile</p>
+      <h1>{agency.name}</h1>
+      {agency.aliases.length > 0 && <p class="muted">Also known as {agency.aliases.join(', ')}</p>}
+      <p class="lead">{agency.summary}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href={agency.official_website} rel="noopener" target="_blank">Visit official website ↗</a>
+      </div>
+      <AuthorReviewLine />
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>Industry selections</h2>
+      <p class="muted prose-width">{agency.name} appears in {placements.length} {placements.length === 1 ? 'niche' : 'niches'}. Each placement points only to the evidence relevant to that niche.</p>
+      <div class="grid grid-2">
+        {placements.map(({ industry, placement: p }) => (
+          <article class="card placement">
+            <div class="ph">
+              <span class="pos">{p.position}</span>
+              <div>
+                <h3><a href={industry.route}>{industry.name}</a></h3>
+                <p class="small muted">Position {p.position} of {industry.placements.length} · {p.subfield}</p>
+              </div>
+            </div>
+            <QualificationBadge label={p.qualification_label} />
+            <dl>
+              <dt>Project</dt><dd>{p.project}</dd>
+              <dt>Contribution</dt><dd>{p.contribution}</dd>
+              <dt>Work stage</dt><dd>{p.work_stage}</dd>
+              <dt>Scope note</dt><dd>{p.fit_and_scope}</dd>
+            </dl>
+            <p class="small"><a href={`${industry.route}#${agency.slug}`}>See it in the {industry.name} list →</a></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Named projects and evidence</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Agency-published sources used for {agency.name}'s placements</caption>
+          <thead><tr><th scope="col">Project / source</th><th scope="col">Supported context</th><th scope="col">Limits</th></tr></thead>
+          <tbody>
+            {evidenceSources.map((s) => (
+              <tr>
+                <th scope="row"><a href={s.url} rel="noopener" target="_blank">{projectName(s.label)}</a><div class="small muted">{s.id} · accessed {s.accessed_date}</div></th>
+                <td>{s.supported_context}</td>
+                <td class="muted">{s.qualification}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {supplementary.length > 0 && (
+        <p class="small muted sup">
+          Additional work, not used as evidence for any industry placement:{' '}
+          {supplementary.map((s, i) => <>{i > 0 && '; '}<a href={s.url} rel="noopener" target="_blank">{projectName(s.label)}</a> ({s.supported_context.replace(/\.$/, '')})</>)}.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <h2>Limits and questions before hiring</h2>
+        <p>{agency.limits_and_questions}</p>
+        <ul class="questions">
+          <li>Who from the referenced projects would work on your project?</li>
+          <li>What exactly did the agency own, and what did the client's team own?</li>
+          <li>Was the referenced work shipped, piloted, or a concept or prototype?</li>
+          <li>Can you speak to a client reference from a comparable engagement?</li>
+        </ul>
+      </div>
+      <aside class="card facts">
+        <h2 class="h3">Commercial facts</h2>
+        <p class="small muted">{agency.commercial_facts.note}</p>
+        {agency.capability_tags.length > 0 && (
+          <>
+            <h2 class="h3">Capabilities (supporting)</h2>
+            <ul class="tag-list">{agency.capability_tags.map((t) => <li class="tag">{t}</li>)}</ul>
+            <p class="small muted">Capabilities don't count as industry experience on their own.</p>
+          </>
+        )}
+        <h2 class="h3">Disclosures</h2>
+        <p class="small muted">{agency.disclosures.length ? agency.disclosures.join(' ') : 'No material relationship with this agency has been recorded.'}</p>
+        <p class="small"><a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + agency.name)}`}>Report a correction</a></p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cta { margin: 1.25rem 0 0.25rem; }
+  .placement { display: flex; flex-direction: column; gap: 0.6rem; }
+  .ph { display: flex; gap: 0.75rem; align-items: center; }
+  .ph h3 { margin: 0; }
+  .ph p { margin: 0; }
+  dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.4rem 0.75rem; font-size: 0.95rem; }
+  dt { font-weight: 700; color: var(--c-muted); font-size: 0.85rem; }
+  dd { margin: 0; }
+  .sup { margin-top: 1rem; }
+  .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
+  .questions { padding-left: 1.2rem; }
+  .questions li { margin-bottom: 0.4rem; }
+  .h3 { font-family: var(--font-sans); font-size: 1.05rem; margin-top: 0.75rem; }
+  .facts .h3:first-child { margin-top: 0; }
+  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } dl { grid-template-columns: 1fr; } }
+</style>

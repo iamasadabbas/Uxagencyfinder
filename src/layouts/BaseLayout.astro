@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { site, absolute } from '../lib/data';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Extra JSON-LD objects for this page (rendered alongside Organization/WebSite on the homepage). */
+  jsonLd?: Record<string, unknown>[];
+  /** Full title override (homepage). Otherwise "{title} | UX Agency Finder". */
+  fullTitle?: string;
+}
+
+const { title, description, jsonLd = [], fullTitle } = Astro.props;
+const pageTitle = fullTitle ?? `${title} | ${site.name}`;
+const canonical = absolute(Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {site.noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#fbfaf7" />
+    {jsonLd.map((obj) => <JsonLd data={obj} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {site.testSiteBanner && <div class="test-banner" role="note">{site.testSiteBanner}</div>}
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .test-banner {
+    background: var(--c-text);
+    color: #fff;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+  }
+  main:focus { outline: none; }
+</style>

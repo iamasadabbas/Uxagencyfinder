@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getIndustries } from '../lib/data';
+const industries = getIndustries();
+---
+
+<BaseLayout title="Page not found" description="The page you were looking for doesn't exist.">
+  <div class="container section prose-width">
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <p class="muted">This page doesn't exist or has moved. Try one of the industry lists or the agency directory.</p>
+    <ul class="tag-list">{industries.map((i) => <li><a class="tag" href={i.route}>{i.name}</a></li>)}</ul>
+    <p style="margin-top:1.5rem"><a class="btn btn-primary" href="/">Go to homepage</a> <a class="btn btn-secondary" href="/directory/">Agency directory</a></p>
+  </div>
+</BaseLayout>
