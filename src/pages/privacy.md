@@ -1,27 +1,55 @@
 ---
 layout: ../layouts/ProseLayout.astro
-title: Privacy
-description: What data UX Agency Finder collects (very little) and how it is handled.
+eyebrow: Legal
+title: Privacy policy
+description: How UX Agency Finder handles your information. In short, we collect very little.
 ---
 
-<!-- TODO (owner): review before public launch, and update if analytics or any third-party service is added. -->
+*Last updated: November 2026*
 
-## Summary
+This privacy policy explains what information UX Agency Finder ("we", "us") collects when you use uxagencyfinder.com, and how we use it.
 
-This website is a **static site**. It has no user accounts, no forms that submit data to our servers, no cookies set by us, and no analytics or advertising scripts at present.
+## Information we collect
 
-## Contacting us
+**You can browse the whole site without giving us any personal information.** We don't offer accounts, and we don't ask you to sign up to read lists or use our guides.
 
-If you email us (for example, through a "mailto" link on the [contact page](/contact/)), your message goes through your own email provider to our inbox. We use your email address and message only to reply and to handle your correction or suggestion. We don't sell or share it.
+- **When you email us:** if you contact us by email (including through our contact page, which opens your own email app), we receive your email address, your name if you include it, and the content of your message.
+- **Technical data:** like most websites, our hosting provider may automatically log basic technical information such as your IP address, browser type, device type, referring page and the pages you visit. This is used for security, performance and to keep the site running reliably.
 
-## Hosting
+## How we use information
 
-Like any website, our hosting provider may record standard technical logs (such as IP address, browser type and the page requested) for security and reliability. We don't use these logs to identify individual visitors.
+We use the information we receive to:
 
-## Outbound links
+- reply to your message and handle corrections or suggestions,
+- maintain, secure and improve the website,
+- understand, in aggregate, which pages are useful.
 
-Agency links take you to third-party websites, which have their own privacy policies.
+We don't sell, rent or trade your personal information, and we don't pass your details to agencies.
 
-## Changes
+## Cookies
 
-If we add analytics or any other service, this page will be updated first.
+We don't use advertising cookies. If we add privacy-friendly analytics in the future, we'll update this policy and, where required, ask for your consent.
+
+## Third-party websites
+
+Our pages link to agency websites and case studies. When you follow those links, the other site's privacy policy applies. We aren't responsible for how third parties handle your data.
+
+## Data retention
+
+We keep emails only as long as we need them to respond and to keep a reasonable record of corrections. Server logs are kept for a limited period by our hosting provider.
+
+## Your rights
+
+Depending on where you live, you may have the right to access, correct or delete the personal information we hold about you, or to object to how we use it. To make a request, email us at [hello@uxagencyfinder.com](mailto:hello@uxagencyfinder.com).
+
+## Children
+
+This site is intended for business users and isn't directed at children under 16.
+
+## Changes to this policy
+
+We may update this policy from time to time. The latest version will always be on this page, with the date it was last updated.
+
+## Contact
+
+Questions about privacy? Email [hello@uxagencyfinder.com](mailto:hello@uxagencyfinder.com).

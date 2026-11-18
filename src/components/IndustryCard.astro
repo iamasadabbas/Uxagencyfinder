@@ -1,25 +1,38 @@
 ---
 import type { Industry } from '../lib/data';
+import { getAgency } from '../lib/data';
+import { themeFor } from '../lib/visuals';
+import Icon from './Icon.astro';
 interface Props { industry: Industry }
 const { industry } = Astro.props;
+const t = themeFor(industry.id);
+const top = industry.placements.slice(0, 3).map((p) => getAgency(p.agency_id)!.name);
 ---
 
-<article class="card industry-card">
+<article class="card card-hover industry-card reveal" style={`--ic:${t.color};--is:${t.soft}`}>
+  <div class="top">
+    <span class="ic"><Icon name={industry.id} size={22} /></span>
+    <span class="count">{industry.placements.length} agencies</span>
+  </div>
   <h3><a href={industry.route} class="stretched">{industry.name}</a></h3>
-  <p class="muted small count">{industry.placements.length} agencies with relevant work</p>
-  <ul class="tag-list" aria-label={`${industry.name} contexts`}>
-    {industry.contexts.slice(0, 4).map((c) => <li class="tag">{c}</li>)}
-  </ul>
-  <span class="go" aria-hidden="true">View list →</span>
+  <p class="ctx">{industry.contexts.slice(0, 3).join(' · ')}</p>
+  <p class="top3"><span>Top picks:</span> {top.join(', ')}</p>
+  <span class="go" aria-hidden="true">Explore list <Icon name="arrow" size={16} /></span>
 </article>
 
 <style>
-  .industry-card { position: relative; display: flex; flex-direction: column; gap: 0.5rem; transition: border-color 0.15s, transform 0.15s; }
-  .industry-card:hover { border-color: var(--c-accent); transform: translateY(-2px); }
-  .industry-card:focus-within { border-color: var(--c-accent); }
-  h3 { margin: 0; font-family: var(--font-serif); font-size: 1.35rem; }
+  .industry-card { position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 1.4rem; }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+  .ic { display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 14px; background: var(--is); color: var(--ic); }
+  .count { font-size: 0.78rem; font-weight: 600; color: var(--c-muted); background: var(--c-bg-soft); border: 1px solid var(--c-border); padding: 0.15rem 0.6rem; border-radius: 999px; }
+  h3 { margin: 0; font-size: 1.25rem; }
   h3 a { color: var(--c-text); text-decoration: none; }
   .stretched::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
-  .count { margin: 0; }
-  .go { margin-top: auto; padding-top: 0.6rem; font-weight: 600; color: var(--c-accent); font-size: 0.95rem; }
+  .ctx { margin: 0; font-size: 0.88rem; color: var(--c-muted); }
+  .top3 { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--c-text-2); }
+  .top3 span { color: var(--c-muted); }
+  .go { margin-top: auto; padding-top: 0.85rem; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--ic); font-size: 0.9rem; }
+  .go :global(svg) { transition: transform 0.2s var(--ease); }
+  .industry-card:hover .go :global(svg) { transform: translateX(4px); }
+  .industry-card:focus-within { border-color: var(--ic); }
 </style>

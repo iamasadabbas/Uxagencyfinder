@@ -1,5 +1,5 @@
 // Client-side directory filtering. All agencies are already in the HTML; this only shows/hides and reorders them.
-// Filter state lives in the URL fragment (e.g. /directory/#industry=healthcare&q=ust&sort=za) so no crawlable
+// Filter state lives in the URL fragment (e.g. /directory/#industry=healthcare&q=ust&sort=za), so no crawlable
 // combination pages are created.
 
 export function initDirectory() {
@@ -8,26 +8,32 @@ export function initDirectory() {
   if (!form || !list) return;
 
   const q = document.getElementById('q') as HTMLInputElement;
-  const ind = document.getElementById('ind') as HTMLSelectElement;
   const sort = document.getElementById('sort') as HTMLSelectElement;
+  const chips = Array.from(form.querySelectorAll<HTMLButtonElement>('.chip'));
   const count = document.getElementById('count')!;
   const empty = document.getElementById('empty')!;
+  const clearBtn = document.getElementById('clear')!;
   const items = Array.from(list.querySelectorAll<HTMLLIElement>('.dir-item'));
   const total = items.length;
+  let industry = '';
 
   form.hidden = false;
+
+  const setIndustry = (id: string) => {
+    industry = chips.some((c) => c.dataset.industry === id) ? id : '';
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.industry === industry)));
+  };
 
   function readHash() {
     const p = new URLSearchParams(location.hash.slice(1));
     q.value = p.get('q') ?? '';
-    const i = p.get('industry') ?? '';
-    ind.value = Array.from(ind.options).some((o) => o.value === i) ? i : '';
+    setIndustry(p.get('industry') ?? '');
     sort.value = p.get('sort') === 'za' ? 'za' : 'az';
   }
 
   function writeHash() {
     const p = new URLSearchParams();
-    if (ind.value) p.set('industry', ind.value);
+    if (industry) p.set('industry', industry);
     if (q.value.trim()) p.set('q', q.value.trim());
     if (sort.value === 'za') p.set('sort', 'za');
     const h = p.toString();
@@ -36,7 +42,6 @@ export function initDirectory() {
 
   function apply() {
     const term = q.value.trim().toLowerCase();
-    const industry = ind.value;
     let shown = 0;
     const sorted = [...items].sort((a, b) => {
       const c = (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'en');
@@ -49,14 +54,17 @@ export function initDirectory() {
       if (!el.hidden) shown++;
       list!.appendChild(el);
     }
-    const label = industry ? ` in ${ind.options[ind.selectedIndex].text}` : '';
-    count.textContent = shown === total && !term && !industry ? `${total} agencies` : `${shown} of ${total} agencies${label}`;
+    const active = !!term || !!industry || sort.value === 'za';
+    const chip = chips.find((c) => c.dataset.industry === industry);
+    const label = industry && chip ? ` in ${chip.textContent?.trim()}` : '';
+    count.textContent = !term && !industry ? `${total} agencies` : `${shown} of ${total} agencies${label}`;
     empty.hidden = shown !== 0;
+    clearBtn.hidden = !active;
   }
 
   function clear() {
     q.value = '';
-    ind.value = '';
+    setIndustry('');
     sort.value = 'az';
     writeHash();
     apply();
@@ -66,9 +74,9 @@ export function initDirectory() {
   readHash();
   apply();
   q.addEventListener('input', () => { writeHash(); apply(); });
-  ind.addEventListener('change', () => { writeHash(); apply(); });
   sort.addEventListener('change', () => { writeHash(); apply(); });
-  document.getElementById('clear')?.addEventListener('click', clear);
+  chips.forEach((c) => c.addEventListener('click', () => { setIndustry(c.dataset.industry ?? ''); writeHash(); apply(); }));
+  clearBtn.addEventListener('click', clear);
   document.getElementById('clear2')?.addEventListener('click', clear);
   window.addEventListener('hashchange', () => { readHash(); apply(); });
 }

@@ -5,23 +5,28 @@ import AuthorReviewLine from '../../components/AuthorReviewLine.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import AgencyAssessment from '../../components/AgencyAssessment.astro';
 import FAQ from '../../components/FAQ.astro';
+import Icon from '../../components/Icon.astro';
+import Avatar from '../../components/Avatar.astro';
 import { site, getIndustries, getIndustry, getAgency, getSource, agencyUrl, absolute, guides } from '../../lib/data';
 import type { Industry } from '../../lib/data';
+import { themeFor } from '../../lib/visuals';
 
 export function getStaticPaths() {
   return getIndustries().map((industry) => ({ params: { industry: industry.slug }, props: { id: industry.id } }));
 }
 
 const industry = getIndustry(Astro.props.id) as Industry;
+const t = themeFor(industry.id);
 const related = industry.related.map((id) => getIndustry(id)).filter((x): x is Industry => !!x);
 const sourceIds = [...new Set(industry.placements.flatMap((p) => p.source_ids))];
 const sources = sourceIds.map((id) => getSource(id)!).sort((a, b) => a.id.localeCompare(b.id));
+const top3 = industry.placements.slice(0, 3).map((p) => ({ p, a: getAgency(p.agency_id)! }));
 
 const faqs = [
-  { q: `What counts as ${industry.name.toLowerCase()} experience here?`, a: `A named project in this niche with a public account of the agency's contribution. ${industry.selection_emphasis}` },
-  { q: 'Is the agency at position 1 the best choice for every project?', a: 'No. Positions are the editorial order for this list as a whole. A narrower brief may be better served by an agency further down. Read the scope notes for each one.' },
-  { q: 'Are budgets, rates or availability verified?', a: 'No. They have not been researched. Confirm current team, availability and pricing directly with each agency.' },
-  { q: 'How do I suggest a correction?', a: `Email <a href="mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + industry.h1)}">${site.contactEmail}</a>. Corrections are reviewed before anything changes.` },
+  { q: `What counts as ${industry.name.toLowerCase()} experience here?`, a: `A named project in this industry with a public account of the agency's contribution. ${industry.selection_emphasis}` },
+  { q: 'Is the agency at position 1 the best choice for every project?', a: 'Not necessarily. Positions are our editorial order for this list as a whole. A narrower brief may suit an agency further down, so read each one\'s scope notes.' },
+  { q: 'Are budgets, rates or availability included?', a: 'No. They change often, so confirm current team, availability and pricing directly with each agency.' },
+  { q: 'How do I suggest a correction or an agency?', a: `Email <a href="mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + industry.h1)}">${site.contactEmail}</a> with a link to a named case study. Every message is reviewed.` },
 ];
 
 const jsonLd = [{
@@ -44,92 +49,155 @@ const jsonLd = [{
 ---
 
 <BaseLayout title={industry.title} description={industry.metaDescription} jsonLd={jsonLd}>
-  <header class="page-header">
+  <header class="page-hero ind-hero" style={`--ic:${t.color};--is:${t.soft}`}>
     <div class="container">
-      <Breadcrumbs items={[{ name: 'Browse niches', href: '/agencies/' }, { name: industry.name, href: industry.route }]} />
-      <p class="eyebrow">{industry.label} · {industry.placements.length} agencies</p>
+      <Breadcrumbs items={[{ name: 'Industries', href: '/agencies/' }, { name: industry.name, href: industry.route }]} />
+      <div class="hero-row">
+        <span class="hero-ic"><Icon name={industry.id} size={30} /></span>
+        <p class="eyebrow">{industry.label}</p>
+      </div>
       <h1>{industry.h1}</h1>
       <p class="lead">{industry.intro}</p>
-      <ul class="tag-list" aria-label="Contexts covered">{industry.contexts.map((c) => <li class="tag">{c}</li>)}</ul>
-      <AuthorReviewLine />
+      <ul class="tag-list ctx" aria-label="Contexts covered">{industry.contexts.map((c) => <li class="tag">{c}</li>)}</ul>
+      <AuthorReviewLine sources={sources.length} />
     </div>
   </header>
 
-  <section class="section">
+  <section class="section-tight">
     <div class="container">
-      <div class="notice prose-width">
-        <p><strong>How to read this list:</strong> {site.disclosure} <strong>Selection emphasis:</strong> {industry.selection_emphasis}</p>
-      </div>
-
-      <h2 class="mt">Quick comparison</h2>
-      <ComparisonTable industry={industry} />
-      {industry.rationaleNote && <p class="prose-width muted note">{industry.rationaleNote}</p>}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>Agency assessments</h2>
-        <p>In the same order as the table. Each entry states the documented project, the agency's role, the work stage and what to confirm before hiring.</p>
-      </div>
-      <div class="assessments">
-        {industry.placements.map((p) => <AgencyAssessment industry={industry} placement={p} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container two-col">
-      <div>
-        <h2>{industry.name} agency selection checklist</h2>
-        <ul class="checklist">{industry.checklist.map((c) => <li>{c}</li>)}</ul>
-      </div>
-      <aside>
-        <h2 class="h3">Hiring resources</h2>
-        <ul class="plain">{guides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>)}</ul>
-        {related.length > 0 && (
-          <>
-            <h2 class="h3">Related niches</h2>
-            <ul class="plain">{related.map((r) => <li><a href={r.route}>{r.h1}</a></li>)}</ul>
-          </>
-        )}
-      </aside>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Sources</h2>
-      <p class="muted prose-width">These are agency-published pages, accessed during research. Accessing a source is not independent verification of outcomes. Found an error? <a href="/contact/">Send a correction</a>.</p>
-      <ol class="sources">
-        {sources.map((s) => (
-          <li id={s.id}><span class="sid">{s.id}</span> <a href={s.url} rel="noopener" target="_blank">{s.label}</a>. {s.supported_context} <span class="muted">Note: {s.qualification} Accessed {s.accessed_date}.</span></li>
+      <p class="eyebrow">Top picks</p>
+      <div class="picks">
+        {top3.map(({ p, a }) => (
+          <a class="pick card-hover" href={`#${a.slug}`}>
+            <span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span>
+            <Avatar name={a.name} size={44} />
+            <span class="pick-txt"><b>{a.name}</b><small>{p.subfield}</small></span>
+            <Icon name="arrow" size={18} class="pick-go" />
+          </a>
         ))}
-      </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="cmp-head">
+        <h2>Compare {industry.placements.length} {industry.name.toLowerCase()} agencies</h2>
+        <p class="muted">{industry.selection_emphasis}</p>
+      </div>
+      <ComparisonTable industry={industry} />
+      <div class="notice disclose">
+        <Icon name="info" />
+        <p>{site.disclosure}{industry.rationaleNote && <> {industry.rationaleNote}</>}</p>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <h2>FAQs</h2>
-      <FAQ items={faqs} />
+    <div class="container layout">
+      <aside class="toc no-print" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          {industry.placements.map((p) => {
+            const a = getAgency(p.agency_id)!;
+            return <li><a href={`#${a.slug}`}><span>{p.position}</span>{a.name}</a></li>;
+          })}
+        </ol>
+        <hr />
+        <ul>
+          <li><a href="#checklist">Selection checklist</a></li>
+          <li><a href="#sources">Sources</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </aside>
+
+      <div class="main-col">
+        <div class="section-head">
+          <h2>Agency assessments</h2>
+          <p>Each assessment covers the documented project, the agency's role, the work stage and what to confirm before hiring.</p>
+        </div>
+        <div class="assessments">
+          {industry.placements.map((p) => <AgencyAssessment industry={industry} placement={p} />)}
+        </div>
+
+        <div class="block" id="checklist">
+          <h2>How to choose a {industry.name.toLowerCase()} UX agency</h2>
+          <p class="muted">Use this checklist when you speak with shortlisted agencies.</p>
+          <ul class="checklist">{industry.checklist.map((c) => <li><Icon name="check" size={16} /><span>{c}</span></li>)}</ul>
+        </div>
+
+        <div class="block resources">
+          <div>
+            <h3>Hiring resources</h3>
+            <ul>{guides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>)}</ul>
+          </div>
+          {related.length > 0 && (
+            <div>
+              <h3>Related industries</h3>
+              <ul>{related.map((r) => <li><a href={r.route}>{r.h1}</a></li>)}</ul>
+            </div>
+          )}
+        </div>
+
+        <div class="block" id="sources">
+          <h2>Sources</h2>
+          <p class="muted">Agency-published pages reviewed for this list. Spotted something out of date? <a href="/contact/">Let us know</a>.</p>
+          <ol class="sources">
+            {sources.map((s) => (
+              <li id={s.id}><a href={s.url} rel="noopener" target="_blank">{s.label}</a><span>{s.supported_context}</span><span class="muted">Note: {s.qualification}</span></li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="block" id="faq">
+          <h2>FAQs</h2>
+          <FAQ items={faqs} />
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .mt { margin-top: 2rem; }
-  .note { margin-top: 1rem; font-size: 0.95rem; }
-  .assessments { display: grid; gap: 1rem; }
-  .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
-  .h3 { font-family: var(--font-sans); font-size: 1.1rem; margin-top: 0.25rem; }
+  .ind-hero::before { background: radial-gradient(600px 300px at 90% -10%, color-mix(in srgb, var(--ic) 18%, transparent), transparent 70%), radial-gradient(500px 260px at 0% 120%, rgb(99 102 241 / 0.08), transparent 70%); }
+  .hero-row { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.75rem; }
+  .hero-row .eyebrow { margin: 0; color: var(--ic); }
+  .hero-ic { display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 16px; background: #fff; color: var(--ic); border: 1px solid var(--c-border); box-shadow: var(--shadow); }
+  .ctx { margin-top: 1.25rem; }
+  .section-tight { padding-top: 2.5rem; }
+  .picks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .pick { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.1rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius); text-decoration: none; color: inherit; box-shadow: var(--shadow-xs); }
+  .pick-txt { display: flex; flex-direction: column; line-height: 1.3; flex: 1; min-width: 0; }
+  .pick-txt b { color: var(--c-text); }
+  .pick-txt small { color: var(--c-muted); font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pick :global(.pick-go) { color: var(--c-muted); transition: transform 0.2s var(--ease), color 0.2s; }
+  .pick:hover :global(.pick-go) { transform: translateX(3px); color: var(--c-accent); }
+  .cmp-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .cmp-head h2 { margin: 0; }
+  .cmp-head p { margin: 0; max-width: 520px; font-size: 0.92rem; }
+  .disclose { margin-top: 1rem; }
+
+  .layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 3rem; }
+  .toc { position: sticky; top: 6rem; align-self: start; font-size: 0.9rem; }
+  .toc-title { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted); }
+  .toc ol, .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li a { display: flex; gap: 0.6rem; align-items: center; padding: 0.4rem 0.6rem; border-radius: 8px; color: var(--c-text-2); text-decoration: none; }
+  .toc li a:hover { background: var(--c-bg-soft); color: var(--c-accent); }
+  .toc ol span { display: inline-grid; place-items: center; width: 1.4rem; height: 1.4rem; border-radius: 6px; background: var(--c-surface-2); font-size: 0.72rem; font-weight: 700; color: var(--c-text); }
+  .toc hr { border: 0; border-top: 1px solid var(--c-border); margin: 0.75rem 0; }
+  .assessments { display: grid; gap: 1.25rem; }
+  .block { margin-top: 4rem; }
   .checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
-  .checklist li { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.75rem 1rem 0.75rem 2.6rem; position: relative; }
-  .checklist li::before { content: ''; position: absolute; left: 1rem; top: 1.05rem; width: 0.9rem; height: 0.9rem; border: 2px solid var(--c-border-strong); border-radius: 3px; }
-  .plain { list-style: none; padding: 0; margin: 0 0 1.5rem; }
-  .plain li { margin-bottom: 0.4rem; }
-  .sources { padding-left: 0; list-style: none; display: grid; gap: 0.6rem; font-size: 0.93rem; }
-  .sid { display: inline-block; min-width: 2.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } }
+  .checklist li { display: flex; gap: 0.75rem; align-items: flex-start; background: #fff; border: 1px solid var(--c-border); border-radius: 12px; padding: 0.9rem 1.1rem; }
+  .checklist li :global(svg) { flex: none; margin-top: 0.2rem; color: #fff; background: var(--c-success); border-radius: 50%; padding: 2px; width: 1.2rem; height: 1.2rem; }
+  .resources { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .resources > div { background: var(--c-bg-soft); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.35rem; }
+  .resources ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+  .resources a { font-weight: 500; }
+  .sources { list-style: none; padding: 0; display: grid; gap: 0.75rem; font-size: 0.9rem; counter-reset: src; }
+  .sources li { display: flex; flex-direction: column; gap: 0.1rem; padding-left: 2.2rem; position: relative; counter-increment: src; }
+  .sources li::before { content: counter(src); position: absolute; left: 0; top: 0.1rem; width: 1.5rem; height: 1.5rem; border-radius: 6px; background: var(--c-surface-2); display: grid; place-items: center; font-size: 0.72rem; font-weight: 700; color: var(--c-text); }
+  .sources a { font-weight: 600; }
+  @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } .toc { display: none; } .picks { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .resources { grid-template-columns: 1fr; } }
 </style>

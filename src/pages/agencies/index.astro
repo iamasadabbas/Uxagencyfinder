@@ -2,7 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import AuthorReviewLine from '../../components/AuthorReviewLine.astro';
+import Icon from '../../components/Icon.astro';
+import Avatar from '../../components/Avatar.astro';
 import { getIndustries, getAgency, absolute } from '../../lib/data';
+import { themeFor } from '../../lib/visuals';
 
 const industries = getIndustries();
 const jsonLd = [{
@@ -12,42 +15,65 @@ const jsonLd = [{
 ---
 
 <BaseLayout title="UX Design Agencies by Industry" description="Browse curated UX design agency lists by industry: healthcare, fintech, ecommerce, logistics, real estate, education, robotics and AI & ML." jsonLd={jsonLd}>
-  <header class="page-header">
+  <header class="page-hero">
     <div class="container">
-      <Breadcrumbs items={[{ name: 'Browse niches', href: '/agencies/' }]} />
+      <Breadcrumbs items={[{ name: 'Industries', href: '/agencies/' }]} />
+      <p class="eyebrow">{industries.length} industries</p>
       <h1>UX design agencies by industry</h1>
-      <p class="lead">Pick the market you're building for. Each list only includes agencies with public, named work in that niche, in an editorial order that explains its reasoning.</p>
+      <p class="lead">Pick the market you're building for. Each list only includes agencies with named work in that industry, in an editorial order with the reasoning shown.</p>
       <AuthorReviewLine />
     </div>
   </header>
 
   <div class="container section">
     <div class="list">
-      {industries.map((i) => (
-        <article class="card row">
-          <div>
-            <h2><a href={i.route}>{i.h1}</a></h2>
-            <p class="muted">{i.intro}</p>
-            <ul class="tag-list">{i.contexts.map((c) => <li class="tag">{c}</li>)}</ul>
-          </div>
-          <div class="side">
-            <p class="eyebrow">First three listed</p>
-            <ol>{i.placements.slice(0, 3).map((p) => <li>{getAgency(p.agency_id)!.name}</li>)}</ol>
-            <a class="btn btn-primary btn-small" href={i.route}>View all {i.placements.length}</a>
-          </div>
-        </article>
-      ))}
+      {industries.map((i) => {
+        const t = themeFor(i.id);
+        return (
+          <article class="row card-hover reveal" style={`--ic:${t.color};--is:${t.soft}`}>
+            <div class="row-main">
+              <div class="row-head">
+                <span class="ic"><Icon name={i.id} size={24} /></span>
+                <div>
+                  <h2><a href={i.route}>{i.h1}</a></h2>
+                  <p class="cnt">{i.placements.length} agencies</p>
+                </div>
+              </div>
+              <p class="muted">{i.intro}</p>
+              <ul class="tag-list">{i.contexts.map((c) => <li class="tag">{c}</li>)}</ul>
+            </div>
+            <div class="side">
+              <p class="side-title">Top picks</p>
+              <ol>
+                {i.placements.slice(0, 3).map((p) => {
+                  const a = getAgency(p.agency_id)!;
+                  return <li><span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span><Avatar name={a.name} size={28} /><span class="nm">{a.name}</span></li>;
+                })}
+              </ol>
+              <a class="btn btn-primary btn-small" href={i.route}>View all {i.placements.length} <Icon name="arrow" size={14} /></a>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .list { display: grid; gap: 1rem; }
-  .row { display: grid; grid-template-columns: 1fr 240px; gap: 1.5rem; }
-  h2 { font-size: 1.45rem; margin-bottom: 0.4rem; }
+  .list { display: grid; gap: 1.25rem; }
+  .row { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-xs); }
+  .row-head { display: flex; gap: 1rem; align-items: center; margin-bottom: 0.9rem; }
+  .ic { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 16px; background: var(--is); color: var(--ic); flex: none; }
+  h2 { font-size: 1.4rem; margin: 0; }
   h2 a { color: var(--c-text); text-decoration: none; }
   h2 a:hover { color: var(--c-accent); }
-  .side { border-left: 1px solid var(--c-border); padding-left: 1.5rem; }
-  .side ol { margin: 0 0 1rem; padding-left: 1.2rem; }
-  @media (max-width: 760px) { .row { grid-template-columns: 1fr; } .side { border-left: 0; padding-left: 0; border-top: 1px solid var(--c-border); padding-top: 1rem; } }
+  .cnt { margin: 0.1rem 0 0; font-size: 0.85rem; color: var(--ic); font-weight: 600; }
+  .side { background: var(--c-bg-soft); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.15rem; display: flex; flex-direction: column; }
+  .side-title { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted); margin-bottom: 0.6rem; }
+  .side ol { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 0.55rem; }
+  .side li { display: flex; align-items: center; gap: 0.55rem; }
+  .side .pos { min-width: 1.6rem; height: 1.6rem; font-size: 0.75rem; border-radius: 7px; }
+  .nm { font-weight: 600; color: var(--c-text); font-size: 0.92rem; }
+  .side .btn { margin-top: auto; align-self: flex-start; }
+  @media (max-width: 820px) { .row { grid-template-columns: 1fr; } }
 </style>

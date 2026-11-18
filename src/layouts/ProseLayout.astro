@@ -1,9 +1,10 @@
 ---
 // Layout for Markdown pages (guides and policy pages in src/pages/**/*.md).
-// Frontmatter: title, description, breadcrumb ("Hiring guides" | omit), worksheet (boolean), type ("guide" | "page")
+// Frontmatter: title, description, type ("guide" | omit), worksheet (boolean), icon (optional icon name)
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import AuthorReviewLine from '../components/AuthorReviewLine.astro';
+import Icon from '../components/Icon.astro';
 import { site, absolute, guides } from '../lib/data';
 
 const { frontmatter } = Astro.props;
@@ -20,7 +21,7 @@ const jsonLd = isGuide
       description: frontmatter.description,
       url: absolute(path),
       dateModified: site.lastReviewed,
-      author: site.editor ? { '@type': 'Person', name: site.editor.name } : { '@type': 'Organization', name: site.publisher.name },
+      author: { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl },
       publisher: { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl },
     }]
   : [{ '@type': 'WebPage', name: frontmatter.title, url: absolute(path) }];
@@ -28,15 +29,15 @@ const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description} jsonLd={jsonLd}>
-  <header class="page-header">
+  <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={crumbs} />
-      {isGuide && <p class="eyebrow">Hiring guide</p>}
+      <p class="eyebrow">{isGuide ? 'Hiring guide' : frontmatter.eyebrow ?? 'UX Agency Finder'}</p>
       <h1>{frontmatter.title}</h1>
       {frontmatter.description && <p class="lead">{frontmatter.description}</p>}
       {isGuide && <AuthorReviewLine />}
       {isGuide && frontmatter.worksheet && (
-        <p class="no-print tools"><button type="button" class="btn btn-secondary btn-small" onclick="window.print()">Print this worksheet</button></p>
+        <p class="no-print tools"><button type="button" class="btn btn-secondary btn-small" onclick="window.print()"><Icon name="file" size={16} />Print this guide</button></p>
       )}
     </div>
   </header>
@@ -44,25 +45,36 @@ const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
     <article class="prose">
       <slot />
     </article>
-    {isGuide && (
-      <aside class="no-print side">
-        <p class="eyebrow">More guides</p>
-        <ul>{otherGuides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>)}</ul>
-        <p class="eyebrow">Next step</p>
-        <p class="small"><a href="/agencies/">Browse agencies by industry →</a></p>
-      </aside>
-    )}
+    <aside class="no-print side">
+      {isGuide ? (
+        <div class="side-card">
+          <p class="side-title">More guides</p>
+          <ul>{otherGuides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>)}</ul>
+          <a class="btn btn-primary btn-small" href="/agencies/">Browse agencies <Icon name="arrow" size={14} /></a>
+        </div>
+      ) : (
+        <div class="side-card">
+          <p class="side-title">Quick links</p>
+          <ul>
+            <li><a href="/methodology/">How we select</a></li>
+            <li><a href="/editorial-policy/">Editorial policy</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+      )}
+    </aside>
   </div>
 </BaseLayout>
 
 <script>
   // Add "Copy" buttons to worksheet code blocks (progressive enhancement).
   document.querySelectorAll<HTMLPreElement>('.prose pre').forEach((pre) => {
-    if (!navigator.clipboard) return;
     const wrap = document.createElement('div');
     wrap.className = 'worksheet';
     pre.parentNode!.insertBefore(wrap, pre);
     wrap.appendChild(pre);
+    if (!navigator.clipboard) return;
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'btn btn-secondary btn-small copy-btn no-print';
@@ -70,9 +82,9 @@ const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
     btn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(pre.innerText);
-        btn.textContent = 'Copied';
+        btn.textContent = 'Copied ✓';
       } catch {
-        btn.textContent = 'Copy failed. Select the text manually.';
+        btn.textContent = 'Select the text to copy';
       }
       setTimeout(() => (btn.textContent = 'Copy'), 2000);
     });
@@ -81,10 +93,13 @@ const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
 </script>
 
 <style>
-  .tools { margin-top: 1rem; }
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 3rem; }
-  .side ul { list-style: none; padding: 0; margin: 0 0 1.5rem; }
-  .side li { margin-bottom: 0.5rem; font-size: 0.95rem; }
-  .side { position: sticky; top: 5.5rem; align-self: start; }
-  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .side { position: static; } }
+  .tools { margin-top: 1.25rem; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 4rem; }
+  .side { position: sticky; top: 6rem; align-self: start; }
+  .side-card { background: var(--c-bg-soft); border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.35rem; }
+  .side-title { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted); }
+  .side ul { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: 0.6rem; }
+  .side li a { font-size: 0.93rem; font-weight: 500; color: var(--c-text-2); text-decoration: none; }
+  .side li a:hover { color: var(--c-accent); }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 2rem; } .side { position: static; } }
 </style>

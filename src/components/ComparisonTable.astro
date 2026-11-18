@@ -2,6 +2,7 @@
 import type { Industry } from '../lib/data';
 import { getAgency, agencyUrl } from '../lib/data';
 import QualificationBadge from './QualificationBadge.astro';
+import Avatar from './Avatar.astro';
 
 interface Props { industry: Industry }
 const { industry } = Astro.props;
@@ -9,15 +10,15 @@ const { industry } = Astro.props;
 
 <div class="table-wrap">
   <table>
-    <caption>{industry.name}: editorial comparison, in the owner's selected order (not a rating)</caption>
+    <caption>{industry.name}: side-by-side comparison in editorial order</caption>
     <thead>
       <tr>
-        <th scope="col">Position</th>
+        <th scope="col">#</th>
         <th scope="col">Agency</th>
         <th scope="col">Relevant subfield</th>
         <th scope="col">Named project</th>
         <th scope="col">Agency contribution</th>
-        <th scope="col">Profile</th>
+        <th scope="col"><span class="visually-hidden">Profile</span></th>
       </tr>
     </thead>
     <tbody>
@@ -25,12 +26,12 @@ const { industry } = Astro.props;
         const a = getAgency(p.agency_id)!;
         return (
           <tr>
-            <td><span class="pos">{p.position}</span></td>
-            <th scope="row"><a href={`#${a.slug}`}>{a.name}</a></th>
-            <td>{p.subfield}</td>
-            <td>{p.project}{p.qualification_label && <div class="q"><QualificationBadge label={p.qualification_label} /></div>}</td>
+            <td><span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span></td>
+            <th scope="row"><a href={`#${a.slug}`} class="ag"><Avatar name={a.name} size={34} /><span>{a.name}</span></a></th>
+            <td><span class="sub">{p.subfield}</span></td>
+            <td class="proj">{p.project}{p.qualification_label && <div class="q"><QualificationBadge label={p.qualification_label} /></div>}</td>
             <td class="contrib">{p.contribution}</td>
-            <td><a href={agencyUrl(a)} aria-label={`${a.name} profile`}>Profile</a></td>
+            <td><a class="btn btn-secondary btn-small" href={agencyUrl(a)} aria-label={`${a.name} profile`}>Profile</a></td>
           </tr>
         );
       })}
@@ -39,9 +40,12 @@ const { industry } = Astro.props;
 </div>
 
 <style>
-  th[scope='row'] { font-weight: 700; white-space: nowrap; }
-  th[scope='row'] a { color: var(--c-text); }
-  .contrib { min-width: 260px; color: var(--c-muted); }
-  .q { margin-top: 0.4rem; }
+  .ag { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--c-text); text-decoration: none; font-weight: 700; white-space: nowrap; }
+  .ag:hover span { color: var(--c-accent); }
+  td, th[scope='row'] { vertical-align: middle; }
+  .sub { font-size: 0.84rem; font-weight: 500; color: var(--c-text-2); }
+  .proj { font-weight: 500; color: var(--c-text); min-width: 180px; }
+  .contrib { min-width: 280px; color: var(--c-muted); font-size: 0.9rem; }
+  .q { margin-top: 0.45rem; }
   td:first-child { width: 1%; }
 </style>

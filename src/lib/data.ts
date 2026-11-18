@@ -85,3 +85,4 @@ export const guides = [
   { slug: 'ux-agency-portfolio-checklist', title: 'UX agency portfolio checklist', description: 'What to check in a case study before you treat it as industry evidence.', featured: false },
   { slug: 'ux-agency-pricing-models', title: 'UX agency pricing models explained', description: 'Fixed price, time and materials, retained teams, subscriptions and discovery-only work.', featured: false },
 ];
+

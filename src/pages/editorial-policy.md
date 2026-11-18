@@ -1,27 +1,33 @@
 ---
 layout: ../layouts/ProseLayout.astro
+eyebrow: Our standards
 title: Editorial policy
-description: Our relationships, sponsorship rules, how positions are set, and how corrections are handled.
+description: How we keep our lists independent and useful, and how we handle sponsorship, relationships and corrections.
 ---
 
-## Editorial order
+## Editorial independence
 
-Positions on each industry list are the **site owner's editorial order**, informed by public agency-published evidence. They aren't ratings, review scores or a measured ranking. See [How we select](/methodology/).
+Every list on UX Agency Finder is an editorial selection. Positions reflect how relevant and well-documented each agency's work is for that industry. They aren't ratings, review scores or paid placements. Read more in [How we select](/methodology/).
+
+## No pay-to-rank
+
+Agencies can't pay to be included, to move up, or to have a placement removed. If we ever introduce sponsored content, it will be clearly labelled, kept separate from editorial lists, and never treated as evidence of expertise.
 
 ## Relationships and disclosure
 
-<!-- TODO (owner): record any ownership, client, paid, referral or other material relationship with a listed agency. -->
+If we have a material relationship with a listed agency (such as ownership, client work or a referral arrangement), we'll disclose it on that agency's profile and on the relevant industry lists.
 
-Any material relationship between the publisher and a listed agency (ownership, client work, payment or referral) will be disclosed on that agency's profile and on the relevant industry lists. No relationships are currently recorded on this test site.
+## How we describe agency work
 
-## Sponsorship
-
-There are currently no sponsored placements. If sponsorship is introduced, sponsored items will be **clearly labelled**, kept separate from the editorial order, and will never count as evidence of industry expertise.
+- We summarise each agency's own published case studies and link to the source.
+- We describe what the agency did, not everything the client's product achieved.
+- We label prototypes, concepts, historical work and portfolio-level entries so they aren't mistaken for shipped products.
+- We don't repeat outcome percentages, funding claims or compliance claims as if they were independently verified.
 
 ## Corrections
 
-Corrections and agency suggestions are reviewed by hand and are never published automatically. Email [the editor](/contact/) with the page, the claim and a source if you have one. Agencies are welcome to send fuller, approved case studies, especially where an entry is labelled "portfolio-level" or "service-level".
+We want our lists to be accurate. If you spot an error, [contact us](/contact/) with the page, the claim and a source if you have one. Every correction is reviewed by hand before anything changes. Agencies are welcome to send fuller, approved case studies at any time.
 
-## Use of agency information
+## Images and trademarks
 
-Agency names, links and project descriptions are summarised from each agency's own public pages, with links to the source. We don't hotlink case-study images or use agency logos without a recorded basis for reuse.
+We don't hotlink case-study images or use agency logos without permission. Agency names and trademarks belong to their respective owners, and being listed doesn't imply that an agency endorses this site.

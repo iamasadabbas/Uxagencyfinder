@@ -1,65 +1,76 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Icon from '../components/Icon.astro';
 import { site, getAgencies } from '../lib/data';
 const agencies = getAgencies();
 const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
 ---
 
-<BaseLayout title="Contact" description="Send a correction, suggest an agency or get in touch with UX Agency Finder.">
-  <header class="page-header">
+<BaseLayout title="Contact" description="Get in touch with UX Agency Finder: corrections, agency suggestions and general questions.">
+  <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={[{ name: 'Contact', href: '/contact/' }]} />
-      <h1>Contact</h1>
-      <p class="lead">Corrections, agency suggestions and general questions. Everything is reviewed by hand, and nothing is published automatically.</p>
+      <p class="eyebrow">Get in touch</p>
+      <h1>Contact us</h1>
+      <p class="lead">Send us a correction, suggest an agency or ask a question. We read every message.</p>
     </div>
   </header>
 
   <div class="container section two-col">
-    <div>
-      <h2>Email us directly</h2>
-      <p><a class="email" href={mail('Hello from UX Agency Finder')}>{site.contactEmail}</a></p>
-      <ul class="options">
-        <li><a href={mail('Correction')}>Report a correction</a>: include the page, the claim and a source if you have one.</li>
-        <li><a href={mail('Agency suggestion')}>Suggest an agency</a>: include a named project in the industry and a link to the agency's own case study.</li>
-        <li><a href={mail('Agency: updated case study')}>Agencies: send a fuller case study</a>, especially for entries labelled portfolio-level or service-level.</li>
-      </ul>
+    <div class="options">
+      <a class="opt card-hover" href={mail('Correction')}>
+        <span class="o-ic"><Icon name="alert" size={22} /></span>
+        <span><b>Report a correction</b><small>Tell us the page, the claim and, if you can, a source.</small></span>
+        <Icon name="arrow" size={18} class="o-go" />
+      </a>
+      <a class="opt card-hover" href={mail('Agency suggestion')}>
+        <span class="o-ic"><Icon name="star" size={22} /></span>
+        <span><b>Suggest an agency</b><small>Include a named project in the industry and a link to the case study.</small></span>
+        <Icon name="arrow" size={18} class="o-go" />
+      </a>
+      <a class="opt card-hover" href={mail('Agency: updated case study')}>
+        <span class="o-ic"><Icon name="file" size={22} /></span>
+        <span><b>Agencies: share a case study</b><small>Send us fuller, approved project details so we can keep your profile current.</small></span>
+        <Icon name="arrow" size={18} class="o-go" />
+      </a>
+      <a class="opt card-hover" href={mail('Hello')}>
+        <span class="o-ic"><Icon name="mail" size={22} /></span>
+        <span><b>General enquiries</b><small>{site.contactEmail}</small></span>
+        <Icon name="arrow" size={18} class="o-go" />
+      </a>
+    </div>
 
-      <h2 class="mt">Or compose a message</h2>
-      <p class="small muted">This opens your own email app with the message filled in. Nothing is sent or stored by this website.</p>
-      <form id="compose" class="card form" action={`mailto:${site.contactEmail}`} method="get" enctype="text/plain">
-        <div>
-          <label for="topic">Topic</label>
-          <select id="topic" name="topic">
-            <option>Correction</option>
-            <option>Agency suggestion</option>
-            <option>Agency: updated case study</option>
-            <option>General question</option>
-          </select>
-        </div>
-        <div>
-          <label for="agency">Agency (optional)</label>
-          <select id="agency" name="agency">
-            <option value="">-</option>
-            {agencies.map((a) => <option>{a.name}</option>)}
-          </select>
+    <div class="form-card">
+      <h2>Send a message</h2>
+      <p class="muted small">Opens your email app with your message ready to send.</p>
+      <form id="compose" class="form" action={`mailto:${site.contactEmail}`} method="get" enctype="text/plain">
+        <div class="row2">
+          <div>
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option>General question</option>
+              <option>Correction</option>
+              <option>Agency suggestion</option>
+              <option>Agency: updated case study</option>
+            </select>
+          </div>
+          <div>
+            <label for="agency">Agency (optional)</label>
+            <select id="agency" name="agency">
+              <option value="">None</option>
+              {agencies.map((a) => <option>{a.name}</option>)}
+            </select>
+          </div>
         </div>
         <div>
           <label for="msg">Message</label>
-          <textarea id="msg" name="body" required></textarea>
+          <textarea id="msg" name="body" required placeholder="How can we help?"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Open in my email app</button>
-        <p id="compose-status" class="small muted" role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Send message <Icon name="arrow" size={16} /></button>
+        <p id="compose-status" class="small muted status" role="status" aria-live="polite"></p>
       </form>
     </div>
-    <aside class="card">
-      <h2 class="h3">Before you write</h2>
-      <ul class="small">
-        <li>We can't introduce you to agencies or pass on your details. Contact agencies through their official websites.</li>
-        <li>We don't accept payment for list positions.</li>
-        <li>Read <a href="/methodology/">how we select</a> and our <a href="/editorial-policy/">editorial policy</a>.</li>
-      </ul>
-    </aside>
   </div>
 </BaseLayout>
 
@@ -73,19 +84,26 @@ const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeU
     if (!body) { form.body.focus(); return; }
     const subject = agency ? `${topic}: ${agency}` : topic;
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    document.getElementById('compose-status').textContent = 'Your email app should open now. If nothing happens, email ' + email + ' directly.';
+    document.getElementById('compose-status').textContent = 'Your email app should open now. If it doesn\'t, write to us at ' + email + '.';
   });
 </script>
 
 <style>
-  .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
-  .email { font-size: 1.3rem; font-weight: 700; }
-  .options { padding-left: 1.2rem; }
-  .options li { margin-bottom: 0.5rem; }
-  .mt { margin-top: 2rem; }
-  .form { display: grid; gap: 1rem; max-width: 560px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .options { display: grid; gap: 0.85rem; }
+  .opt { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.25rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius); text-decoration: none; color: inherit; box-shadow: var(--shadow-xs); }
+  .opt > span:nth-child(2) { display: flex; flex-direction: column; flex: 1; }
+  .opt b { color: var(--c-text); }
+  .opt small { color: var(--c-muted); font-size: 0.86rem; }
+  .o-ic { display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 14px; background: var(--c-accent-soft); color: var(--c-accent); flex: none; }
+  .opt :global(.o-go) { color: var(--c-muted); transition: transform 0.2s var(--ease); }
+  .opt:hover :global(.o-go) { transform: translateX(3px); color: var(--c-accent); }
+  .form-card { background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow); }
+  .form-card h2 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  .form { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .form .btn { justify-self: start; }
-  .h3 { font-family: var(--font-sans); font-size: 1.1rem; }
-  aside ul { padding-left: 1.1rem; }
-  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } }
+  .status { margin: 0; }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
 </style>

@@ -338,3 +338,4 @@ write('agencies.json', agencies);
 write('industries.json', industries);
 write('sources.json', sources);
 console.log(`Imported ${agencies.length} agencies, ${industries.length} industries, ${industries.reduce((n, i) => n + i.placements.length, 0)} placements, ${sources.length} sources.`);
+

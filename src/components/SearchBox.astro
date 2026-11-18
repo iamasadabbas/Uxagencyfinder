@@ -1,0 +1,107 @@
+---
+// Accessible combobox search over industries and agencies. Data is a small public projection embedded in the page.
+import Icon from './Icon.astro';
+import { getIndustries, getAgencies, getPlacementsForAgency, agencyUrl } from '../lib/data';
+
+interface Props { id?: string; placeholder?: string }
+const { id = 'site-search', placeholder = 'Search an industry or agency…' } = Astro.props;
+
+const items = [
+  ...getIndustries().map((i) => ({ t: 'Industry', n: i.h1.replace(/^Best /, '').replace(/^./, (c) => c.toUpperCase()), k: [i.name, i.label, ...i.contexts].join(' ').toLowerCase(), u: i.route, m: `${i.placements.length} agencies` })),
+  ...getAgencies().map((a) => ({ t: 'Agency', n: a.name, k: [a.name, ...a.aliases].join(' ').toLowerCase(), u: agencyUrl(a), m: getPlacementsForAgency(a.id).map((p) => p.industry.name).join(' · ') })),
+];
+---
+
+<div class="search" data-search-root>
+  <form action="/directory/" method="get" role="search" class="search-form" onsubmit="return false">
+    <label for={id} class="visually-hidden">Search industries and agencies</label>
+    <Icon name="search" size={20} class="s-icon" />
+    <input
+      id={id}
+      type="text"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls={`${id}-list`}
+      aria-autocomplete="list"
+      autocomplete="off"
+      placeholder={placeholder}
+    />
+    <kbd class="s-kbd" aria-hidden="true">/</kbd>
+  </form>
+  <ul id={`${id}-list`} role="listbox" class="s-list" hidden aria-label="Suggestions"></ul>
+  <script type="application/json" data-search-data set:html={JSON.stringify(items).replace(/</g, '\\u003c')} />
+</div>
+
+<script>
+  type Item = { t: string; n: string; k: string; u: string; m: string };
+  document.querySelectorAll<HTMLElement>('[data-search-root]').forEach((root) => {
+    const input = root.querySelector('input')!;
+    const list = root.querySelector('ul')!;
+    const data: Item[] = JSON.parse(root.querySelector('[data-search-data]')!.textContent || '[]');
+    let active = -1;
+    let results: Item[] = [];
+
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    function render() {
+      list.innerHTML = results.length
+        ? results.map((r, i) => `<li role="option" id="${list.id}-${i}" aria-selected="${i === active}" data-u="${r.u}"><span class="s-type">${r.t}</span><span class="s-name">${esc(r.n)}</span><span class="s-meta">${esc(r.m)}</span></li>`).join('')
+        : `<li class="s-empty" role="option" aria-disabled="true">No matches. <a href="/directory/">Browse the full directory</a></li>`;
+      list.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      input.setAttribute('aria-activedescendant', active >= 0 ? `${list.id}-${active}` : '');
+    }
+    function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); active = -1; }
+    function update() {
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        results = data.filter((d) => d.t === 'Industry');
+      } else {
+        results = data
+          .map((d) => ({ d, s: d.n.toLowerCase().startsWith(q) ? 0 : d.k.includes(q) ? 1 : 9 }))
+          .filter((x) => x.s < 9)
+          .sort((a, b) => a.s - b.s)
+          .slice(0, 8)
+          .map((x) => x.d);
+      }
+      active = results.length ? 0 : -1;
+      render();
+    }
+    input.addEventListener('focus', update);
+    input.addEventListener('input', update);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (list.hidden) update(); active = Math.min(active + 1, results.length - 1); render(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
+      else if (e.key === 'Enter') { e.preventDefault(); const r = results[active]; if (r) location.href = r.u; else location.href = '/directory/'; }
+      else if (e.key === 'Escape') { close(); }
+    });
+    list.addEventListener('mousedown', (e) => {
+      const li = (e.target as HTMLElement).closest('li[data-u]') as HTMLElement | null;
+      if (li) { e.preventDefault(); location.href = li.dataset.u!; }
+    });
+    document.addEventListener('click', (e) => { if (!root.contains(e.target as Node)) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') { e.preventDefault(); input.focus(); }
+    });
+  });
+</script>
+
+<style>
+  .search { position: relative; width: 100%; max-width: 560px; }
+  .search-form { position: relative; }
+  .search :global(.s-icon) { position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%); color: var(--c-muted); pointer-events: none; }
+  .search input {
+    height: 3.6rem; padding: 0 3.2rem 0 3.1rem; border-radius: 999px; font-size: 1.02rem;
+    border: 1px solid var(--c-border-strong); background: #fff; box-shadow: var(--shadow);
+  }
+  .search input:focus { box-shadow: 0 0 0 5px rgb(99 102 241 / 0.15), var(--shadow); }
+  .s-kbd { position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); font: 600 0.75rem var(--font-sans); color: var(--c-muted); border: 1px solid var(--c-border); border-radius: 6px; padding: 0.1rem 0.45rem; background: var(--c-bg-soft); }
+  @media (hover: none), (max-width: 640px) { .s-kbd { display: none; } }
+  .s-list { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 0.5rem); margin: 0; padding: 0.4rem; list-style: none; background: #fff; border: 1px solid var(--c-border); border-radius: 18px; box-shadow: var(--shadow-lg); max-height: 360px; overflow-y: auto; }
+  .s-list :global(li) { display: grid; grid-template-columns: 4.6rem 1fr; grid-template-rows: auto auto; column-gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 12px; cursor: pointer; }
+  .s-list :global(li[aria-selected='true']) { background: var(--c-accent-soft); }
+  .s-list :global(.s-type) { grid-row: span 2; align-self: center; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-accent); background: var(--c-accent-soft); border-radius: 6px; padding: 0.2rem 0.4rem; text-align: center; }
+  .s-list :global(li[aria-selected='true'] .s-type) { background: #fff; }
+  .s-list :global(.s-name) { font-weight: 600; color: var(--c-text); font-size: 0.95rem; }
+  .s-list :global(.s-meta) { font-size: 0.8rem; color: var(--c-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .s-list :global(.s-empty) { display: block; color: var(--c-muted); cursor: default; font-size: 0.92rem; }
+</style>

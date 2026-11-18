@@ -58,3 +58,4 @@ Any static host works (Netlify, Vercel, Cloudflare Pages, GitHub Pages):
 ## Before public launch
 
 Set `noindex: false`, `showDrafts: false` and `testSiteBanner: null` in `site.json`. Mark reviewed records as `published`. Add a real `editor` and `contactEmail`. Complete the `TODO (owner)` notes in `about.md`, `editorial-policy.md`, `privacy.md` and `terms.md`.
+

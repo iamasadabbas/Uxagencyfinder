@@ -6,13 +6,13 @@
   "contactEmail": "hello@uxagencyfinder.com",
   "publisher": {
     "name": "UX Agency Finder",
-    "description": "An editorial selection of UX design agencies organised by industry and technology market."
+    "description": "A curated guide to the best UX design agencies, organised by industry and technology market."
   },
   "editor": null,
   "lastReviewed": "2026-11-18",
   "researchDate": "2026-11-18",
   "showDrafts": true,
   "noindex": true,
-  "testSiteBanner": "Test website: content is in draft and still under editorial review.",
-  "disclosure": "Positions are the owner's editorial order for each industry, based on public agency-published evidence. They are not review scores, ratings or measured rankings. Agency case-study claims have not been independently audited."
+  "testSiteBanner": null,
+  "disclosure": "Positions are our editorial order for each industry, based on public evidence of each agency's work. They are not review scores or paid placements. Case-study claims come from the agencies' own published work."
 }

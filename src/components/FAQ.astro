@@ -6,18 +6,23 @@ const { items } = Astro.props;
 <div class="faq">
   {items.map((it) => (
     <details>
-      <summary>{it.q}</summary>
-      <p set:html={it.a} />
+      <summary>{it.q}<span class="pm" aria-hidden="true"></span></summary>
+      <div class="ans"><p set:html={it.a} /></div>
     </details>
   ))}
 </div>
 
 <style>
-  .faq { max-width: var(--w-prose); border-top: 1px solid var(--c-border); }
-  details { border-bottom: 1px solid var(--c-border); padding: 0.25rem 0; }
-  summary { cursor: pointer; font-weight: 600; padding: 0.85rem 2rem 0.85rem 0; list-style: none; position: relative; }
+  .faq { display: grid; gap: 0.6rem; max-width: 820px; }
+  details { background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius); transition: box-shadow 0.2s, border-color 0.2s; }
+  details[open] { box-shadow: var(--shadow); border-color: var(--c-border-strong); }
+  summary { cursor: pointer; font-weight: 600; color: var(--c-text); padding: 1.05rem 3.25rem 1.05rem 1.25rem; list-style: none; position: relative; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: '+'; position: absolute; right: 0.25rem; top: 0.7rem; font-size: 1.3rem; color: var(--c-muted); }
-  details[open] summary::after { content: '−'; }
-  p { color: var(--c-muted); margin: 0 0 1rem; }
+  .pm { position: absolute; right: 1.1rem; top: 50%; width: 1.6rem; height: 1.6rem; margin-top: -0.8rem; border-radius: 50%; background: var(--c-surface-2); transition: transform 0.25s var(--ease), background 0.2s; }
+  .pm::before, .pm::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 2px; margin: -1px 0 0 -5px; background: var(--c-text); border-radius: 2px; }
+  .pm::after { transform: rotate(90deg); transition: transform 0.25s var(--ease); }
+  details[open] .pm { background: var(--c-accent-soft); transform: rotate(180deg); }
+  details[open] .pm::after { transform: rotate(0deg); }
+  .ans { padding: 0 1.25rem 1.1rem; }
+  .ans p { color: var(--c-muted); margin: 0; }
 </style>

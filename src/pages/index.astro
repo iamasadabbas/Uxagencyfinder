@@ -3,20 +3,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import IndustryCard from '../components/IndustryCard.astro';
 import QualificationBadge from '../components/QualificationBadge.astro';
 import FAQ from '../components/FAQ.astro';
-import AuthorReviewLine from '../components/AuthorReviewLine.astro';
-import { site, getIndustries, getAgencies, getAgency, agencyUrl, absolute, guides } from '../lib/data';
+import SearchBox from '../components/SearchBox.astro';
+import Icon from '../components/Icon.astro';
+import Avatar from '../components/Avatar.astro';
+import { site, getIndustries, getAgencies, getAgency, getIndustry, agencyUrl, absolute, guides } from '../lib/data';
+import { themeFor } from '../lib/visuals';
 
 const industries = getIndustries();
 const agencies = getAgencies();
-// Discovery preview: the first-listed agency from each published industry list (no cross-niche ranking).
+const placementsTotal = industries.reduce((n, i) => n + i.placements.length, 0);
+const sourcesTotal = new Set(industries.flatMap((i) => i.placements.flatMap((p) => p.source_ids))).size;
 const examples = industries.map((ind) => ({ ind, p: ind.placements[0], a: getAgency(ind.placements[0].agency_id)! }));
+const preview = getIndustry('healthcare') ?? industries[0];
+const previewTheme = themeFor(preview.id);
 
 const faqs = [
-  { q: 'What counts as industry experience?', a: 'A named project in that industry, with a public account of what the agency actually did. Visual style, generic "SaaS experience", a client logo with no scope, or a marketing website for a company in the industry do not count on their own.' },
-  { q: 'How are positions chosen?', a: 'Each industry has its own editorial order, based on the relevance of the documented work and the published criteria for that list. Positions are not ratings, review scores or measured market rankings. See <a href="/methodology/">How we select</a>.' },
-  { q: 'Do you verify budgets, rates or availability?', a: 'No. We have not researched current budgets, hourly rates, office locations or availability. Confirm these directly with each agency.' },
-  { q: 'How do I suggest an agency or report a correction?', a: 'Email us through the <a href="/contact/">contact page</a>. Suggestions and corrections are reviewed and are never published automatically.' },
+  { q: 'What counts as industry experience?', a: 'A named project in that industry, with a public account of what the agency actually did. Visual style, generic "SaaS experience", a client logo with no scope, or a marketing site for a company in the industry don\'t count on their own.' },
+  { q: 'How are positions chosen?', a: 'Each industry has its own editorial order, based on how relevant the documented work is and the published criteria for that list. Positions are not ratings or paid placements. See <a href="/methodology/">How we select</a>.' },
+  { q: 'Can agencies pay to be listed or ranked higher?', a: 'No. Positions can\'t be bought. If sponsorship is ever introduced, it will be clearly labelled and kept separate from the editorial order.' },
+  { q: 'Do you verify budgets, rates or availability?', a: 'No. Pricing and availability change often, so confirm them directly with each agency. Our <a href="/guides/ux-agency-pricing-models/">pricing models guide</a> explains what to ask.' },
+  { q: 'How do I suggest an agency or report a correction?', a: 'Email us through the <a href="/contact/">contact page</a> with a link to a named case study. Every suggestion is reviewed by hand.' },
 ];
+
+const guideIcons: Record<string, string> = {
+  'ux-agency-brief-template': 'file',
+  'compare-ux-design-proposals': 'scale',
+  'ux-agency-portfolio-checklist': 'clipboard',
+  'ux-agency-pricing-models': 'coins',
+};
 
 const jsonLd = [
   { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl, description: site.publisher.description },
@@ -31,28 +45,67 @@ const jsonLd = [
 <BaseLayout
   fullTitle="Best UX Design Agencies by Industry | UX Agency Finder"
   title="Home"
-  description="Find UX design agencies with documented work in your industry. Compare named projects and agency contributions across healthcare, fintech, ecommerce, logistics, real estate, education, robotics and AI."
+  description="Find UX design agencies with proven work in your industry. Compare named projects and agency contributions across healthcare, fintech, ecommerce, logistics, real estate, education, robotics and AI."
   jsonLd={jsonLd}
 >
   <section class="hero">
-    <div class="container hero-inner">
-      <p class="eyebrow">Editorial agency selection · {industries.length} niches · {agencies.length} agencies</p>
-      <h1>Find the best UX agencies for your industry</h1>
-      <p class="lead">Explore UX design agencies with relevant experience in your market. Compare industry projects, see what each team actually contributed, and find partners to contact for your product.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#industries">Browse agencies by industry</a>
-        <a class="btn btn-secondary" href="/directory/">Explore the agency directory</a>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="dot"></span>Curated by industry · Updated {new Date(site.lastReviewed).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</p>
+        <h1>Find the best UX agencies <span class="grad">for your industry</span></h1>
+        <p class="lead">Compare UX design agencies by the work that matters: named projects in your market, what each team actually delivered, and the sources to prove it.</p>
+        <SearchBox id="hero-search" />
+        <div class="quick">
+          <span class="muted small">Popular:</span>
+          {industries.slice(0, 5).map((i) => <a class="chip" href={i.route}>{i.name}</a>)}
+        </div>
       </div>
-      <AuthorReviewLine />
-      <p class="small muted disclosure">{site.disclosure}</p>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock">
+          <div class="mock-head">
+            <span class="mock-ic" style={`color:${previewTheme.color};background:${previewTheme.soft}`}><Icon name={preview.id} size={18} /></span>
+            <div>
+              <strong>{preview.h1}</strong>
+              <small>{preview.placements.length} agencies · editorial order</small>
+            </div>
+          </div>
+          <ol class="mock-list">
+            {preview.placements.slice(0, 4).map((p) => {
+              const a = getAgency(p.agency_id)!;
+              return (
+                <li>
+                  <span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span>
+                  <Avatar name={a.name} size={36} />
+                  <span class="mock-txt"><b>{a.name}</b><small>{p.subfield}</small></span>
+                  <span class="mock-src"><Icon name="check" size={14} />Sourced</span>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+        <div class="float f1"><Icon name="shield" size={18} /><span><b>No paid rankings</b><small>Editorial order only</small></span></div>
+        <div class="float f2"><Icon name="link" size={18} /><span><b>{sourcesTotal} cited sources</b><small>Every placement linked</small></span></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <dl class="stats">
+        <div><dt>Industries covered</dt><dd>{industries.length}</dd></div>
+        <div><dt>Curated agencies</dt><dd>{agencies.length}</dd></div>
+        <div><dt>Industry placements</dt><dd>{placementsTotal}</dd></div>
+        <div><dt>Sources cited</dt><dd>{sourcesTotal}</dd></div>
+      </dl>
     </div>
   </section>
 
   <section class="section" id="industries">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Browse by industry</p>
         <h2>Explore agencies in your industry</h2>
-        <p>Each niche has its own list, criteria and order. An agency appears in a niche only when public evidence supports it.</p>
+        <p>Each industry has its own list, criteria and order. An agency only appears where its public work backs it up.</p>
       </div>
       <div class="grid grid-4">
         {industries.map((i) => <IndustryCard industry={i} />)}
@@ -60,85 +113,218 @@ const jsonLd = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-soft">
     <div class="container">
-      <div class="section-head">
-        <h2>Agencies with relevant industry work</h2>
-        <p>A preview of the first-listed agency in each niche. This is not a cross-industry ranking. The full order and reasoning are on each industry page.</p>
+      <div class="section-head reveal">
+        <p class="eyebrow">Featured</p>
+        <h2>Leading agencies, industry by industry</h2>
+        <p>The first-listed agency in each industry, with the project that earned the spot. Open any list for the full comparison.</p>
       </div>
-      <div class="grid grid-2">
-        {examples.map(({ ind, p, a }) => (
-          <article class="card example">
-            <p class="eyebrow"><a href={ind.route}>{ind.name}</a></p>
-            <h3><a href={agencyUrl(a)}>{a.name}</a></h3>
-            <p class="small"><strong>Project:</strong> {p.project}</p>
-            <p class="small muted">{p.contribution}</p>
-            <QualificationBadge label={p.qualification_label} />
-            <p class="small links"><a href={`${ind.route}#${a.slug}`}>Read assessment</a> · <a href={agencyUrl(a)}>Profile</a></p>
-          </article>
-        ))}
+      <div class="grid feat-grid">
+        {examples.map(({ ind, p, a }) => {
+          const t = themeFor(ind.id);
+          return (
+            <article class="card card-hover feat reveal">
+              <div class="feat-head">
+                <Avatar name={a.name} size={48} />
+                <div class="feat-title">
+                  <h3><a href={agencyUrl(a)}>{a.name}</a></h3>
+                  <a class="feat-ind" href={ind.route} style={`color:${t.color};background:${t.soft}`}><Icon name={ind.id} size={14} />#1 in {ind.name}</a>
+                </div>
+              </div>
+              <p class="feat-proj"><span>Project</span>{p.project}</p>
+              <p class="feat-desc">{p.contribution}</p>
+              <QualificationBadge label={p.qualification_label} />
+              <div class="feat-links">
+                <a href={`${ind.route}#${a.slug}`}>Read assessment <Icon name="arrow" size={14} /></a>
+                <a href={agencyUrl(a)}>Profile</a>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container split">
-      <div>
-        <h2>Relevant industry work comes first</h2>
-        <p>We look for named projects in the industry, a clear account of the agency's contribution, and evidence that shows which buyers the team may suit. Each list has its own criteria, source notes and questions to confirm before hiring.</p>
-        <p><a href="/methodology/">Read our methodology</a> · <a href="/editorial-policy/">Editorial policy</a></p>
+    <div class="container">
+      <div class="section-head center reveal">
+        <p class="eyebrow">How it works</p>
+        <h2>From your industry to the right shortlist</h2>
       </div>
       <ol class="steps">
-        <li><strong>Choose an industry</strong><span>Start from your actual market context.</span></li>
-        <li><strong>Compare the editorial list</strong><span>Named projects, contribution and scope limits.</span></li>
-        <li><strong>Inspect the evidence</strong><span>Every placement links to the agency's own source.</span></li>
-        <li><strong>Contact agencies directly</strong><span>We don't forward your details or take referral fees.</span></li>
+        <li class="reveal"><span class="step-ic"><Icon name="compass" size={22} /></span><h3>Choose your industry</h3><p>Start from the market you're building for, not a generic service list.</p></li>
+        <li class="reveal"><span class="step-ic"><Icon name="list" size={22} /></span><h3>Compare the list</h3><p>See named projects, each agency's contribution and any scope limits side by side.</p></li>
+        <li class="reveal"><span class="step-ic"><Icon name="eye" size={22} /></span><h3>Check the evidence</h3><p>Every placement links straight to the agency's own case study.</p></li>
+        <li class="reveal"><span class="step-ic"><Icon name="mail" size={22} /></span><h3>Contact directly</h3><p>Reach agencies through their official sites. No middlemen, no lead forms.</p></li>
       </ol>
     </div>
   </section>
 
+  <section class="section section-dark">
+    <div class="container trust">
+      <div class="reveal">
+        <p class="eyebrow light">Why trust our lists</p>
+        <h2>Relevant industry work comes first</h2>
+        <p>We look for named projects in the industry, a clear account of the agency's contribution, and evidence that shows which buyers the team suits. Each list has its own criteria, sources and questions to ask before hiring.</p>
+        <a class="btn btn-primary" href="/methodology/">Read our methodology <Icon name="arrow" size={16} /></a>
+      </div>
+      <ul class="principles">
+        <li class="reveal"><Icon name="layers" size={22} /><div><h3>Evidence over claims</h3><p>A logo or service page isn't proof. We need a named project and a described contribution.</p></div></li>
+        <li class="reveal"><Icon name="ban" size={22} /><div><h3>No pay-to-rank</h3><p>Positions can't be bought. Agencies don't pay to appear.</p></div></li>
+        <li class="reveal"><Icon name="alert" size={22} /><div><h3>Limits stated openly</h3><p>Prototypes, portfolio-level entries and service-level evidence are labelled, never hidden.</p></div></li>
+        <li class="reveal"><Icon name="link" size={22} /><div><h3>Every source cited</h3><p>Each placement links to the agency's own published work so you can check it yourself.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
-      <div class="section-head">
-        <h2>Hiring resources</h2>
-        <p>Practical worksheets you can copy or print. No email required.</p>
+      <div class="section-head reveal">
+        <p class="eyebrow">Hiring resources</p>
+        <h2>Hire with confidence</h2>
+        <p>Free worksheets to brief, evaluate and compare agencies. Copy or print them. No sign-up needed.</p>
       </div>
       <div class="grid grid-4">
         {guides.map((g) => (
-          <article class:list={['card', 'guide', { featured: g.featured }]}>
-            <h3><a href={`/guides/${g.slug}/`}>{g.title}</a></h3>
-            <p class="small muted">{g.description}</p>
+          <article class="card card-hover guide reveal">
+            <span class="g-ic"><Icon name={guideIcons[g.slug] ?? 'file'} size={22} /></span>
+            <h3><a href={`/guides/${g.slug}/`} class="stretched">{g.title}</a></h3>
+            <p>{g.description}</p>
+            <span class="g-go">Open guide <Icon name="arrow" size={14} /></span>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Frequently asked questions</h2>
+  <section class="section section-soft">
+    <div class="container faq-wrap">
+      <div class="reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2>Frequently asked questions</h2>
+        <p class="muted">Can't find what you're looking for? <a href="/contact/">Get in touch</a>.</p>
+      </div>
       <FAQ items={faqs} />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hero { background: var(--c-surface); border-bottom: 1px solid var(--c-border); }
-  .hero-inner { padding-block: clamp(2.5rem, 7vw, 4.5rem); max-width: 860px; margin-left: max(1.25rem, calc((100% - var(--w-content)) / 2)); }
-  .lead { font-size: 1.2rem; color: var(--c-muted); max-width: 680px; }
-  .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0.5rem; }
-  .disclosure { margin-top: 1rem; max-width: 680px; }
-  .example h3 { margin: 0 0 0.4rem; }
-  .example h3 a { color: var(--c-text); text-decoration: none; }
-  .example .eyebrow a { color: var(--c-muted); text-decoration: none; }
-  .example .links { margin: 0.75rem 0 0; }
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-  .steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
-  .steps li { counter-increment: s; display: grid; grid-template-columns: 2.25rem 1fr; column-gap: 0.75rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 0.85rem 1rem; }
-  .steps li::before { content: counter(s); grid-row: span 2; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--c-accent-soft); color: var(--c-accent); font-weight: 700; }
-  .steps span { color: var(--c-muted); font-size: 0.95rem; }
-  .guide h3 { font-size: 1.1rem; }
-  .guide h3 a { color: var(--c-text); }
-  .guide.featured { border-color: var(--c-accent); }
-  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+  /* Hero */
+  .hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 7vw, 5.5rem) 3rem; border-bottom: 1px solid var(--c-border); }
+  .hero-bg { position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(800px 420px at 80% 0%, rgb(124 58 237 / 0.13), transparent 65%),
+      radial-gradient(700px 420px at 0% 30%, rgb(79 70 229 / 0.10), transparent 65%),
+      linear-gradient(180deg, #fbfbff, #fff);
+  }
+  .hero-bg::after { content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgb(15 23 42 / 0.045) 1px, transparent 1px), linear-gradient(90deg, rgb(15 23 42 / 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+  .hero-grid > * { min-width: 0; }
+  .pill { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 500; color: var(--c-text-2); background: #fff; border: 1px solid var(--c-border); padding: 0.35rem 0.85rem; border-radius: 999px; box-shadow: var(--shadow-xs); margin-bottom: 1.4rem; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 4px rgb(16 185 129 / 0.18); }
+  .hero h1 { margin-bottom: 1.1rem; }
+  .grad { background: linear-gradient(90deg, #4f46e5, #7c3aed 60%, #db2777); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lead { max-width: 560px; margin-bottom: 1.8rem; }
+  .quick { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 1.1rem; }
+  .chip { font-size: 0.84rem; font-weight: 500; color: var(--c-text-2); text-decoration: none; padding: 0.3rem 0.75rem; border-radius: 999px; border: 1px solid var(--c-border); background: rgb(255 255 255 / 0.7); transition: all 0.15s; }
+  .chip:hover { border-color: var(--c-accent); color: var(--c-accent); background: #fff; }
+
+  .hero-visual { position: relative; padding: 1.5rem 0; }
+  .mock { background: #fff; border: 1px solid var(--c-border); border-radius: 22px; box-shadow: 0 30px 60px -20px rgb(30 27 75 / 0.25), 0 0 0 8px rgb(255 255 255 / 0.6); padding: 1.25rem; transform: rotate(-1deg); }
+  .mock-head { display: flex; gap: 0.75rem; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--c-border); margin-bottom: 0.5rem; }
+  .mock-head strong { display: block; color: var(--c-text); font-size: 0.98rem; }
+  .mock-head small { color: var(--c-muted); font-size: 0.8rem; }
+  .mock-ic { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 12px; }
+  .mock-list { list-style: none; margin: 0; padding: 0; }
+  .mock-list li { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.35rem; border-bottom: 1px dashed var(--c-border); }
+  .mock-list li:last-child { border-bottom: 0; }
+  .mock-list .pos { min-width: 1.8rem; height: 1.8rem; font-size: 0.82rem; border-radius: 8px; }
+  .mock-txt { display: flex; flex-direction: column; line-height: 1.3; flex: 1; min-width: 0; }
+  .mock-txt b { color: var(--c-text); font-size: 0.92rem; }
+  .mock-txt small { color: var(--c-muted); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mock-src { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; font-weight: 600; color: var(--c-success); background: var(--c-success-soft); padding: 0.2rem 0.5rem; border-radius: 999px; }
+  .float { position: absolute; display: flex; gap: 0.6rem; align-items: center; background: #fff; border: 1px solid var(--c-border); border-radius: 14px; padding: 0.7rem 0.95rem; box-shadow: var(--shadow-lg); color: var(--c-accent); animation: bob 6s ease-in-out infinite; }
+  .float span { display: flex; flex-direction: column; line-height: 1.25; }
+  .float b { color: var(--c-text); font-size: 0.85rem; }
+  .float small { color: var(--c-muted); font-size: 0.74rem; }
+  .f1 { left: -2.2rem; bottom: 0; }
+  .f2 { right: -1rem; top: -0.4rem; animation-delay: -3s; color: var(--c-success); }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin: 3.5rem 0 0; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
+  .stats div { padding: 1.4rem 1.5rem; border-right: 1px solid var(--c-border); display: flex; flex-direction: column-reverse; }
+  .stats div:last-child { border-right: 0; }
+  .stats dt { font-size: 0.85rem; color: var(--c-muted); }
+  .stats dd { margin: 0; font-size: 2.1rem; font-weight: 800; color: var(--c-text); letter-spacing: -0.03em; line-height: 1.1; }
+
+  /* Featured */
+  .feat-grid { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 1100px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .feat-grid { grid-template-columns: 1fr; } }
+  .feat { display: flex; flex-direction: column; gap: 0.75rem; }
+  .feat-head { display: flex; gap: 0.9rem; align-items: center; }
+  .feat-title { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .feat h3 { margin: 0; font-size: 1.2rem; }
+  .feat h3 a { color: var(--c-text); text-decoration: none; }
+  .feat h3 a:hover { color: var(--c-accent); }
+  .feat-ind { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.76rem; font-weight: 600; text-decoration: none; padding: 0.15rem 0.55rem; border-radius: 999px; }
+  .feat-proj { margin: 0; font-weight: 600; color: var(--c-text); font-size: 0.95rem; }
+  .feat-proj span { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-muted); font-weight: 600; margin-bottom: 0.1rem; }
+  .feat-desc { margin: 0; color: var(--c-muted); font-size: 0.92rem; }
+  .feat-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: auto; padding-top: 0.5rem; font-size: 0.88rem; font-weight: 600; }
+  .feat-links a { display: inline-flex; align-items: center; gap: 0.3rem; text-decoration: none; white-space: nowrap; }
+  .feat-links a:last-child { color: var(--c-muted); }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; counter-reset: s; }
+  .steps li { position: relative; counter-increment: s; padding: 1.5rem; border-radius: var(--radius); background: #fff; border: 1px solid var(--c-border); }
+  .steps li::after { content: '0' counter(s); position: absolute; top: 1.25rem; right: 1.4rem; font-size: 2rem; font-weight: 800; color: var(--c-surface-2); letter-spacing: -0.04em; }
+  .step-ic { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 14px; background: var(--c-accent-soft); color: var(--c-accent); margin-bottom: 1rem; }
+  .steps h3 { margin-bottom: 0.35rem; }
+  .steps p { margin: 0; color: var(--c-muted); font-size: 0.93rem; }
+
+  /* Dark trust section */
+  .section-dark { background: radial-gradient(900px 400px at 100% 0%, rgb(79 70 229 / 0.35), transparent 60%), var(--c-dark); color: #cbd5e1; }
+  .section-dark h2 { color: #fff; }
+  .eyebrow.light { color: #a5b4fc; }
+  .trust { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
+  .trust > div > p { color: #94a3b8; font-size: 1.05rem; margin-bottom: 1.75rem; }
+  .principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .principles li { display: flex; flex-direction: column; gap: 0.75rem; padding: 1.35rem; border-radius: var(--radius); background: rgb(255 255 255 / 0.04); border: 1px solid rgb(255 255 255 / 0.09); color: #a5b4fc; }
+  .principles h3 { color: #fff; font-size: 1.02rem; margin: 0 0 0.3rem; }
+  .principles p { margin: 0; font-size: 0.9rem; color: #94a3b8; }
+
+  /* Guides */
+  .guide { position: relative; display: flex; flex-direction: column; }
+  .g-ic { display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 14px; background: var(--c-bg-soft); border: 1px solid var(--c-border); color: var(--c-text); margin-bottom: 1rem; }
+  .guide h3 { font-size: 1.08rem; margin-bottom: 0.4rem; }
+  .guide h3 a { color: var(--c-text); text-decoration: none; }
+  .stretched::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+  .guide p { color: var(--c-muted); font-size: 0.9rem; }
+  .g-go { margin-top: auto; display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 600; font-size: 0.88rem; color: var(--c-accent); }
+
+  .faq-wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: start; }
+
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 520px; margin-inline: auto; width: 100%; }
+    .f1 { left: -0.5rem; }
+    .f2 { right: -0.5rem; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .trust, .faq-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stats div:nth-child(2) { border-right: 0; }
+    .stats div:nth-child(-n+2) { border-bottom: 1px solid var(--c-border); }
+    .steps, .principles { grid-template-columns: 1fr; }
+    .float { display: none; }
+    .mock { transform: none; }
+  }
 </style>

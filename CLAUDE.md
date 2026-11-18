@@ -50,9 +50,14 @@ Delete the placement and renumber positions. If the agency has no placements lef
 
 ### Publish vs draft
 - `publication_state` can be `draft | researched | reviewed | published | needs-review | archived`.
-- `site.json -> showDrafts: true` (test mode) shows everything except `archived`. Set it to `false` to show only `published` records.
-- `site.json -> noindex: true` keeps search engines out (meta robots and robots.txt). Set it to `false` at public launch.
-- `site.json -> testSiteBanner`: set to `null` to hide the top banner.
+- `site.json -> showDrafts: true` shows everything except `archived` records. Set it to `false` to show only `published` records. Visitors never see draft status either way.
+- `site.json -> noindex: true` keeps search engines out (meta robots and robots.txt) while the site isn't public. Set it to `false` at launch. Visitors can't see this setting.
+- `site.json -> testSiteBanner` must stay `null`. The site must never look like a test site.
+
+### Visual design
+- Design tokens (colours, radius, shadows) are in `src/styles/global.css`. The font is Inter Variable (self-hosted via `@fontsource-variable/inter`).
+- Industry icon and colour: `src/lib/visuals.ts` (`industryTheme`) and `src/components/Icon.astro`. A new industry needs an entry in both, otherwise it falls back to a neutral style.
+- Agency avatars are generated monograms. Don't hotlink or invent agency logos.
 
 ### Change the contact email
 Edit `contactEmail` in `src/data/site.json`.
@@ -65,3 +70,4 @@ npm run build
 ```
 
 (On Windows PowerShell, use `npm.cmd` if script execution is blocked.) Fix any reported errors before committing. Deploy the `dist/` folder or push to the connected Git host.
+

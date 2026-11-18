@@ -30,3 +30,4 @@ if (errors.length) {
 }
 const placements = data.industries.reduce((n, i) => n + i.placements.length, 0);
 console.log(`OK Data valid: ${data.agencies.length} agencies, ${data.industries.length} industries, ${placements} placements, ${data.sources.length} sources.`);
+

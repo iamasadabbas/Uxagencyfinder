@@ -1,13 +1,14 @@
 ---
+import Icon from './Icon.astro';
 import { site, formatDate } from '../lib/data';
-interface Props { reviewed?: string }
+interface Props { reviewed?: string; sources?: number }
 const reviewed = Astro.props.reviewed ?? site.lastReviewed;
+const { sources } = Astro.props;
 ---
 
 <div class="meta-line">
-  <span>By <a href={site.editor ? `/authors/${site.editor.slug}/` : '/about/'}>{site.editor ? site.editor.name : `${site.publisher.name} editorial`}</a></span>
-  <span>Sources accessed {formatDate(site.researchDate)}</span>
-  <span>Last reviewed <time datetime={reviewed}>{formatDate(reviewed)}</time></span>
-  <span><a href="/methodology/">How we select</a></span>
-  <span><a href="/editorial-policy/">Disclosure</a></span>
+  <span><Icon name="calendar" size={16} />Updated <time datetime={reviewed}>{formatDate(reviewed)}</time></span>
+  {sources !== undefined && <span><Icon name="link" size={16} />{sources} sources cited</span>}
+  <span><Icon name="shield" size={16} /><a href="/methodology/">How we select</a></span>
+  <span><Icon name="ban" size={16} />No paid placements</span>
 </div>

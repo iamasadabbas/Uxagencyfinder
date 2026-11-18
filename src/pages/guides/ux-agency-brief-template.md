@@ -84,3 +84,4 @@ UX AGENCY PROJECT BRIEF
 ## Next step
 
 Once your brief is ready, [browse agencies with work in your industry](/agencies/), then use the [proposal comparison worksheet](/guides/compare-ux-design-proposals/) when replies arrive.
+

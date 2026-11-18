@@ -2,9 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import QualificationBadge from '../components/QualificationBadge.astro';
+import Icon from '../components/Icon.astro';
+import Avatar from '../components/Avatar.astro';
 import { getAgencies, getIndustries, getPlacementsForAgency, agencyUrl, absolute } from '../lib/data';
+import { themeFor } from '../lib/visuals';
 
-const agencies = getAgencies(); // already alphabetical
+const agencies = getAgencies(); // alphabetical
 const industries = getIndustries();
 const rows = agencies.map((a) => ({ a, placements: getPlacementsForAgency(a.id) }));
 
@@ -15,70 +18,83 @@ const jsonLd = [{
 }];
 ---
 
-<BaseLayout title="UX Agency Directory (A–Z)" description={`Alphabetical directory of all ${agencies.length} UX design agencies in our industry selections. Filter by industry and search by name.`} jsonLd={jsonLd}>
-  <header class="page-header">
+<BaseLayout title="UX Agency Directory (A–Z)" description={`Browse all ${agencies.length} curated UX design agencies alphabetically. Filter by industry and search by name.`} jsonLd={jsonLd}>
+  <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={[{ name: 'Agency directory', href: '/directory/' }]} />
+      <p class="eyebrow">{agencies.length} agencies · A–Z</p>
       <h1>Agency directory</h1>
-      <p class="lead">Every agency in our industry selections, listed alphabetically. Industry tags come from reviewed placements only. The numbers show the agency's editorial position in each niche.</p>
+      <p class="lead">Every agency in our industry lists, in alphabetical order. Filter by industry to see who has relevant work and where they rank.</p>
     </div>
   </header>
 
-  <div class="container section">
-    <form class="filters card" id="dir-filters" hidden role="search" aria-label="Filter agencies" onsubmit="return false">
-      <div class="f-search">
-        <label for="q">Search by name</label>
-        <input id="q" type="search" placeholder="e.g. ustwo, Momentum" autocomplete="off" />
+  <div class="container section dir-section">
+    <form class="filters" id="dir-filters" hidden role="search" aria-label="Filter agencies" onsubmit="return false">
+      <div class="f-row">
+        <div class="f-search">
+          <label for="q" class="visually-hidden">Search agencies by name</label>
+          <Icon name="search" size={18} class="f-ic" />
+          <input id="q" type="search" placeholder="Search agencies, e.g. ustwo or Momentum" autocomplete="off" />
+        </div>
+        <div class="f-sort">
+          <label for="sort" class="visually-hidden">Sort</label>
+          <select id="sort">
+            <option value="az">Name A–Z</option>
+            <option value="za">Name Z–A</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label for="ind">Industry</label>
-        <select id="ind">
-          <option value="">All industries</option>
-          {industries.map((i) => <option value={i.id}>{i.name}</option>)}
-        </select>
-      </div>
-      <div>
-        <label for="sort">Sort</label>
-        <select id="sort">
-          <option value="az">Name A–Z</option>
-          <option value="za">Name Z–A</option>
-        </select>
-      </div>
-      <div class="f-actions">
-        <button type="button" class="btn btn-secondary" id="clear">Clear all</button>
-      </div>
+      <fieldset class="chips">
+        <legend class="visually-hidden">Filter by industry</legend>
+        <button type="button" class="chip" data-industry="" aria-pressed="true">All</button>
+        {industries.map((i) => {
+          const t = themeFor(i.id);
+          return <button type="button" class="chip" data-industry={i.id} aria-pressed="false" style={`--ic:${t.color};--is:${t.soft}`}><Icon name={i.id} size={14} />{i.name}</button>;
+        })}
+      </fieldset>
     </form>
 
     <noscript>
       <p class="notice">Browse by industry: {industries.map((i, n) => <>{n > 0 && ' · '}<a href={i.route}>{i.name}</a></>)}</p>
     </noscript>
 
-    <p class="count" id="count" aria-live="polite" role="status">{agencies.length} agencies</p>
+    <div class="result-bar">
+      <p class="count" id="count" aria-live="polite" role="status">{agencies.length} agencies</p>
+      <button type="button" class="btn btn-ghost btn-small" id="clear" hidden>Clear all</button>
+    </div>
 
     <ul class="dir" id="dir-list">
       {rows.map(({ a, placements }) => (
-        <li class="card dir-item" data-name={a.name.toLowerCase()} data-search={[a.name, ...a.aliases].join(' ').toLowerCase()} data-industries={placements.map((p) => p.industry.id).join(' ')}>
-          <div class="dir-main">
-            <h2><a href={agencyUrl(a)}>{a.name}</a></h2>
-            {a.aliases.length > 0 && <p class="small muted alias">Also known as {a.aliases.join(', ')}</p>}
-            <p class="small muted">{a.project_evidence}</p>
-            {placements.filter(({ placement }) => placement.evidence_depth === 'service-page').map(({ industry, placement }) => (
-              <p class="qual"><QualificationBadge label={`${industry.name}: ${placement.qualification_label}`} /></p>
-            ))}
+        <li class="dir-item" data-name={a.name.toLowerCase()} data-search={[a.name, ...a.aliases].join(' ').toLowerCase()} data-industries={placements.map((p) => p.industry.id).join(' ')}>
+          <div class="di-head">
+            <Avatar name={a.name} size={48} />
+            <div class="di-title">
+              <h2><a href={agencyUrl(a)} class="stretched">{a.name}</a></h2>
+              {a.aliases.length > 0 ? <p class="alias">aka {a.aliases.join(', ')}</p> : <p class="alias">{new URL(a.official_website).hostname.replace(/^www\./, '')}</p>}
+            </div>
           </div>
+          <p class="di-proj">{a.project_evidence}</p>
+          {placements.filter(({ placement }) => placement.evidence_depth === 'service-page').map(({ industry, placement }) => (
+            <div class="qual"><QualificationBadge label={`${industry.name}: ${placement.qualification_label}`} /></div>
+          ))}
           <ul class="tag-list ind-tags" aria-label="Industry placements">
-            {placements.map(({ industry, placement }) => (
-              <li><a class="tag" href={`${industry.route}#${a.slug}`}>{industry.name} <b>#{placement.position}</b></a></li>
-            ))}
+            {placements.map(({ industry, placement }) => {
+              const t = themeFor(industry.id);
+              return <li><a class="itag" href={`${industry.route}#${a.slug}`} style={`color:${t.color};background:${t.soft}`}>{industry.name} <b>#{placement.position}</b></a></li>;
+            })}
           </ul>
-          <div class="dir-links small">
-            <a href={agencyUrl(a)}>Profile</a>
-            <a href={a.official_website} rel="noopener" target="_blank">Website ↗</a>
+          <div class="di-foot">
+            <span>View profile <Icon name="arrow" size={14} /></span>
+            <a href={a.official_website} rel="noopener" target="_blank" class="ext">Website <Icon name="external" size={13} /></a>
           </div>
         </li>
       ))}
     </ul>
-    <p id="empty" class="notice" hidden>No agencies match these filters. <button type="button" class="linklike" id="clear2">Clear all filters</button></p>
+    <div id="empty" class="empty" hidden>
+      <Icon name="search" size={28} />
+      <p><strong>No agencies match these filters.</strong></p>
+      <button type="button" class="btn btn-secondary btn-small" id="clear2">Clear all filters</button>
+    </div>
   </div>
 </BaseLayout>
 
@@ -88,26 +104,43 @@ const jsonLd = [{
 </script>
 
 <style>
-  .filters { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 1rem; align-items: end; margin-bottom: 1.25rem; }
-  .f-actions .btn { width: 100%; }
-  .count { font-weight: 600; color: var(--c-muted); }
-  .dir { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
-  .dir-item { display: grid; grid-template-columns: 1.4fr 1.6fr auto; gap: 1rem 1.5rem; align-items: center; }
-  .dir-item h2 { font-family: var(--font-sans); font-size: 1.15rem; margin: 0 0 0.2rem; }
+  .dir-section { padding-top: 2rem; }
+  .filters { position: sticky; top: 4.6rem; z-index: 20; background: rgb(255 255 255 / 0.92); backdrop-filter: blur(10px); border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; display: grid; gap: 0.85rem; }
+  .filters > * { min-width: 0; }
+  .f-row { display: flex; gap: 0.75rem; }
+  .f-search { position: relative; flex: 1; }
+  .f-search :global(.f-ic) { position: absolute; left: 0.95rem; top: 50%; transform: translateY(-50%); color: var(--c-muted); pointer-events: none; }
+  .f-search input { padding-left: 2.6rem; border-radius: 999px; height: 2.9rem; }
+  .f-sort select { border-radius: 999px; height: 2.9rem; padding-inline: 1rem 2rem; min-width: 150px; }
+  .chips { border: 0; margin: 0; padding: 0; display: flex; gap: 0.45rem; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { display: inline-flex; align-items: center; gap: 0.35rem; font: 500 0.86rem var(--font-sans); padding: 0.45rem 0.85rem; border-radius: 999px; border: 1px solid var(--c-border); background: #fff; color: var(--c-text-2); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+  .chip:hover { border-color: var(--c-border-strong); color: var(--c-text); }
+  .chip :global(svg) { color: var(--ic, currentColor); }
+  .chip[aria-pressed='true'] { background: var(--c-text); color: #fff; border-color: var(--c-text); }
+  .chip[aria-pressed='true'] :global(svg) { color: #fff; }
+  .result-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; min-height: 2.2rem; }
+  .count { font-weight: 600; color: var(--c-text-2); margin: 0; }
+  .dir { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1.1rem; }
+  .dir-item { position: relative; display: flex; flex-direction: column; gap: 0.8rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-xs); transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s; animation: fade 0.3s var(--ease); }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .dir-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--c-border-strong); }
+  .di-head { display: flex; gap: 0.85rem; align-items: center; }
+  .di-title { min-width: 0; }
+  .dir-item h2 { font-size: 1.12rem; margin: 0; }
   .dir-item h2 a { color: var(--c-text); text-decoration: none; }
-  .dir-item h2 a:hover { color: var(--c-accent); text-decoration: underline; }
-  .dir-item p { margin: 0; }
-  .alias { font-style: italic; }
-  .qual { margin-top: 0.4rem !important; }
-  a.tag { text-decoration: none; color: var(--c-text); }
-  a.tag:hover { border-color: var(--c-accent); color: var(--c-accent); }
-  a.tag b { color: var(--c-muted); font-weight: 600; }
-  .dir-links { display: flex; flex-direction: column; gap: 0.25rem; text-align: right; white-space: nowrap; }
-  .linklike { background: none; border: 0; padding: 0; color: var(--c-accent); text-decoration: underline; cursor: pointer; font: inherit; }
-  @media (max-width: 860px) {
-    .filters { grid-template-columns: 1fr 1fr; }
-    .f-search { grid-column: 1 / -1; }
-    .dir-item { grid-template-columns: 1fr; }
-    .dir-links { flex-direction: row; gap: 1rem; text-align: left; }
-  }
+  .stretched::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); }
+  .alias { margin: 0; font-size: 0.82rem; color: var(--c-muted); }
+  .di-proj { margin: 0; font-size: 0.88rem; color: var(--c-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ind-tags { position: relative; z-index: 1; }
+  .itag { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.78rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; text-decoration: none; }
+  .itag b { font-weight: 800; opacity: 0.75; }
+  .itag:hover { filter: brightness(0.94); }
+  .qual { position: relative; z-index: 1; }
+  .di-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--c-border); font-size: 0.86rem; font-weight: 600; }
+  .di-foot span { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--c-accent); }
+  .ext { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.25rem; color: var(--c-muted); text-decoration: none; }
+  .ext:hover { color: var(--c-text); }
+  .empty { text-align: center; padding: 3rem 1rem; border: 1px dashed var(--c-border-strong); border-radius: var(--radius-lg); color: var(--c-muted); }
+  @media (max-width: 640px) { .f-row { flex-direction: column; } .filters { top: 4.4rem; } }
 </style>

@@ -5,7 +5,7 @@
     "label": "Cieden: Sitenna",
     "url": "https://cieden.com/telecom-design-sitenna",
     "supported_context": "Telecom operations, dashboards, product UX, and a design system.",
-    "qualification": "Agency-published case; omit causal funding claims.",
+    "qualification": "Agency-published case; funding outcomes are not attributed to the design work.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published",
     "supplementary": true
@@ -16,7 +16,7 @@
     "label": "Fuselab: Stardog Voicebox",
     "url": "https://fuselabcreative.com/our-projects/stardog-conversational-ai/",
     "supported_context": "Conversational enterprise-data workspace and UI/UX contribution.",
-    "qualification": "Attribute the scope; omit unaudited conversion/engagement percentages.",
+    "qualification": "Scope as described by the agency; conversion and engagement figures are not independently audited.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -26,7 +26,7 @@
     "label": "Fuselab: DHCS",
     "url": "https://fuselabcreative.com/our-projects/dhcs/",
     "supported_context": "LTSS public-health reporting, research, design, and data-visualization development.",
-    "qualification": "Public-sector program reporting is distinct from bedside clinical software.",
+    "qualification": "Covers public-sector program reporting, not bedside clinical software.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -36,7 +36,7 @@
     "label": "Fuselab: ClyHealth",
     "url": "https://fuselabcreative.com/our-projects/clyhealth-dashboard-design/",
     "supported_context": "Healthcare dashboards, patient/provider research, UI/UX, and an API contribution.",
-    "qualification": "Interface and integration work do not establish clinical validation or independent compliance certification.",
+    "qualification": "Interface and integration work; not evidence of clinical validation or independent compliance certification.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -46,7 +46,7 @@
     "label": "Fuzzy Math: GE Healthcare",
     "url": "https://fuzzymath.com/work/case-study/general-electric/",
     "supported_context": "Enterprise healthcare R&D, data visualization, and reusable design patterns.",
-    "qualification": "Preserve the mixture of exploration and product work; do not claim every concept shipped.",
+    "qualification": "Mixes exploratory concepts with product work; not every concept shipped.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -56,7 +56,7 @@
     "label": "GoInvo: Maya EHR",
     "url": "https://www.goinvo.com/work/maya-ehr",
     "supported_context": "Home-health clinical and administrative workflows; the source describes a working EHR.",
-    "qualification": "Working-product status is source-reported, not independently tested here.",
+    "qualification": "Working-product status is agency-reported and not independently tested.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -66,7 +66,7 @@
     "label": "GoInvo: Ipsos Facto",
     "url": "https://www.goinvo.com/work/ipsos-facto",
     "supported_context": "Guided generative-AI research workflows and cited insights.",
-    "qualification": "Treat adoption and usage numbers as agency-published claims if ever included.",
+    "qualification": "Any adoption or usage figures are agency-published claims.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -76,7 +76,7 @@
     "label": "Guidea: IBM Maximo collaboration",
     "url": "https://guidea.com/insights/design-collaboration-with-ibm-wins-international-award",
     "supported_context": "Field-service research, prototypes, validation, and mobile design-system work.",
-    "qualification": "The source credits IBM's engineers for component implementation.",
+    "qualification": "IBM's engineers are credited with component implementation.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published",
     "supplementary": true
@@ -87,7 +87,7 @@
     "label": "Lazarev.agency: Accern Rhea",
     "url": "https://www.lazarev.agency/cases/accern-rhea",
     "supported_context": "Financial-research AI workspace combining prompts, widgets, and reports.",
-    "qualification": "The design scope does not prove responsibility for corporate fundraising or acquisition.",
+    "qualification": "Design scope only; it does not show responsibility for corporate fundraising or acquisition.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -97,7 +97,7 @@
     "label": "Metalab: AI portfolio",
     "url": "https://www.metalab.com/ai",
     "supported_context": "Selected product-interface examples, including Midjourney and Suno.",
-    "qualification": "A mixed portfolio overview; some other entries describe branding/websites only.",
+    "qualification": "Mixed portfolio overview; some entries cover branding or websites only.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -107,7 +107,7 @@
     "label": "Neuron: iQuartic",
     "url": "https://www.neuronux.com/iquartic-case-study",
     "supported_context": "Medical-coding workflows, interface modernization, and React implementation.",
-    "qualification": "Health insurance and administrative work; no general clinical or regulatory claim.",
+    "qualification": "Health-insurance and administrative work; no general clinical or regulatory claim.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -127,7 +127,7 @@
     "label": "Qubstudio: Ademrius",
     "url": "https://qubstudio.com/projects/ademrius/",
     "supported_context": "Clinic/patient SaaS, appointments, telemedicine, and records interfaces.",
-    "qualification": "Attribute the design contribution without inferring a regulatory audit.",
+    "qualification": "Design contribution only; no regulatory audit is implied.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -137,7 +137,7 @@
     "label": "Think Company: ADP",
     "url": "https://www.thinkcompany.com/work/adp",
     "supported_context": "Workforce analytics, research, chart components, and embedded delivery.",
-    "qualification": "Work alongside ADP teams; do not imply sole ownership of the product.",
+    "qualification": "Work done alongside ADP's teams; the agency did not solely own the product.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published",
     "supplementary": true
@@ -148,7 +148,7 @@
     "label": "Think Company: Nemours",
     "url": "https://www.thinkcompany.com/work/nemours-childrens-health",
     "supported_context": "Research, family-provider experiences, and product delivery.",
-    "qualification": "Published health/app outcomes were not independently audited.",
+    "qualification": "Published health and app outcomes are not independently audited.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -158,7 +158,7 @@
     "label": "UX Studio: IncQuery Suite",
     "url": "https://www.uxstudioteam.com/case-study/incquery-suite-case-study",
     "supported_context": "Specialist engineering-data dashboards and SaaS redesign.",
-    "qualification": "Source-reported redesign; no present-day deployment audit.",
+    "qualification": "Agency-reported redesign; current deployment not independently verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published",
     "supplementary": true
@@ -169,7 +169,7 @@
     "label": "UX Studio: OverseeAI",
     "url": "https://www.uxstudioteam.com/case-study/oversee-ai-case-study",
     "supported_context": "AI-model monitoring, product research, and interface concepts.",
-    "qualification": "Explicit POC/MVP work; preserve the stage label.",
+    "qualification": "Explicitly proof-of-concept / MVP-stage work.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -179,7 +179,7 @@
     "label": "Fuselab: Robodog AGV",
     "url": "https://fuselabcreative.com/our-projects/robodog/",
     "supported_context": "Warehouse robot fleets, missions, monitoring, alerts, and manual controls.",
-    "qualification": "Agency portfolio description; current deployment, safety, and productivity outcomes not independently verified.",
+    "qualification": "Agency portfolio description; deployment, safety and productivity outcomes not independently verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -189,7 +189,7 @@
     "label": "Fuselab: Hyperfab robotics dashboard",
     "url": "https://fuselabcreative.com/our-projects/robotics-dashboard-design/",
     "supported_context": "Industrial robot operations, production monitoring, and simulation-interface design.",
-    "qualification": "Attribute the published design contribution; do not infer independent validation of the physical robot system.",
+    "qualification": "Published design contribution only; the physical robot system is not independently validated.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -199,7 +199,7 @@
     "label": "UX Studio: Revolution Robotics",
     "url": "https://www.uxstudioteam.com/revolution-robotics-case-study",
     "supported_context": "Educational robotics app configuration, coding, control, and user research.",
-    "qualification": "Educational/child-user context, not industrial robotics proof; no hardware/safety certification claim.",
+    "qualification": "Educational, child-user context rather than industrial robotics; no hardware or safety certification.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -209,7 +209,7 @@
     "label": "Agente: project portfolio",
     "url": "https://agentestudio.com/cases",
     "supported_context": "WorkFusion Automation Academy UX/UI redesign.",
-    "qualification": "Portfolio confirmation; direct case access was inconsistent, so do not invent unavailable process detail.",
+    "qualification": "Portfolio confirmation only; detailed process information was not consistently available.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -219,7 +219,7 @@
     "label": "Agente: Atterley",
     "url": "https://agentestudio.com/cases/atterley",
     "supported_context": "Ecommerce information architecture, product/catalog pages and checkout.",
-    "qualification": "Historical agency case; not current client/team/deployment verification.",
+    "qualification": "Historical agency case; current client, team and deployment not verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -239,7 +239,7 @@
     "label": "Aufait UX: DAMAC",
     "url": "https://www.aufaitux.com/case-study/damac/",
     "supported_context": "Agent-facing property app, search, scanning, details and booking.",
-    "qualification": "Broker workflow; do not generalize to every PropTech subfield.",
+    "qualification": "Broker workflow specifically; not representative of every PropTech subfield.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -249,7 +249,7 @@
     "label": "Aufait UX: iD Fresh",
     "url": "https://www.aufaitux.com/case-study/id-fresh-ux-research/",
     "supported_context": "Field research, distribution, loadout, route and reconciliation workflows.",
-    "qualification": "Food distribution context, not every freight/transport product.",
+    "qualification": "Food-distribution context; not representative of every freight or transport product.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -269,7 +269,7 @@
     "label": "Cieden: Clinicmaster",
     "url": "https://cieden.com/article-enterprise-emr",
     "supported_context": "Clinical/practice-management modernization and design-system direction.",
-    "qualification": "Validated direction ready for continued rollout; no independent compliance or full-rollout verification.",
+    "qualification": "Validated direction ready for continued rollout; compliance and full rollout not independently verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -279,7 +279,7 @@
     "label": "Fantasy: BNY Eliza",
     "url": "https://fantasy.co/work/bny-eliza",
     "supported_context": "Enterprise banking AI vision, interface and coded design-system contribution.",
-    "qualification": "Do not attribute the whole bank platform or all reported outcomes to the agency.",
+    "qualification": "Covers the agency's vision and design-system scope, not the whole bank platform or all reported outcomes.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -289,7 +289,7 @@
     "label": "Guidea: digital-health portfolio",
     "url": "https://guidea.com/industries/digital-health",
     "supported_context": "Named Amalgam Rx, Humana and other healthcare design contexts.",
-    "qualification": "Portfolio overview with uneven project depth; partner product clearances are not agency certification.",
+    "qualification": "Portfolio overview with uneven project depth; partner product clearances are not agency certifications.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -309,7 +309,7 @@
     "label": "HTEC Momentum: Bitstamp",
     "url": "https://www.momentumdesignlab.com/work/bitstamp",
     "supported_context": "Trading-app product strategy and new user experience.",
-    "qualification": "Crypto-investing context; do not generalize to all banking or credit products.",
+    "qualification": "Crypto-investing context; not representative of all banking or credit products.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -319,7 +319,7 @@
     "label": "Netguru: Otodom",
     "url": "https://www.netguru.com/clients/otodom-product-design",
     "supported_context": "Embedded research, UI, testing and real-estate marketplace product work.",
-    "qualification": "Attribute the embedded contribution; outcomes not independently audited.",
+    "qualification": "Embedded team contribution; outcomes not independently audited.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -329,7 +329,7 @@
     "label": "Netguru: UCLA Chorus",
     "url": "https://www.netguru.com/clients/chorus",
     "supported_context": "App-creation UX/UI for academics.",
-    "qualification": "Academic tooling; scope differs from classroom course delivery.",
+    "qualification": "Academic tooling; different in scope from classroom course delivery.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -339,7 +339,7 @@
     "label": "Qubstudio: LinkIt!",
     "url": "https://qubstudio.com/projects/linkit/",
     "supported_context": "Student assessment, parent/student portal and staff portal redesign.",
-    "qualification": "Separate platform design from branding and website work.",
+    "qualification": "Platform design is distinct from the branding and website work also shown.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -359,7 +359,7 @@
     "label": "Qubstudio: client portfolio",
     "url": "https://qubstudio.com/clients/",
     "supported_context": "MyTower IA/UX; Gulf/ila banking work; other named sector contributions.",
-    "qualification": "Short portfolio entries have less depth than full case studies.",
+    "qualification": "Short portfolio entries offer less depth than full case studies.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -369,7 +369,7 @@
     "label": "ustwo: Fresenius Medical Care",
     "url": "https://ustwo.com/work/fresenius-medical-care/",
     "supported_context": "Clinician and patient kidney-care app design with user input.",
-    "qualification": "Working-product claims are source-reported; no clinical-outcome certification inferred.",
+    "qualification": "Working-product claims are agency-reported; no clinical-outcome certification.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -389,7 +389,7 @@
     "label": "ustwo: Inflection AI",
     "url": "https://ustwo.com/work/inflection-ai/",
     "supported_context": "Pi interface, research, mobile launch and ongoing product work.",
-    "qualification": "Historical/current-service status and product outcomes require separate checks.",
+    "qualification": "Current service status and product outcomes were not separately verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -419,7 +419,7 @@
     "label": "ustwo: European Payments Initiative",
     "url": "https://ustwo.com/work/european-payments-initiative/",
     "supported_context": "Payments research, tested flows/prototypes and strategic experience foundation.",
-    "qualification": "Not a claim of sole ownership of the final live platform.",
+    "qualification": "The agency did not solely own the final live platform.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -429,7 +429,7 @@
     "label": "ustwo: Lush",
     "url": "https://ustwo.com/work/lush/",
     "supported_context": "Mobile commerce, product discovery, research and delivery.",
-    "qualification": "Historical engagement; not current Lush app ownership or maintenance verification.",
+    "qualification": "Historical engagement; current ownership or maintenance of the Lush app not verified.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -439,7 +439,7 @@
     "label": "UXDA: United Arab Bank",
     "url": "https://www.theuxda.com/blog/united-arab-bank-case-study-bringing-brand-values-digital-experience",
     "supported_context": "Banking task redesign and mobile financial UX.",
-    "qualification": "Agency account; no independent audit of adoption or business impact.",
+    "qualification": "Agency account; adoption and business impact not independently audited.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -449,7 +449,7 @@
     "label": "Work & Co: IKEA",
     "url": "https://www.work.co/clients/ikea/",
     "supported_context": "Commerce app, website, cross-channel experience and design-system contribution.",
-    "qualification": "Shared work with IKEA; business outcomes not independently attributed to design.",
+    "qualification": "Shared work with IKEA; business outcomes are not independently attributed to design.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -459,7 +459,7 @@
     "label": "Work & Co: current client portfolio",
     "url": "https://work.co/clients/",
     "supported_context": "Lennar home-buying experience contribution.",
-    "qualification": "Portfolio-level Real Estate evidence; no detailed approved case retrieved.",
+    "qualification": "Portfolio-level Real Estate evidence; no detailed case study available.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -469,7 +469,7 @@
     "label": "Lazarev: WellSet",
     "url": "https://www.lazarev.agency/cases/wellset",
     "supported_context": "Wellness content discovery, live-session scheduling, personalization and platform UX.",
-    "qualification": "Wellness, not clinical/EHR proof; published growth/funding figures not independently audited.",
+    "qualification": "Wellness, not clinical/EHR work; published growth and funding figures not independently audited.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -479,7 +479,7 @@
     "label": "Lazarev: Matta",
     "url": "https://www.lazarev.agency/cases/matta",
     "supported_context": "Chemical B2B marketplace sourcing, product selection, purchasing and supplier workflows.",
-    "qualification": "Industrial commerce; a Health taxonomy label does not establish clinical-product expertise.",
+    "qualification": "Industrial commerce; a health-category label does not indicate clinical-product expertise.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -489,7 +489,7 @@
     "label": "Lazarev: CoHome",
     "url": "https://www.lazarev.agency/cases/real-estate-platform-redesign",
     "supported_context": "Property exploration, co-ownership acquisition, calculator and website/funnel UX.",
-    "qualification": "Preserve the actual website/product scope; no investment-performance or regulatory claim.",
+    "qualification": "Website and product scope only; no investment-performance or regulatory claim.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },
@@ -499,7 +499,7 @@
     "label": "Netguru: Aspit",
     "url": "https://www.netguru.com/clients/software-for-medical-professionals",
     "supported_context": "Healthcare product design/development for medical-professional software.",
-    "qualification": "Less public research/process depth than some leading healthcare cases; no independent compliance audit.",
+    "qualification": "Less public research and process detail than leading healthcare cases; no independent compliance audit.",
     "accessed_date": "2026-11-18",
     "publisher_type": "agency-published"
   },

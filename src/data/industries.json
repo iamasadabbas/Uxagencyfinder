@@ -23,13 +23,13 @@
       "Ask how integration, data and regulatory constraints were handled. Agency case studies are not compliance certification.",
       "Request a comparable project at a similar stage: concept, prototype, rollout or live product."
     ],
-    "rationaleNote": "Fuselab Creative leads because this list weighs complex, data-rich healthcare platforms most heavily. For a narrower home-health EHR brief, GoInvo may be the stronger first call, and Guidea's specialist portfolio may suit a medical-device brief better. Lazarev.agency appears last for wellness only. WellSet is not clinical validation.",
+    "rationaleNote": "Fuselab Creative leads because this list weighs complex, data-rich healthcare platforms most heavily. For a narrower home-health EHR brief, GoInvo may be the stronger first call, and Guidea's specialist portfolio may suit a medical-device brief better. Lazarev.agency appears last for wellness work only; WellSet is not clinical validation.",
     "related": [
       "ai-and-ml",
       "education"
     ],
     "route": "/agencies/healthcare-ux/",
-    "selection_emphasis": "Relevant clinical, care, administrative and health-data work; clear contribution; research/process visibility; fit for complex digital healthcare. Wellness is qualified separately.",
+    "selection_emphasis": "Relevant clinical, care, administrative and health-data work; a clear agency contribution; visible research and process; and fit for complex digital healthcare. Wellness work is labelled separately.",
     "publication_state": "draft",
     "placements": [
       {
@@ -39,7 +39,7 @@
         "subfield": "Provider dashboards & public-health reporting",
         "contribution": "Patient/provider research, dashboard UI/UX and an API contribution (ClyHealth); research, design and data-visualization development for LTSS reporting (DHCS).",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Editorial lead for complex provider-facing and public-health data interfaces; separate those two contexts.",
+        "fit_and_scope": "Complex provider-facing dashboards and public-health data interfaces, documented as two separate projects.",
         "source_ids": [
           "E07",
           "E06"
@@ -55,7 +55,7 @@
         "subfield": "Home-health EHR",
         "contribution": "Clinical and administrative workflow design for a home-health EHR.",
         "work_stage": "Source-reported working product",
-        "fit_and_scope": "Concrete home-health clinical and administrative workflows with source-reported working software.",
+        "fit_and_scope": "Concrete home-health clinical and administrative workflows, with agency-reported working software.",
         "source_ids": [
           "E09"
         ],
@@ -70,7 +70,7 @@
         "subfield": "Digital & population health",
         "contribution": "Platform design across named digital-health clients (Amalgam Rx, Humana, Express Scripts).",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Healthcare-specialist portfolio; public detail varies, so avoid unsupported process or clearance claims.",
+        "fit_and_scope": "Healthcare-specialist portfolio; public project detail varies, so ask about process and any clearances directly.",
         "source_ids": [
           "E33"
         ],
@@ -100,7 +100,7 @@
         "subfield": "Kidney care apps",
         "contribution": "Clinician and patient app design informed by user research.",
         "work_stage": "Source-reported working product",
-        "fit_and_scope": "Clinician and patient app experience informed by user research.",
+        "fit_and_scope": "Clinician and patient app experiences informed by user research.",
         "source_ids": [
           "E41"
         ],
@@ -115,7 +115,7 @@
         "subfield": "Clinical practice management / EMR",
         "contribution": "Modernization of patient records, billing and charting, with design-system direction.",
         "work_stage": "Validated direction, continued rollout",
-        "fit_and_scope": "Detailed EMR modernization and design-system direction, with continued rollout qualification.",
+        "fit_and_scope": "Detailed EMR modernization and design-system direction, validated and ready for continued rollout.",
         "source_ids": [
           "E31"
         ],
@@ -130,7 +130,7 @@
         "subfield": "Clinic & patient SaaS",
         "contribution": "Clinic/patient roles, appointments, telemedicine and records interfaces.",
         "work_stage": "Prototype / deliverable scope",
-        "fit_and_scope": "Clinic/patient roles, appointments and records workflows; preserve prototype/deliverable scope.",
+        "fit_and_scope": "Clinic and patient roles, appointments and records workflows, at prototype/deliverable scope.",
         "source_ids": [
           "E17"
         ],
@@ -145,7 +145,7 @@
         "subfield": "Enterprise healthcare R&D",
         "contribution": "Research, data visualization and reusable interaction patterns across clinical, imaging and admin products.",
         "work_stage": "R&D / exploration",
-        "fit_and_scope": "Enterprise healthcare R&D and data patterns; not every concept is a deployed product.",
+        "fit_and_scope": "Enterprise healthcare R&D and data patterns; not every concept became a deployed product.",
         "source_ids": [
           "E08"
         ],
@@ -175,7 +175,7 @@
         "subfield": "Software for medical professionals",
         "contribution": "Healthcare product design and development.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Healthcare product design and development context; the public process account is less detailed than the leading specialist cases.",
+        "fit_and_scope": "Healthcare product design and development; the public process account is less detailed than the leading specialist cases.",
         "source_ids": [
           "E54"
         ],
@@ -190,7 +190,7 @@
         "subfield": "Wellness (not clinical)",
         "contribution": "Wellness content discovery, live-session scheduling and personalization.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Qualified wellness placement: content discovery, live classes and personalization, not clinical/EHR evidence.",
+        "fit_and_scope": "Wellness placement only: content discovery, live classes and personalization, not clinical/EHR work.",
         "source_ids": [
           "E51"
         ],
@@ -230,7 +230,7 @@
       "ecommerce"
     ],
     "route": "/agencies/fintech-ux/",
-    "selection_emphasis": "Financial-task relevance and industry focus, with retail banking/payments distinguished from trading, internal bank AI and financial research.",
+    "selection_emphasis": "Financial-task relevance and industry focus, with retail banking and payments distinguished from trading, internal bank AI and financial research.",
     "publication_state": "draft",
     "placements": [
       {
@@ -240,7 +240,7 @@
         "subfield": "Retail banking",
         "contribution": "Redesign of customer banking tasks and mobile financial flows.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Focused financial UX with detailed banking-task redesign.",
+        "fit_and_scope": "Focused financial UX with a detailed banking-task redesign.",
         "source_ids": [
           "E48"
         ],
@@ -255,7 +255,7 @@
         "subfield": "Banking",
         "contribution": "Banking UX/UI work for Gulf Bank and ila Bank.",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Banking UX/UI contribution; portfolio entries should be supplemented before deeper claims.",
+        "fit_and_scope": "Banking UX/UI contribution; portfolio entries are brief, so ask for fuller case detail.",
         "source_ids": [
           "E40"
         ],
@@ -285,7 +285,7 @@
         "subfield": "Crypto trading",
         "contribution": "Product strategy and new trading-app user experience.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Product strategy and trading-app experience; crypto context is explicit.",
+        "fit_and_scope": "Product strategy and trading-app experience in an explicitly crypto context.",
         "source_ids": [
           "E35"
         ],
@@ -300,7 +300,7 @@
         "subfield": "AI financial research",
         "contribution": "Financial-research AI workspace combining prompts, widgets and reports.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Detailed AI-assisted financial-research workflow; not a general payments claim.",
+        "fit_and_scope": "Detailed AI-assisted financial-research workflow; not a general payments example.",
         "source_ids": [
           "E12"
         ],
@@ -315,7 +315,7 @@
         "subfield": "Internal bank AI",
         "contribution": "Enterprise AI vision, interface and coded design-system contribution.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Internal bank AI vision and coded design system; distinguish from retail banking.",
+        "fit_and_scope": "Internal bank AI vision and coded design system, distinct from retail banking.",
         "source_ids": [
           "E32"
         ],
@@ -330,7 +330,7 @@
         "subfield": "Banking & microloans",
         "contribution": "UX, wireframes and UI for banking, microloan and insurance flows, including onboarding.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Banking/microloan design account; current deployment and compliance are not independently checked.",
+        "fit_and_scope": "Banking and microloan design account; current deployment and compliance are not independently verified.",
         "source_ids": [
           "E27"
         ],
@@ -369,7 +369,7 @@
       "logistics"
     ],
     "route": "/agencies/ecommerce-ux/",
-    "selection_emphasis": "Actual shopping or procurement journeys, product discovery, transaction flow and documented UX responsibility. Consumer retail and industrial B2B commerce remain distinct.",
+    "selection_emphasis": "Real shopping or procurement journeys, product discovery, transaction flows and documented UX responsibility. Consumer retail and industrial B2B commerce are treated separately.",
     "publication_state": "draft",
     "placements": [
       {
@@ -473,13 +473,13 @@
       "Confirm a comparable named logistics engagement and the agency's actual design contribution.",
       "Clarify integration with TMS, WMS or telematics systems and who builds it."
     ],
-    "rationaleNote": "CorLab Tech is at position 5 at the owner's direction. Its evidence comes from service pages, not a named logistics client case. Confirm a comparable project and the actual UX contribution before relying on it.",
+    "rationaleNote": "CorLab Tech's evidence comes from its service pages, not a named logistics client case. Ask for a comparable project and confirm the actual UX contribution before relying on it.",
     "related": [
       "robotics",
       "ai-and-ml"
     ],
     "route": "/agencies/logistics-ux/",
-    "selection_emphasis": "Operational relevance to transport, distribution, warehouse or fleet users, with task scope and source detail visible.",
+    "selection_emphasis": "Operational relevance to transport, distribution, warehouse or fleet users, with visible task scope and source detail.",
     "publication_state": "draft",
     "placements": [
       {
@@ -489,7 +489,7 @@
         "subfield": "Transportation management",
         "contribution": "Information architecture and UX for a transportation-management product.",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Transportation-management IA/UX provides direct shipper/supply-chain relevance; public depth is limited.",
+        "fit_and_scope": "Transportation-management IA/UX with direct shipper and supply-chain relevance; public detail is limited.",
         "source_ids": [
           "E40"
         ],
@@ -504,7 +504,7 @@
         "subfield": "Supply-chain intelligence",
         "contribution": "Platform redesign and accessible ML recommendations for shippers.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Supply-chain intelligence, shippers' decisions and accessible ML recommendations.",
+        "fit_and_scope": "Supply-chain intelligence, shipper decision-making and accessible ML recommendations.",
         "source_ids": [
           "E34"
         ],
@@ -519,7 +519,7 @@
         "subfield": "Warehouse robot fleets",
         "contribution": "Fleet, mission, monitoring, alert and manual-control interfaces for warehouse AGVs.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Warehouse fleet and mission controls; preserve the warehouse-robotics boundary.",
+        "fit_and_scope": "Warehouse fleet and mission controls, specifically in a warehouse-robotics context.",
         "source_ids": [
           "E22"
         ],
@@ -534,7 +534,7 @@
         "subfield": "Food distribution",
         "contribution": "Field research and distribution, loadout, route and reconciliation workflow design.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Field research and distribution/loadout/route/reconciliation workflow design.",
+        "fit_and_scope": "Field research and distribution, loadout, route and reconciliation workflow design.",
         "source_ids": [
           "E29"
         ],
@@ -549,7 +549,7 @@
         "subfield": "Logistics software services",
         "contribution": "Unconfirmed. The service pages describe dashboard, map and logistics-software services, not a named project contribution.",
         "work_stage": "Unknown",
-        "fit_and_scope": "Owner-selected at #5. Dashboard/map capability and stated logistics services; confirm a comparable project and actual UX contribution.",
+        "fit_and_scope": "Dashboard and map capability with stated logistics services, based on service pages rather than a named client case; ask for a comparable project and its actual UX contribution.",
         "source_ids": [
           "E55",
           "E56"
@@ -566,7 +566,7 @@
         "subfield": "Fleet-driver self-service",
         "contribution": "Fleet-driver app research, redesign, delivery and service lifecycle.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Fleet-driver lifecycle and self-service; not freight-dispatch or warehouse operations.",
+        "fit_and_scope": "Fleet-driver lifecycle and self-service; not freight dispatch or warehouse operations.",
         "source_ids": [
           "E44"
         ],
@@ -600,13 +600,13 @@
       "For portfolio-level entries, request a fuller case study before relying on the claim.",
       "Confirm the proposed team and the agency's role alongside the client's engineers."
     ],
-    "rationaleNote": "CoHome gives this list a fourth source-backed agency. Work & Co stays as a portfolio-level entry: its Lennar evidence is much thinner than its IKEA case.",
+    "rationaleNote": "CoHome adds a fourth agency with a source-backed case. Work & Co appears as a portfolio-level entry because its Lennar evidence is much thinner than its IKEA case.",
     "related": [
       "ecommerce",
       "fintech"
     ],
     "route": "/agencies/real-estate-ux/",
-    "selection_emphasis": "Documented property-marketplace, broker, home-buying or ownership journeys, with full product work distinguished from acquisition websites and brief portfolio claims.",
+    "selection_emphasis": "Documented property-marketplace, broker, home-buying or ownership journeys, with full product work distinguished from acquisition websites and brief portfolio entries.",
     "publication_state": "draft",
     "placements": [
       {
@@ -646,7 +646,7 @@
         "subfield": "Co-ownership acquisition",
         "contribution": "Property exploration, co-ownership calculator and website/funnel UX.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Property exploration and co-ownership acquisition UX; preserve website/funnel scope.",
+        "fit_and_scope": "Property exploration and co-ownership acquisition UX, within a website/funnel scope.",
         "source_ids": [
           "E53"
         ],
@@ -661,7 +661,7 @@
         "subfield": "Home buying",
         "contribution": "Home-buying experience contribution (portfolio entry only).",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Qualified portfolio-level home-buying example; seek deeper approved detail.",
+        "fit_and_scope": "Portfolio-level home-buying example; ask for more detailed case information.",
         "source_ids": [
           "E50"
         ],
@@ -700,7 +700,7 @@
       "healthcare"
     ],
     "route": "/agencies/education-ux/",
-    "selection_emphasis": "Learning/assessment and education-user relevance, actual design contribution, and clear distinctions among LMS, academic tools, institutional websites and educational hardware.",
+    "selection_emphasis": "Relevance to learning, assessment and education users, the agency's actual design contribution, and clear distinctions among LMS platforms, academic tools, institutional websites and educational hardware.",
     "publication_state": "draft",
     "placements": [
       {
@@ -725,7 +725,7 @@
         "subfield": "Online learning",
         "contribution": "Learning-engagement vision, prototypes, research and interaction work.",
         "work_stage": "Tested vision / concept",
-        "fit_and_scope": "User-tested learning-engagement vision and interaction work; contribution to an existing product.",
+        "fit_and_scope": "User-tested learning-engagement vision and interaction work, contributed to an existing product.",
         "source_ids": [
           "E42"
         ],
@@ -770,7 +770,7 @@
         "subfield": "Educational robotics",
         "contribution": "Research and configuration, coding and control UX for an educational robotics app.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Research and configuration/coding/control for an educational robotics app.",
+        "fit_and_scope": "Research and configuration, coding and control design for an educational robotics app.",
         "source_ids": [
           "E24"
         ],
@@ -826,7 +826,7 @@
       "education"
     ],
     "route": "/agencies/robotics-ux/",
-    "selection_emphasis": "Actual robot or robotics-tool interaction, operator/user tasks, research visibility and clear separation of industrial, consumer, educational and simulation contexts.",
+    "selection_emphasis": "Real robot or robotics-tool interaction, operator and user tasks, visible research, and clear separation of industrial, consumer, educational and simulation contexts.",
     "publication_state": "draft",
     "placements": [
       {
@@ -836,7 +836,7 @@
         "subfield": "Industrial & warehouse robots",
         "contribution": "Warehouse fleet/mission controls (Robodog) and industrial robot operations and simulation interfaces (Hyperfab).",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Most directly aligned here with warehouse/industrial fleet and control interfaces.",
+        "fit_and_scope": "Most directly aligned here with warehouse and industrial fleet and control interfaces.",
         "source_ids": [
           "E22",
           "E23"
@@ -867,7 +867,7 @@
         "subfield": "Educational robotics",
         "contribution": "Robot configuration, coding and control with child-user research.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Educational robot configuration, coding and control with child-user research.",
+        "fit_and_scope": "Educational robot configuration, coding and control, with child-user research.",
         "source_ids": [
           "E24"
         ],
@@ -882,7 +882,7 @@
         "subfield": "Robotics simulation & testing",
         "contribution": "Robotics virtual-testing infrastructure (portfolio entry).",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Qualified developer simulation/testing placement; limited public depth and no physical control claim.",
+        "fit_and_scope": "Developer simulation and testing tools; limited public depth and no physical robot-control work.",
         "source_ids": [
           "E13"
         ],
@@ -923,7 +923,7 @@
       "robotics"
     ],
     "route": "/agencies/ai-ux/",
-    "selection_emphasis": "AI-centric product UX, documented interaction/research/delivery contribution and project stage. Product interfaces rank on the reviewed fit, not generic AI service claims.",
+    "selection_emphasis": "AI-centric product UX, documented interaction, research and delivery contribution, and project stage. Rankings reflect reviewed product work, not generic AI service claims.",
     "publication_state": "draft",
     "placements": [
       {
@@ -933,7 +933,7 @@
         "subfield": "Conversational enterprise data",
         "contribution": "Conversational enterprise-data workspace UI/UX with source verification.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Owner-selected lead for conversational enterprise-data UX; Stardog Voicebox supplies workspace and source-verification context.",
+        "fit_and_scope": "Conversational enterprise-data UX; Stardog Voicebox shows workspace design and source verification.",
         "source_ids": [
           "E05"
         ],
@@ -948,7 +948,7 @@
         "subfield": "Generative AI products",
         "contribution": "Product design and implementation for selected AI products (Midjourney, Suno).",
         "work_stage": "Portfolio-level",
-        "fit_and_scope": "Multiple core AI-product examples; selected portfolio items need separate scope labels.",
+        "fit_and_scope": "Multiple core AI-product examples; the scope of each portfolio item varies.",
         "source_ids": [
           "E13"
         ],
@@ -963,7 +963,7 @@
         "subfield": "AI assistant",
         "contribution": "Pi interface, continuous research, mobile launch and ongoing product work.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Detailed AI interaction, continuous research, mobile launch and product delivery account.",
+        "fit_and_scope": "Detailed account of AI interaction, continuous research, mobile launch and product delivery.",
         "source_ids": [
           "E43"
         ],
@@ -978,7 +978,7 @@
         "subfield": "AI research tools",
         "contribution": "Guided generative-AI research workflows with citations.",
         "work_stage": "Mixed: shipped + prototypes",
-        "fit_and_scope": "Guided AI research with citations and workflow support; distinguish shipped work and prototypes.",
+        "fit_and_scope": "Guided AI research with citations and workflow support, combining shipped work and prototypes.",
         "source_ids": [
           "E10"
         ],
@@ -993,7 +993,7 @@
         "subfield": "AI financial research",
         "contribution": "Prompt, widget and report workflows for financial analysts.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Prompt/widget/report workflows for financial analysts.",
+        "fit_and_scope": "Prompt, widget and report workflows for financial analysts.",
         "source_ids": [
           "E12"
         ],
@@ -1008,7 +1008,7 @@
         "subfield": "Enterprise banking AI",
         "contribution": "Enterprise AI vision, interface and coded design-system contribution.",
         "work_stage": "Agency-reported",
-        "fit_and_scope": "Enterprise AI vision/interface and coded system contribution; not the whole bank platform.",
+        "fit_and_scope": "Enterprise AI vision/interface and coded design-system contribution; not the whole bank platform.",
         "source_ids": [
           "E32"
         ],
@@ -1038,7 +1038,7 @@
         "subfield": "Conversational recruitment",
         "contribution": "Conversational recruitment SaaS, research and design system.",
         "work_stage": "Historical engagement",
-        "fit_and_scope": "Historical conversational recruitment and portfolio-level AI work; keep those limits.",
+        "fit_and_scope": "Historical conversational recruitment and portfolio-level AI work.",
         "source_ids": [
           "E16",
           "E40"
@@ -1054,7 +1054,7 @@
         "subfield": "Model monitoring",
         "contribution": "AI-model monitoring product research and interface concepts.",
         "work_stage": "POC / MVP",
-        "fit_and_scope": "Model-monitoring product UX with explicit POC/MVP stage.",
+        "fit_and_scope": "Model-monitoring product UX at an explicit POC/MVP stage.",
         "source_ids": [
           "E21"
         ],

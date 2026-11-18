@@ -5,7 +5,7 @@ title: UX agency pricing models explained
 description: Fixed price, time and materials, retained teams, subscriptions and discovery-only engagements, and what each one means for your scope and risk.
 ---
 
-This guide explains how UX agencies commonly structure their pricing. **It doesn't give market-average prices.** We haven't researched current rates, and any figures below are labelled arithmetic examples, not benchmarks.
+This guide explains how UX agencies commonly structure their pricing, so you can compare proposals like for like. Rates vary widely by region, seniority and scope, so **we don't quote market averages**. Any figures below are labelled arithmetic examples, not benchmarks.
 
 ## Common models
 
@@ -49,3 +49,4 @@ A short, paid phase to research and define scope before committing to a full pro
 ## Next step
 
 Prepare a comparable [project brief](/guides/ux-agency-brief-template/) so every agency prices the same work.
+

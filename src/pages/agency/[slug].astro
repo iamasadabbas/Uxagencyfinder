@@ -3,8 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import AuthorReviewLine from '../../components/AuthorReviewLine.astro';
 import QualificationBadge from '../../components/QualificationBadge.astro';
-import { site, getAgencies, getAgency, getPlacementsForAgency, getSourcesForAgency, getSource, agencyUrl, absolute } from '../../lib/data';
+import Icon from '../../components/Icon.astro';
+import Avatar from '../../components/Avatar.astro';
+import { site, getAgencies, getAgency, getPlacementsForAgency, getSourcesForAgency, agencyUrl, absolute } from '../../lib/data';
 import type { Agency } from '../../lib/data';
+import { themeFor } from '../../lib/visuals';
 
 export function getStaticPaths() {
   return getAgencies().map((a) => ({ params: { slug: a.slug }, props: { id: a.id } }));
@@ -18,8 +21,9 @@ const evidenceSources = allSources.filter((s) => placementSourceIds.has(s.id));
 const supplementary = allSources.filter((s) => !placementSourceIds.has(s.id));
 const industryNames = placements.map(({ industry }) => industry.name);
 const projectName = (label: string) => label.split(':').slice(1).join(':').trim() || label;
+const host = new URL(agency.official_website).hostname.replace(/^www\./, '');
 
-const description = `${agency.name}: documented UX work in ${industryNames.join(', ')}. Named projects, agency contribution, scope limits and questions to ask before hiring.`;
+const description = `${agency.name}: UX agency with documented work in ${industryNames.join(', ')}. Named projects, agency contribution, scope notes and questions to ask before hiring.`;
 
 const jsonLd = [{
   '@type': 'WebPage',
@@ -27,69 +31,75 @@ const jsonLd = [{
   url: absolute(agencyUrl(agency)),
   dateModified: site.lastReviewed,
   publisher: { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl },
-  mainEntity: {
-    '@type': 'Organization',
-    name: agency.name,
-    url: agency.official_website,
-    ...(agency.aliases.length ? { alternateName: agency.aliases } : {}),
-  },
+  mainEntity: { '@type': 'Organization', name: agency.name, url: agency.official_website, ...(agency.aliases.length ? { alternateName: agency.aliases } : {}) },
 }];
 ---
 
 <BaseLayout title={`${agency.name}: UX Agency Profile`} description={description} jsonLd={jsonLd}>
-  <header class="page-header">
+  <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={[{ name: 'Agency directory', href: '/directory/' }, { name: agency.name, href: agencyUrl(agency) }]} />
-      <p class="eyebrow">UX agency profile</p>
-      <h1>{agency.name}</h1>
-      {agency.aliases.length > 0 && <p class="muted">Also known as {agency.aliases.join(', ')}</p>}
-      <p class="lead">{agency.summary}</p>
-      <div class="cta">
-        <a class="btn btn-primary" href={agency.official_website} rel="noopener" target="_blank">Visit official website ↗</a>
+      <div class="id">
+        <Avatar name={agency.name} size={84} />
+        <div class="id-txt">
+          <p class="eyebrow">UX agency profile</p>
+          <h1>{agency.name}</h1>
+          {agency.aliases.length > 0 && <p class="muted alias">Also known as {agency.aliases.join(', ')}</p>}
+        </div>
+        <div class="id-cta">
+          <a class="btn btn-primary" href={agency.official_website} rel="noopener" target="_blank">Visit {host} <Icon name="external" size={16} /><span class="visually-hidden"> (opens in new tab)</span></a>
+        </div>
       </div>
-      <AuthorReviewLine />
+      <p class="lead summary">{agency.summary}</p>
+      <ul class="tag-list niches" aria-label="Industry placements">
+        {placements.map(({ industry, placement }) => {
+          const t = themeFor(industry.id);
+          return <li><a class="niche" href={industry.route} style={`color:${t.color};background:${t.soft}`}><Icon name={industry.id} size={14} />#{placement.position} in {industry.name}</a></li>;
+        })}
+      </ul>
+      <AuthorReviewLine sources={evidenceSources.length} />
     </div>
   </header>
 
-  <section class="section">
-    <div class="container">
-      <h2>Industry selections</h2>
-      <p class="muted prose-width">{agency.name} appears in {placements.length} {placements.length === 1 ? 'niche' : 'niches'}. Each placement points only to the evidence relevant to that niche.</p>
-      <div class="grid grid-2">
-        {placements.map(({ industry, placement: p }) => (
-          <article class="card placement">
-            <div class="ph">
-              <span class="pos">{p.position}</span>
-              <div>
-                <h3><a href={industry.route}>{industry.name}</a></h3>
-                <p class="small muted">Position {p.position} of {industry.placements.length} · {p.subfield}</p>
+  <div class="container section layout">
+    <div class="main-col">
+      <h2>Industry placements</h2>
+      <p class="muted">{agency.name} appears in {placements.length} {placements.length === 1 ? 'industry list' : 'industry lists'}. Each placement draws only on evidence relevant to that industry.</p>
+      <div class="placements">
+        {placements.map(({ industry, placement: p }) => {
+          const t = themeFor(industry.id);
+          return (
+            <article class="placement" style={`--ic:${t.color};--is:${t.soft}`}>
+              <div class="ph">
+                <span class="pic"><Icon name={industry.id} size={20} /></span>
+                <div class="ph-txt">
+                  <h3><a href={industry.route}>{industry.name}</a></h3>
+                  <p>Position {p.position} of {industry.placements.length} · {p.subfield}</p>
+                </div>
+                <span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span>
               </div>
-            </div>
-            <QualificationBadge label={p.qualification_label} />
-            <dl>
-              <dt>Project</dt><dd>{p.project}</dd>
-              <dt>Contribution</dt><dd>{p.contribution}</dd>
-              <dt>Work stage</dt><dd>{p.work_stage}</dd>
-              <dt>Scope note</dt><dd>{p.fit_and_scope}</dd>
-            </dl>
-            <p class="small"><a href={`${industry.route}#${agency.slug}`}>See it in the {industry.name} list →</a></p>
-          </article>
-        ))}
+              <QualificationBadge label={p.qualification_label} />
+              <dl>
+                <div><dt>Project</dt><dd>{p.project}</dd></div>
+                <div><dt>Work stage</dt><dd>{p.work_stage}</dd></div>
+                <div class="wide"><dt>Contribution</dt><dd>{p.contribution}</dd></div>
+                <div class="wide"><dt>Why it's listed</dt><dd>{p.fit_and_scope}</dd></div>
+              </dl>
+              <a class="more" href={`${industry.route}#${agency.slug}`}>See it in the {industry.name} list <Icon name="arrow" size={14} /></a>
+            </article>
+          );
+        })}
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Named projects and evidence</h2>
+      <h2 class="mt">Projects and evidence</h2>
       <div class="table-wrap">
         <table>
-          <caption>Agency-published sources used for {agency.name}'s placements</caption>
-          <thead><tr><th scope="col">Project / source</th><th scope="col">Supported context</th><th scope="col">Limits</th></tr></thead>
+          <caption>Published case studies behind {agency.name}'s placements</caption>
+          <thead><tr><th scope="col">Project</th><th scope="col">What it shows</th><th scope="col">Notes</th></tr></thead>
           <tbody>
             {evidenceSources.map((s) => (
               <tr>
-                <th scope="row"><a href={s.url} rel="noopener" target="_blank">{projectName(s.label)}</a><div class="small muted">{s.id} · accessed {s.accessed_date}</div></th>
+                <th scope="row"><a href={s.url} rel="noopener" target="_blank">{projectName(s.label)} <Icon name="external" size={12} /></a></th>
                 <td>{s.supported_context}</td>
                 <td class="muted">{s.qualification}</td>
               </tr>
@@ -99,57 +109,77 @@ const jsonLd = [{
       </div>
       {supplementary.length > 0 && (
         <p class="small muted sup">
-          Additional work, not used as evidence for any industry placement:{' '}
+          Other published work (not used for industry placements):{' '}
           {supplementary.map((s, i) => <>{i > 0 && '; '}<a href={s.url} rel="noopener" target="_blank">{projectName(s.label)}</a> ({s.supported_context.replace(/\.$/, '')})</>)}.
         </p>
       )}
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container two-col">
-      <div>
-        <h2>Limits and questions before hiring</h2>
-        <p>{agency.limits_and_questions}</p>
-        <ul class="questions">
-          <li>Who from the referenced projects would work on your project?</li>
-          <li>What exactly did the agency own, and what did the client's team own?</li>
-          <li>Was the referenced work shipped, piloted, or a concept or prototype?</li>
-          <li>Can you speak to a client reference from a comparable engagement?</li>
-        </ul>
-      </div>
-      <aside class="card facts">
-        <h2 class="h3">Commercial facts</h2>
-        <p class="small muted">{agency.commercial_facts.note}</p>
-        {agency.capability_tags.length > 0 && (
-          <>
-            <h2 class="h3">Capabilities (supporting)</h2>
-            <ul class="tag-list">{agency.capability_tags.map((t) => <li class="tag">{t}</li>)}</ul>
-            <p class="small muted">Capabilities don't count as industry experience on their own.</p>
-          </>
-        )}
-        <h2 class="h3">Disclosures</h2>
-        <p class="small muted">{agency.disclosures.length ? agency.disclosures.join(' ') : 'No material relationship with this agency has been recorded.'}</p>
-        <p class="small"><a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + agency.name)}`}>Report a correction</a></p>
-      </aside>
+      <h2 class="mt">Before you hire</h2>
+      <div class="notice"><Icon name="info" /><p>{agency.limits_and_questions}</p></div>
+      <ul class="questions">
+        <li><Icon name="check" size={16} />Who from the referenced projects would work on yours?</li>
+        <li><Icon name="check" size={16} />What exactly did the agency own, and what did the client's team own?</li>
+        <li><Icon name="check" size={16} />Was the referenced work shipped, piloted, or a concept or prototype?</li>
+        <li><Icon name="check" size={16} />Can you speak with a client from a comparable engagement?</li>
+      </ul>
     </div>
-  </section>
+
+    <aside class="side no-print">
+      <div class="side-card">
+        <h2 class="h3">At a glance</h2>
+        <dl class="glance">
+          <div><dt>Website</dt><dd><a href={agency.official_website} rel="noopener" target="_blank">{host}</a></dd></div>
+          <div><dt>Industries</dt><dd>{industryNames.join(', ')}</dd></div>
+          <div><dt>Best position</dt><dd>#{Math.min(...placements.map((x) => x.placement.position))}</dd></div>
+          <div><dt>Pricing</dt><dd>Ask the agency directly</dd></div>
+        </dl>
+        {agency.capability_tags.length > 0 && <ul class="tag-list">{agency.capability_tags.map((t) => <li class="tag">{t}</li>)}</ul>}
+        {agency.disclosures.length > 0 && <p class="small muted">{agency.disclosures.join(' ')}</p>}
+        <a class="btn btn-dark btn-small full" href={agency.official_website} rel="noopener" target="_blank">Contact {agency.name} <Icon name="external" size={14} /></a>
+      </div>
+      <p class="small muted corr">Something out of date? <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + agency.name)}`}>Suggest a correction</a></p>
+    </aside>
+  </div>
 </BaseLayout>
 
 <style>
-  .cta { margin: 1.25rem 0 0.25rem; }
-  .placement { display: flex; flex-direction: column; gap: 0.6rem; }
+  .id { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+  .id-txt { flex: 1; min-width: 220px; }
+  .id-txt .eyebrow { margin-bottom: 0.3rem; }
+  .id h1 { margin: 0; }
+  .alias { margin: 0.3rem 0 0; }
+  .summary { margin-top: 1.4rem; }
+  .niches { margin-top: 1rem; }
+  .niche { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.75rem; border-radius: 999px; }
+  .niche:hover { filter: brightness(0.95); }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3rem; }
+  .placements { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+  .placement { display: flex; flex-direction: column; gap: 0.85rem; background: #fff; border: 1px solid var(--c-border); border-top: 3px solid var(--ic); border-radius: var(--radius); padding: 1.25rem; }
   .ph { display: flex; gap: 0.75rem; align-items: center; }
-  .ph h3 { margin: 0; }
-  .ph p { margin: 0; }
-  dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.4rem 0.75rem; font-size: 0.95rem; }
-  dt { font-weight: 700; color: var(--c-muted); font-size: 0.85rem; }
-  dd { margin: 0; }
+  .pic { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 12px; background: var(--is); color: var(--ic); flex: none; }
+  .ph-txt { flex: 1; min-width: 0; }
+  .ph h3 { margin: 0; font-size: 1.08rem; }
+  .ph h3 a { color: var(--c-text); text-decoration: none; }
+  .ph p { margin: 0; font-size: 0.82rem; color: var(--c-muted); }
+  dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  dl .wide { grid-column: 1 / -1; }
+  dt { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--c-muted); }
+  dd { margin: 0.1rem 0 0; font-size: 0.9rem; color: var(--c-text); }
+  .more { margin-top: auto; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+  .mt { margin-top: 3.5rem; }
   .sup { margin-top: 1rem; }
-  .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
-  .questions { padding-left: 1.2rem; }
-  .questions li { margin-bottom: 0.4rem; }
-  .h3 { font-family: var(--font-sans); font-size: 1.05rem; margin-top: 0.75rem; }
-  .facts .h3:first-child { margin-top: 0; }
-  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } dl { grid-template-columns: 1fr; } }
+  .questions { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.5rem; }
+  .questions li { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .questions li :global(svg) { flex: none; margin-top: 0.25rem; color: var(--c-success); }
+  .side { position: sticky; top: 6rem; align-self: start; }
+  .side-card { background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow); display: grid; gap: 1rem; }
+  .h3 { font-size: 1.05rem; margin: 0; }
+  .glance { grid-template-columns: 1fr; gap: 0.8rem; }
+  .glance div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--c-border); padding-bottom: 0.7rem; }
+  .glance dt { font-size: 0.82rem; text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .glance dd { margin: 0; text-align: right; font-weight: 600; font-size: 0.86rem; }
+  .full { width: 100%; }
+  .corr { margin-top: 1rem; text-align: center; }
+  @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } .side { position: static; } }
+  @media (max-width: 700px) { .placements { grid-template-columns: 1fr; } }
 </style>

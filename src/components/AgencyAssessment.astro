@@ -2,6 +2,8 @@
 import type { Industry, Placement } from '../lib/data';
 import { getAgency, getSource, agencyUrl } from '../lib/data';
 import QualificationBadge from './QualificationBadge.astro';
+import Avatar from './Avatar.astro';
+import Icon from './Icon.astro';
 
 interface Props { industry: Industry; placement: Placement }
 const { industry, placement: p } = Astro.props;
@@ -9,49 +11,65 @@ const a = getAgency(p.agency_id)!;
 const sources = p.source_ids.map((id) => getSource(id)!).filter(Boolean);
 ---
 
-<article class="assessment card" id={a.slug} aria-labelledby={`h-${a.slug}`}>
+<article class="assessment" id={a.slug} aria-labelledby={`h-${a.slug}`}>
   <header>
-    <span class="pos" aria-hidden="true">{p.position}</span>
-    <div>
+    <span class:list={['pos', 'big', { 'pos-1': p.position === 1 }]} aria-hidden="true">{p.position}</span>
+    <Avatar name={a.name} size={52} />
+    <div class="h">
       <h3 id={`h-${a.slug}`}><span class="visually-hidden">Position {p.position}: </span>{a.name}</h3>
-      <p class="muted small sub">{p.subfield} · {p.project}</p>
+      <p class="sub">{p.subfield}</p>
+    </div>
+    <div class="head-actions">
+      <a class="btn btn-secondary btn-small" href={agencyUrl(a)}>Profile</a>
+      <a class="btn btn-dark btn-small" href={a.official_website} rel="noopener" target="_blank">Website <Icon name="external" size={14} /><span class="visually-hidden"> (opens in new tab)</span></a>
     </div>
   </header>
 
-  {p.qualification_label && <p><QualificationBadge label={p.qualification_label} /></p>}
+  {p.qualification_label && <div class="qual"><QualificationBadge label={p.qualification_label} /></div>}
 
-  <dl class="facts">
-    <div><dt>Why it's on the {industry.name} list</dt><dd>{p.fit_and_scope}</dd></div>
-    <div><dt>Agency contribution</dt><dd>{p.contribution}</dd></div>
-    <div><dt>Work stage</dt><dd>{p.work_stage}</dd></div>
-    <div><dt>Evidence</dt>
-      <dd>
-        {sources.length === 0 ? 'No public source recorded.' : (
-          <ul class="src">
-            {sources.map((s) => (
-              <li><a href={s.url} rel="noopener" target="_blank">{s.label}<span class="visually-hidden"> (opens agency website)</span></a> <span class="muted small">({s.id}) Note: {s.qualification}</span></li>
-            ))}
-          </ul>
-        )}
-      </dd>
-    </div>
-  </dl>
+  <p class="fit">{p.fit_and_scope}</p>
 
-  <div class="actions">
-    <a class="btn btn-secondary btn-small" href={agencyUrl(a)}>Full profile</a>
-    <a class="btn btn-secondary btn-small" href={a.official_website} rel="noopener" target="_blank">Visit {a.name} ↗</a>
+  <div class="facts">
+    <div class="fact"><span class="k">Named project</span><span class="v">{p.project}</span></div>
+    <div class="fact"><span class="k">Work stage</span><span class="v">{p.work_stage}</span></div>
+    <div class="fact wide"><span class="k">Agency contribution</span><span class="v">{p.contribution}</span></div>
   </div>
+
+  {sources.length > 0 && (
+    <div class="evidence">
+      <span class="k"><Icon name="link" size={14} /> Evidence</span>
+      <ul>
+        {sources.map((s) => (
+          <li>
+            <a href={s.url} rel="noopener" target="_blank">{s.label}<span class="visually-hidden"> (opens agency website)</span></a>
+            <span class="note">{s.qualification}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
 </article>
 
 <style>
-  .assessment { scroll-margin-top: 5rem; }
-  header { display: flex; gap: 0.85rem; align-items: flex-start; margin-bottom: 0.75rem; }
-  h3 { margin: 0; font-size: 1.3rem; }
-  .sub { margin: 0.15rem 0 0; }
-  .facts { margin: 0; display: grid; gap: 0.75rem; }
-  dt { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-muted); }
-  dd { margin: 0.15rem 0 0; }
-  .src { margin: 0; padding-left: 1.1rem; }
-  .src li { margin-bottom: 0.3rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .assessment { scroll-margin-top: 6rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-lg); padding: 1.6rem; box-shadow: var(--shadow-xs); transition: box-shadow 0.2s, border-color 0.2s; }
+  .assessment:target { border-color: var(--c-accent); box-shadow: 0 0 0 4px rgb(99 102 241 / 0.12); }
+  header { display: flex; gap: 0.9rem; align-items: center; flex-wrap: wrap; }
+  .pos.big { min-width: 2.4rem; height: 2.4rem; font-size: 1.05rem; border-radius: 12px; }
+  .h { flex: 1; min-width: 160px; }
+  h3 { margin: 0; font-size: 1.35rem; }
+  .sub { margin: 0.1rem 0 0; color: var(--c-muted); font-size: 0.9rem; }
+  .head-actions { display: flex; gap: 0.5rem; }
+  .qual { margin-top: 1rem; }
+  .fit { margin: 1.1rem 0 1.25rem; font-size: 1.02rem; color: var(--c-text-2); }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .fact { background: var(--c-bg-soft); border: 1px solid var(--c-border); border-radius: 12px; padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.2rem; }
+  .fact.wide { grid-column: 1 / -1; }
+  .k { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--c-muted); }
+  .v { color: var(--c-text); font-size: 0.94rem; }
+  .evidence { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed var(--c-border); }
+  .evidence ul { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+  .evidence li { display: flex; flex-direction: column; font-size: 0.9rem; }
+  .evidence a { font-weight: 600; }
+  .note { color: var(--c-muted); font-size: 0.84rem; }
+  @media (max-width: 640px) { .facts { grid-template-columns: 1fr; } .head-actions { width: 100%; } }
 </style>

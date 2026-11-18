@@ -1,29 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
 import { guides, absolute } from '../../lib/data';
+const icons: Record<string, string> = {
+  'ux-agency-brief-template': 'file',
+  'compare-ux-design-proposals': 'scale',
+  'ux-agency-portfolio-checklist': 'clipboard',
+  'ux-agency-pricing-models': 'coins',
+};
 const jsonLd = [{
   '@type': 'CollectionPage', name: 'UX agency hiring guides', url: absolute('/guides/'),
   mainEntity: { '@type': 'ItemList', itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: absolute(`/guides/${g.slug}/`) })) },
 }];
 ---
 
-<BaseLayout title="UX Agency Hiring Guides" description="Practical, copyable worksheets for hiring a UX design agency: brief template, proposal comparison, portfolio checklist and pricing models." jsonLd={jsonLd}>
-  <header class="page-header">
+<BaseLayout title="UX Agency Hiring Guides" description="Free, copyable worksheets for hiring a UX design agency: brief template, proposal comparison, portfolio checklist and pricing models." jsonLd={jsonLd}>
+  <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={[{ name: 'Hiring guides', href: '/guides/' }]} />
+      <p class="eyebrow">Free resources</p>
       <h1>Hiring guides</h1>
-      <p class="lead">Practical resources for briefing, evaluating and comparing UX agencies. Copy or print any worksheet. No email required.</p>
+      <p class="lead">Practical worksheets for briefing, evaluating and comparing UX agencies. Copy or print any of them. No sign-up needed.</p>
     </div>
   </header>
   <div class="container section">
     <div class="grid grid-2">
-      {guides.map((g) => (
-        <article class:list={['card', { featured: g.featured }]}>
-          {g.featured && <p class="eyebrow">Start here</p>}
-          <h2><a href={`/guides/${g.slug}/`}>{g.title}</a></h2>
+      {guides.map((g, i) => (
+        <article class="card card-hover g reveal">
+          <div class="g-top">
+            <span class="g-ic"><Icon name={icons[g.slug] ?? 'file'} size={24} /></span>
+            {g.featured && <span class="badge">Start here</span>}
+          </div>
+          <p class="num">Guide 0{i + 1}</p>
+          <h2><a href={`/guides/${g.slug}/`} class="stretched">{g.title}</a></h2>
           <p class="muted">{g.description}</p>
-          <a class="btn btn-secondary btn-small" href={`/guides/${g.slug}/`}>Open guide</a>
+          <span class="go">Open guide <Icon name="arrow" size={16} /></span>
         </article>
       ))}
     </div>
@@ -31,7 +43,13 @@ const jsonLd = [{
 </BaseLayout>
 
 <style>
-  h2 { font-size: 1.35rem; }
+  .g { position: relative; display: flex; flex-direction: column; padding: 1.75rem; }
+  .g-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+  .g-ic { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 16px; background: var(--c-accent-soft); color: var(--c-accent); }
+  .badge { font-size: 0.75rem; font-weight: 600; color: var(--c-success); background: var(--c-success-soft); padding: 0.2rem 0.65rem; border-radius: 999px; }
+  .num { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 0.4rem; }
+  h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
   h2 a { color: var(--c-text); text-decoration: none; }
-  .featured { border-color: var(--c-accent); }
+  .stretched::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+  .go { margin-top: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--c-accent); }
 </style>
