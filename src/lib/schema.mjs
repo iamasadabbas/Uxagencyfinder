@@ -145,9 +145,9 @@ export function validateData(raw) {
   let placementCount = 0;
   for (const ind of industries) {
     const positions = ind.placements.map((p) => p.position).sort((a, b) => a - b);
-    positions.forEach((pos, i) => {
-      if (pos !== i + 1) errors.push(`${ind.id}: positions must be 1..${positions.length} with no gaps/duplicates (got ${positions.join(',')})`);
-    });
+    if (positions.some((pos, i) => pos !== i + 1)) {
+      errors.push(`${ind.id}: positions must be 1..${positions.length} with no gaps/duplicates (got ${positions.join(',')})`);
+    }
     const declared = ind.placements.map((p) => p.position);
     if (declared.some((p, i) => i > 0 && p < declared[i - 1])) errors.push(`${ind.id}: placements must be stored in position order`);
     const seenAgency = new Set();
