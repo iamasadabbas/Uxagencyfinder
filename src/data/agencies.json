@@ -132,7 +132,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/fantasy.png",
+    "logo_source": {
+      "url": "LinkedIn company page (supplied manually)",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency profile image; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "fuselab-creative",
@@ -173,7 +179,13 @@
       "note": "Budgets, rates, offices and availability have not been researched."
     },
     "disclosures": [],
-    "publication_state": "draft"
+    "publication_state": "draft",
+    "logo": "/logos/fuzzy-math.png",
+    "logo_source": {
+      "url": "LinkedIn company page (supplied manually)",
+      "retrieved": "2026-11-18",
+      "basis": "Official agency profile image; used at site owner direction to identify the agency."
+    }
   },
   {
     "id": "goinvo",
