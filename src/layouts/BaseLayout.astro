@@ -47,16 +47,27 @@ const canonical = absolute(Astro.url.pathname);
     </main>
     <Footer />
     <script>
-      // Subtle reveal-on-scroll. Content is fully visible without JS.
-      const els = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-        }, { rootMargin: '0px 0px -8% 0px' });
-        els.forEach((el) => io.observe(el));
-      } else {
-        els.forEach((el) => el.classList.add('in'));
+      // Subtle reveal-on-scroll. Content is fully visible without JS. Anything at or above the fold
+      // (including content skipped past by fast scrolling or anchor jumps) is revealed.
+      let pending = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        pending.forEach((el) => el.classList.add('in'));
+        pending = [];
       }
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const limit = window.innerHeight * 0.94;
+        pending = pending.filter((el) => {
+          if (el.getBoundingClientRect().top < limit) { el.classList.add('in'); return false; }
+          return true;
+        });
+        if (!pending.length) { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); }
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
     </script>
   </body>
 </html>

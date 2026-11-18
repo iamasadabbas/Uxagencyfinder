@@ -26,12 +26,12 @@ const { industry } = Astro.props;
         const a = getAgency(p.agency_id)!;
         return (
           <tr>
-            <td><span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span></td>
-            <th scope="row"><a href={`#${a.slug}`} class="ag"><Avatar name={a.name} size={34} /><span>{a.name}</span></a></th>
-            <td><span class="sub">{p.subfield}</span></td>
-            <td class="proj">{p.project}{p.qualification_label && <div class="q"><QualificationBadge label={p.qualification_label} /></div>}</td>
-            <td class="contrib">{p.contribution}</td>
-            <td><a class="btn btn-secondary btn-small" href={agencyUrl(a)} aria-label={`${a.name} profile`}>Profile</a></td>
+            <td class="c-pos"><span class:list={['pos', { 'pos-1': p.position === 1 }]}>{p.position}</span></td>
+            <th scope="row" class="c-ag"><a href={`#${a.slug}`} class="ag"><Avatar name={a.name} size={34} /><span>{a.name}</span></a></th>
+            <td class="c-sub" data-label="Subfield"><span class="sub">{p.subfield}</span></td>
+            <td class="proj" data-label="Project">{p.project}{p.qualification_label && <div class="q"><QualificationBadge label={p.qualification_label} /></div>}</td>
+            <td class="contrib" data-label="Contribution">{p.contribution}</td>
+            <td class="c-btn"><a class="btn btn-secondary btn-small" href={agencyUrl(a)} aria-label={`${a.name} profile`}>Profile</a></td>
           </tr>
         );
       })}
@@ -48,4 +48,18 @@ const { industry } = Astro.props;
   .contrib { min-width: 280px; color: var(--c-muted); font-size: 0.9rem; }
   .q { margin-top: 0.45rem; }
   td:first-child { width: 1%; }
+
+  /* Mobile: each row becomes a compact card */
+  @media (max-width: 720px) {
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    table, tbody { display: block; }
+    tr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.5rem 0.75rem; padding: 1rem; border-bottom: 1px solid var(--c-border); }
+    tbody tr:last-child { border-bottom: 0; }
+    td, th { display: block; padding: 0; border: 0; width: auto !important; min-width: 0 !important; }
+    .c-sub, .proj, .contrib { grid-column: 1 / -1; }
+    .c-btn { grid-column: 3; grid-row: 1; }
+    .c-sub, .proj, .contrib { font-size: 0.88rem; }
+    [data-label]::before { content: attr(data-label); display: block; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--c-muted); margin-bottom: 0.1rem; }
+    .ag { white-space: normal; }
+  }
 </style>

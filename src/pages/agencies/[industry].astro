@@ -165,7 +165,7 @@ const jsonLd = [{
   .hero-ic { display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 16px; background: #fff; color: var(--ic); border: 1px solid var(--c-border); box-shadow: var(--shadow); }
   .ctx { margin-top: 1.25rem; }
   .section-tight { padding-top: 2.5rem; }
-  .picks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .picks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .pick { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.1rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius); text-decoration: none; color: inherit; box-shadow: var(--shadow-xs); }
   .pick-txt { display: flex; flex-direction: column; line-height: 1.3; flex: 1; min-width: 0; }
   .pick-txt b { color: var(--c-text); }
@@ -198,6 +198,6 @@ const jsonLd = [{
   .sources li { display: flex; flex-direction: column; gap: 0.1rem; padding-left: 2.2rem; position: relative; counter-increment: src; }
   .sources li::before { content: counter(src); position: absolute; left: 0; top: 0.1rem; width: 1.5rem; height: 1.5rem; border-radius: 6px; background: var(--c-surface-2); display: grid; place-items: center; font-size: 0.72rem; font-weight: 700; color: var(--c-text); }
   .sources a { font-weight: 600; }
-  @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } .toc { display: none; } .picks { grid-template-columns: 1fr; } }
-  @media (max-width: 640px) { .resources { grid-template-columns: 1fr; } }
+  @media (max-width: 1000px) { .layout { grid-template-columns: minmax(0, 1fr); } .toc { display: none; } .picks { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .resources { grid-template-columns: minmax(0, 1fr); } }
 </style>

@@ -2,14 +2,14 @@
 // Adding a new industry? Add an entry here (optional - a neutral fallback is used).
 
 export const industryTheme: Record<string, { color: string; soft: string }> = {
-  healthcare: { color: '#e11d48', soft: '#fff1f3' },
-  fintech: { color: '#059669', soft: '#ecfdf5' },
-  ecommerce: { color: '#d97706', soft: '#fffbeb' },
-  logistics: { color: '#2563eb', soft: '#eff6ff' },
-  'real-estate': { color: '#0d9488', soft: '#f0fdfa' },
-  education: { color: '#7c3aed', soft: '#f5f3ff' },
-  robotics: { color: '#475569', soft: '#f1f5f9' },
-  'ai-and-ml': { color: '#4f46e5', soft: '#eef2ff' },
+  healthcare: { color: '#be123c', soft: '#fff1f3' },
+  fintech: { color: '#047857', soft: '#ecfdf5' },
+  ecommerce: { color: '#b45309', soft: '#fffbeb' },
+  logistics: { color: '#1d4ed8', soft: '#eff6ff' },
+  'real-estate': { color: '#0f766e', soft: '#f0fdfa' },
+  education: { color: '#6d28d9', soft: '#f5f3ff' },
+  robotics: { color: '#334155', soft: '#f1f5f9' },
+  'ai-and-ml': { color: '#4338ca', soft: '#eef2ff' },
 };
 export const themeFor = (id: string) => industryTheme[id] ?? { color: '#4f46e5', soft: '#eef2ff' };
 
