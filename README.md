@@ -4,7 +4,7 @@ A curated, **frontend-only** static website listing the best UX design agencies 
 
 - **Stack:** Astro (static output) + TypeScript + plain CSS. No backend, database, CMS or server functions.
 - **Data:** JSON files in `src/data/`, validated with Zod before every build.
-- **Spec:** `UXAgencyFinder-Developer-Handoff/01-brief/UXAgencyFinder-Developer-Brief.md` (client brief v1.6).
+- **Spec:** client brief v1.6 (implemented; the original brief files are no longer kept in the repo).
 
 ## Commands
 
@@ -15,7 +15,6 @@ A curated, **frontend-only** static website listing the best UX design agencies 
 | `npm run validate` | Check the data rules (exclusions, positions, references, CorLab label) |
 | `npm run build` | Validate, then build the static site into `dist/` |
 | `npm run preview` | Serve the built `dist/` locally |
-| `npm run import:handoff -- --force` | Re-import from the handoff package (**overwrites** `src/data/` edits) |
 
 > On Windows PowerShell with script execution disabled, use `npm.cmd` instead of `npm`.
 
@@ -34,7 +33,7 @@ src/
   layouts/         BaseLayout (meta/SEO), ProseLayout (Markdown pages)
   pages/           routes (industry lists, profiles, directory, guides, policies, robots.txt)
   scripts/         directory.ts (client-side search/filter/sort)
-scripts/           validate-data.mjs, import-handoff.mjs
+scripts/           validate-data.mjs, fetch-logos.mjs, generate-images.mjs
 ```
 
 ## Frontend-only decisions

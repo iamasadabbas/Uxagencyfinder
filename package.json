@@ -9,7 +9,6 @@
     "validate": "node scripts/validate-data.mjs",
     "build": "node scripts/validate-data.mjs && astro build",
     "preview": "astro preview",
-    "import:handoff": "node scripts/import-handoff.mjs",
     "check": "astro check",
     "test:e2e": "node tests/qa.mjs",
     "test:lighthouse": "node tests/lighthouse.mjs",
