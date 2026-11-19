@@ -26,9 +26,9 @@ We use the information we receive to:
 
 We don't sell, rent or trade your personal information, and we don't pass your details to agencies.
 
-## Cookies
+## Cookies and analytics
 
-We don't use advertising cookies. If we add privacy-friendly analytics in the future, we'll update this policy and, where required, ask for your consent.
+We don't use advertising or tracking cookies. To understand which pages are useful, we use **Umami**, a privacy-friendly analytics service that doesn't set cookies and doesn't collect personal data. It records anonymous, aggregated information such as pages viewed, referring website, country, device type and browser, plus clicks on agency links and our worksheets. It doesn't identify you or follow you across other websites. You can learn more at [umami.is](https://umami.is/privacy).
 
 ## Third-party websites
 

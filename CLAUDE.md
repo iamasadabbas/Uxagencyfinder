@@ -70,6 +70,10 @@ Delete the placement and renumber positions. If the agency has no placements lef
 ### Change the contact email
 Edit `contactEmail` in `src/data/site.json`.
 
+### Analytics (Umami Cloud, free and cookieless)
+- To connect it, set `site.json -> analytics.umamiWebsiteId` to the Website ID from the client's Umami dashboard, then build. Leave it as `""` to disable analytics (no script is loaded).
+- Events are documented in `docs/EVENT-MAP.md`, and the client setup guide is `docs/ANALYTICS-GUIDE.md`. To track a new link, add `data-track="event_name"` (plus optional `data-agency`, `data-industry` or `data-source`).
+
 ## After every edit, run
 
 ```

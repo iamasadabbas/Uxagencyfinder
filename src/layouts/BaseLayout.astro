@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
+import Analytics from '../components/Analytics.astro';
 import { site, absolute } from '../lib/data';
 
 interface Props {
@@ -49,6 +50,7 @@ const ogImage = absolute('/og-image.png');
     <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
     <meta name="theme-color" content="#ffffff" />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <Analytics />
     {jsonLd.map((obj) => <JsonLd data={obj} />)}
   </head>
   <body>

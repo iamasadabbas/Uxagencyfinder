@@ -24,6 +24,12 @@ export const SiteSchema = z.object({
   noindex: z.boolean(),
   testSiteBanner: z.string().nullable(),
   disclosure: z.string(),
+  analytics: z.object({
+    provider: z.literal('umami'),
+    umamiWebsiteId: z.union([z.literal(''), z.string().uuid()]),
+    umamiScriptUrl: z.string().url(),
+    domains: z.string(),
+  }),
 });
 
 export const AgencySchema = z.object({

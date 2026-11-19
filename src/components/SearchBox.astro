@@ -66,17 +66,18 @@ const items = [
       active = results.length ? 0 : -1;
       render();
     }
+    const go = (r: Item) => { (window as any).uafTrack?.('search_select', { type: r.t.toLowerCase() }); location.href = r.u; };
     input.addEventListener('focus', update);
     input.addEventListener('input', update);
     input.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') { e.preventDefault(); if (list.hidden) update(); active = Math.min(active + 1, results.length - 1); render(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(active - 1, 0); render(); }
-      else if (e.key === 'Enter') { e.preventDefault(); const r = results[active]; if (r) location.href = r.u; else location.href = '/directory/'; }
+      else if (e.key === 'Enter') { e.preventDefault(); const r = results[active]; if (r) go(r); else location.href = '/directory/'; }
       else if (e.key === 'Escape') { close(); }
     });
     list.addEventListener('mousedown', (e) => {
       const li = (e.target as HTMLElement).closest('li[data-u]') as HTMLElement | null;
-      if (li) { e.preventDefault(); location.href = li.dataset.u!; }
+      if (li) { e.preventDefault(); const r = results.find((x) => x.u === li.dataset.u); if (r) go(r); else location.href = li.dataset.u!; }
     });
     document.addEventListener('click', (e) => { if (!root.contains(e.target as Node)) close(); });
     document.addEventListener('keydown', (e) => {

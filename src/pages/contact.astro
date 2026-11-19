@@ -83,6 +83,7 @@ const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeU
     const body = form.body.value.trim();
     if (!body) { form.body.focus(); return; }
     const subject = agency ? `${topic}: ${agency}` : topic;
+    if (window.uafTrack) window.uafTrack('contact_compose', { topic: topic });
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     document.getElementById('compose-status').textContent = 'Your email app should open now. If it doesn\'t, write to us at ' + email + '.';
   });
