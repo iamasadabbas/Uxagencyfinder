@@ -49,7 +49,7 @@ const jsonLd = [{
           {agency.aliases.length > 0 && <p class="muted alias">Also known as {agency.aliases.join(', ')}</p>}
         </div>
         <div class="id-cta">
-          <a class="btn btn-primary" href={agency.official_website} rel="noopener" target="_blank">Visit {host} <Icon name="external" size={16} /><span class="visually-hidden"> (opens in new tab)</span></a>
+          <a class="btn btn-primary" href={agency.official_website} rel="noopener" target="_blank" data-track="official_site_click" data-agency={agency.id}>Visit {host} <Icon name="external" size={16} /><span class="visually-hidden"> (opens in new tab)</span></a>
         </div>
       </div>
       <p class="lead summary">{agency.summary}</p>
@@ -101,7 +101,7 @@ const jsonLd = [{
           <tbody>
             {evidenceSources.map((s) => (
               <tr>
-                <th scope="row"><a href={s.url} rel="noopener" target="_blank">{projectName(s.label)} <Icon name="external" size={12} /></a></th>
+                <th scope="row"><a href={s.url} rel="noopener" target="_blank" data-track="evidence_click" data-agency={agency.id} data-source={s.id}>{projectName(s.label)} <Icon name="external" size={12} /></a></th>
                 <td>{s.supported_context}</td>
                 <td class="muted">{s.qualification}</td>
               </tr>
@@ -137,7 +137,7 @@ const jsonLd = [{
         </dl>
         {agency.capability_tags.length > 0 && <ul class="tag-list">{agency.capability_tags.map((t) => <li class="tag">{t}</li>)}</ul>}
         {agency.disclosures.length > 0 && <p class="small muted">{agency.disclosures.join(' ')}</p>}
-        <a class="btn btn-dark btn-small full" href={agency.official_website} rel="noopener" target="_blank">Contact {agency.name} <Icon name="external" size={14} /></a>
+        <a class="btn btn-dark btn-small full" href={agency.official_website} rel="noopener" target="_blank" data-track="official_site_click" data-agency={agency.id}>Contact {agency.name} <Icon name="external" size={14} /></a>
       </div>
       <p class="small muted corr">Something out of date? <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Correction: ' + agency.name)}`}>Suggest a correction</a></p>
     </aside>
