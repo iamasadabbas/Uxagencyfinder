@@ -11,7 +11,7 @@ mkdirSync(out, { recursive: true });
 const pages = ['/', '/agencies/healthcare-ux/', '/directory/', '/agency/ustwo/', '/guides/ux-agency-brief-template/'];
 const cli = resolve('node_modules/lighthouse/cli/index.js');
 
-console.log('Page'.padEnd(40), 'Perf', 'A11y', 'BestP', 'SEO*', ' LCP    CLS   TBT');
+console.log('Page'.padEnd(40), 'Perf', 'A11y', 'BestP', 'SEO ', ' LCP    CLS   TBT');
 for (const path of pages) {
   const file = resolve(out, (path.replace(/\//g, '_') || '_home') + '.json');
   execFileSync(process.execPath, [cli, BASE + path, '--quiet', '--output=json', `--output-path=${file}`, `--chrome-path=${CHROME}`, '--chrome-flags=--headless=new --no-sandbox', '--only-categories=performance,accessibility,best-practices,seo'], { stdio: 'ignore' });
@@ -22,5 +22,5 @@ for (const path of pages) {
   const fails = Object.values(a).filter((x) => x.score !== null && x.score < 0.9 && ['binary', 'numeric'].includes(x.scoreDisplayMode) && r.categories.accessibility.auditRefs.some((ref) => ref.id === x.id));
   for (const f of fails) console.log('    a11y:', f.id, '-', f.title);
 }
-console.log('\n*SEO is reduced while site.json noindex=true (intentional for the unlaunched site).');
+
 

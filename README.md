@@ -43,7 +43,7 @@ scripts/           validate-data.mjs, import-handoff.mjs
 | --- | --- |
 | Headless CMS | JSON/Markdown in Git, edited directly or through Claude |
 | Contact/correction form | `mailto:` links plus a compose form that opens the visitor's email app. Nothing is stored |
-| Staging protection | `noindex` meta and `robots.txt` disallow (controlled by `site.json -> noindex`) |
+| Search visibility | Indexable. `/sitemap.xml`, `/robots.txt`, `/llms.txt` (+ `/llm.txt`, `/llms-full.txt`), canonical URLs, Open Graph image and JSON-LD are generated from the data. `site.json -> noindex: true` turns a copy into a hidden staging site. |
 | Publication workflow | `publication_state` per record, plus a `showDrafts` test-mode flag |
 | Directory filters | Client-side JavaScript, with state kept in the URL hash (`/directory/#industry=healthcare`) |
 
@@ -57,5 +57,7 @@ Any static host works (Netlify, Vercel, Cloudflare Pages, GitHub Pages):
 
 ## Before public launch
 
-Set `noindex: false`, `showDrafts: false` and `testSiteBanner: null` in `site.json`. Mark reviewed records as `published`. Add a real `editor` and `contactEmail`. Complete the `TODO (owner)` notes in `about.md`, `editorial-policy.md`, `privacy.md` and `terms.md`.
+The site is configured for public indexing. Before or after launch: submit `https://uxagencyfinder.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools, mark reviewed records as `published`, and set `showDrafts: false` once every published record is reviewed.
+
+Tests: `npm run test:seo` (static SEO audit), `npm run test:e2e` and `npm run test:lighthouse` (both need `npm run preview` running).
 

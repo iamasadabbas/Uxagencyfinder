@@ -18,11 +18,11 @@ const jsonLd = [{
 }];
 ---
 
-<BaseLayout title="UX Agency Directory (A–Z)" description={`Browse all ${agencies.length} curated UX design agencies alphabetically. Filter by industry and search by name.`} jsonLd={jsonLd}>
+<BaseLayout title="UX Agency Directory (A-Z)" description={`Browse all ${agencies.length} curated UX design agencies alphabetically. Filter by industry and search by name.`} jsonLd={jsonLd}>
   <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={[{ name: 'Agency directory', href: '/directory/' }]} />
-      <p class="eyebrow">{agencies.length} agencies · A–Z</p>
+      <p class="eyebrow">{agencies.length} agencies · A-Z</p>
       <h1>Agency directory</h1>
       <p class="lead">Every agency in our industry lists, in alphabetical order. Filter by industry to see who has relevant work and where they rank.</p>
     </div>
@@ -39,8 +39,8 @@ const jsonLd = [{
         <div class="f-sort">
           <label for="sort" class="visually-hidden">Sort</label>
           <select id="sort">
-            <option value="az">Name A–Z</option>
-            <option value="za">Name Z–A</option>
+            <option value="az">Name A-Z</option>
+            <option value="za">Name Z-A</option>
           </select>
         </div>
       </div>

@@ -15,7 +15,14 @@ This is a **frontend-only static website** (Astro + TypeScript). There's **no ba
 | Guide list (titles shown on home and guides index) | `guides` array in `src/lib/data.ts` |
 | Styles | `src/styles/global.css` |
 
-Pages are generated from the data automatically: the 8 industry pages, 21 agency profiles, directory, homepage previews, sitemap and JSON-LD. **Never hand-edit `dist/`.**
+Pages are generated from the data automatically: the 8 industry pages, 21 agency profiles, directory, homepage previews, `/sitemap.xml`, `/robots.txt`, `/llms.txt` (also served as `/llm.txt`), `/llms-full.txt` and the JSON-LD. **Never hand-edit `dist/`.**
+
+## SEO and writing rules
+- The site is indexable (`site.json -> noindex: false`). The sitemap uses absolute `https://uxagencyfinder.com` URLs (from `site.json -> siteUrl`), and every public route is listed in `src/lib/routes.ts`. **When you add a new page, add it to `routes.ts` too.**
+- Titles must be 20-65 characters and meta descriptions 70-160 characters, and each must be unique.
+- **Never use em dashes or en dashes anywhere** (in content, data or docs). Use a comma, colon, period or plain hyphen instead.
+- After changing content, run `npm run build && npm run test:seo`.
+- The social preview image is `public/og-image.png`. Regenerate it with `npm run images` if the industries or brand change.
 
 ## Hard rules (the build fails if they're broken)
 
@@ -51,7 +58,7 @@ Delete the placement and renumber positions. If the agency has no placements lef
 ### Publish vs draft
 - `publication_state` can be `draft | researched | reviewed | published | needs-review | archived`.
 - `site.json -> showDrafts: true` shows everything except `archived` records. Set it to `false` to show only `published` records. Visitors never see draft status either way.
-- `site.json -> noindex: true` keeps search engines out (meta robots and robots.txt) while the site isn't public. Set it to `false` at launch. Visitors can't see this setting.
+- `site.json -> noindex` is `false`, so the site is live and indexable. Only set it to `true` for a private staging copy: that adds `noindex` and makes robots.txt disallow all.
 - `site.json -> testSiteBanner` must stay `null`. The site must never look like a test site.
 
 ### Visual design

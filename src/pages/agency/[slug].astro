@@ -23,7 +23,9 @@ const industryNames = placements.map(({ industry }) => industry.name);
 const projectName = (label: string) => label.split(':').slice(1).join(':').trim() || label;
 const host = new URL(agency.official_website).hostname.replace(/^www\./, '');
 
-const description = `${agency.name}: UX agency with documented work in ${industryNames.join(', ')}. Named projects, agency contribution, scope notes and questions to ask before hiring.`;
+const fitList = industryNames.length <= 2 ? industryNames.join(' and ') : `${industryNames.length} industries incl. ${industryNames.slice(0, 2).join(' and ')}`;
+let description = `${agency.name} UX agency profile: documented work in ${fitList}. Named projects, agency contribution and questions to ask before hiring.`;
+if (description.length > 158) description = `${agency.name} UX agency profile: work in ${fitList}. Projects, contribution and what to ask before hiring.`;
 
 const jsonLd = [{
   '@type': 'WebPage',

@@ -28,7 +28,7 @@ const jsonLd = isGuide
 const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
 ---
 
-<BaseLayout title={frontmatter.title} description={frontmatter.description} jsonLd={jsonLd}>
+<BaseLayout title={frontmatter.title} description={frontmatter.description} jsonLd={jsonLd} ogType={isGuide ? 'article' : 'website'}>
   <header class="page-hero">
     <div class="container">
       <Breadcrumbs items={crumbs} />

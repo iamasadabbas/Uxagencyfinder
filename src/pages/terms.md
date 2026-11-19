@@ -2,7 +2,7 @@
 layout: ../layouts/ProseLayout.astro
 eyebrow: Legal
 title: Terms of use
-description: The terms that apply when you use the UX Agency Finder website.
+description: The terms that apply when you use the UX Agency Finder website, its agency lists, hiring guides and worksheets.
 ---
 
 *Last updated: November 2026*

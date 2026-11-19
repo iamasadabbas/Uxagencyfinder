@@ -33,8 +33,8 @@ const guideIcons: Record<string, string> = {
 };
 
 const jsonLd = [
-  { '@type': 'Organization', name: site.publisher.name, url: site.siteUrl, description: site.publisher.description },
-  { '@type': 'WebSite', name: site.name, url: site.siteUrl },
+  { '@type': 'Organization', '@id': `${site.siteUrl}/#organization`, name: site.publisher.name, url: site.siteUrl, description: site.publisher.description, logo: { '@type': 'ImageObject', url: absolute('/apple-touch-icon.png'), width: 180, height: 180 }, email: site.contactEmail },
+  { '@type': 'WebSite', '@id': `${site.siteUrl}/#website`, name: site.name, url: site.siteUrl, inLanguage: 'en', publisher: { '@id': `${site.siteUrl}/#organization` } },
   {
     '@type': 'CollectionPage', name: 'Best UX Design Agencies by Industry', url: absolute('/'),
     mainEntity: { '@type': 'ItemList', itemListElement: industries.map((i, n) => ({ '@type': 'ListItem', position: n + 1, name: i.h1, url: absolute(i.route) })) },
@@ -45,7 +45,7 @@ const jsonLd = [
 <BaseLayout
   fullTitle="Best UX Design Agencies by Industry | UX Agency Finder"
   title="Home"
-  description="Find UX design agencies with proven work in your industry. Compare named projects and agency contributions across healthcare, fintech, ecommerce, logistics, real estate, education, robotics and AI."
+  description="Find UX design agencies with proven work in your industry. Compare named projects across healthcare, fintech, ecommerce, logistics, robotics, AI and more."
   jsonLd={jsonLd}
 >
   <section class="hero">
