@@ -75,12 +75,7 @@ export function initDirectory() {
   apply();
   q.addEventListener('input', () => { writeHash(); apply(); });
   sort.addEventListener('change', () => { writeHash(); apply(); });
-  chips.forEach((c) => c.addEventListener('click', () => {
-    setIndustry(c.dataset.industry ?? '');
-    writeHash();
-    apply();
-    if (industry) (window as any).uafTrack?.('directory_filter', { industry });
-  }));
+  chips.forEach((c) => c.addEventListener('click', () => { setIndustry(c.dataset.industry ?? ''); writeHash(); apply(); }));
   clearBtn.addEventListener('click', clear);
   document.getElementById('clear2')?.addEventListener('click', clear);
   window.addEventListener('hashchange', () => { readHash(); apply(); });

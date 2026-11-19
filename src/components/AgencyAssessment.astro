@@ -21,7 +21,7 @@ const sources = p.source_ids.map((id) => getSource(id)!).filter(Boolean);
     </div>
     <div class="head-actions">
       <a class="btn btn-secondary btn-small" href={agencyUrl(a)}>Profile</a>
-      <a class="btn btn-dark btn-small" href={a.official_website} rel="noopener" target="_blank" data-track="official_site_click" data-agency={a.id} data-industry={industry.id}>Website <Icon name="external" size={14} /><span class="visually-hidden"> (opens in new tab)</span></a>
+      <a class="btn btn-dark btn-small" href={a.official_website} rel="noopener" target="_blank">Website <Icon name="external" size={14} /><span class="visually-hidden"> (opens in new tab)</span></a>
     </div>
   </header>
 
@@ -41,7 +41,7 @@ const sources = p.source_ids.map((id) => getSource(id)!).filter(Boolean);
       <ul>
         {sources.map((s) => (
           <li>
-            <a href={s.url} rel="noopener" target="_blank" data-track="evidence_click" data-agency={a.id} data-industry={industry.id} data-source={s.id}>{s.label}<span class="visually-hidden"> (opens agency website)</span></a>
+            <a href={s.url} rel="noopener" target="_blank">{s.label}<span class="visually-hidden"> (opens agency website)</span></a>
             <span class="note">{s.qualification}</span>
           </li>
         ))}

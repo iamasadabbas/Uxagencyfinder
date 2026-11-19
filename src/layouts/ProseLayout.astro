@@ -83,7 +83,6 @@ const otherGuides = guides.filter((g) => `/guides/${g.slug}/` !== path);
       try {
         await navigator.clipboard.writeText(pre.innerText);
         btn.textContent = 'Copied ✓';
-        (window as any).uafTrack?.('worksheet_copy', { guide: location.pathname });
       } catch {
         btn.textContent = 'Select the text to copy';
       }

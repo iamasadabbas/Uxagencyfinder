@@ -59,7 +59,7 @@ Delete the placement and renumber positions. If the agency has no placements lef
 - `publication_state` can be `draft | researched | reviewed | published | needs-review | archived`.
 - `site.json -> showDrafts: true` shows everything except `archived` records. Set it to `false` to show only `published` records. Visitors never see draft status either way.
 - `site.json -> noindex` is `false`, so the site is live and indexable. Only set it to `true` for a private staging copy: that adds `noindex` and makes robots.txt disallow all.
-- `site.json -> testSiteBanner` must stay `null`. The site must never look like a test site.
+- The site must never look like a test or draft site: no banners and no "draft" wording.
 
 ### Visual design
 - Design tokens (colours, radius, shadows) are in `src/styles/global.css`. The font is Inter Variable (self-hosted via `@fontsource-variable/inter`).
@@ -69,10 +69,6 @@ Delete the placement and renumber positions. If the agency has no placements lef
 
 ### Change the contact email
 Edit `contactEmail` in `src/data/site.json`.
-
-### Analytics (Umami Cloud, free and cookieless)
-- To connect it, set `site.json -> analytics.umamiWebsiteId` to the Website ID from the client's Umami dashboard, then build. Leave it as `""` to disable analytics (no script is loaded).
-- Events are documented in `docs/EVENT-MAP.md`, and the client setup guide is `docs/ANALYTICS-GUIDE.md`. To track a new link, add `data-track="event_name"` (plus optional `data-agency`, `data-industry` or `data-source`).
 
 ## After every edit, run
 
